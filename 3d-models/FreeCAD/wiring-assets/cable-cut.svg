@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="520" height="112" preserveAspectRatio="xMinYMin meet" viewBox="0 0 520 112" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="520" height="112"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-112)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="3" y="40" width="79" height="40" rx="5" ry="5" style="stroke: rgb(65%,73%,78%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,97%); fill-rule: evenodd;"/>
+			<text x="16.943359375" y="57.0" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,114) scale(1,-1)">USB-Cオス</text>
+			<path d="M 82,60 L 303,60 Z" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 2;"/>
+			<rect x="430" y="40" width="86" height="40" rx="5" ry="5" style="stroke: rgb(65%,73%,78%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,97%); fill-rule: evenodd;"/>
+			<text x="447.71923828125" y="57.0" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,114) scale(1,-1)">USB-Aオス</text>
+			<path d="M 315,60 L 430,60 Z" style="stroke: rgb(61%,67%,70%); stroke-linecap: butt; stroke-width: 2; stroke-dasharray: 5, 4;"/>
+			<path d="M 303,46 L 313,73 Z" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 304,75 L 313,47 Z" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="113.5" y="91" style="font-family: Arial Unicode MS; font-size: 11px;fill: rgb(9%,48%,60%); stroke:none;" transform="translate(0,182) scale(1,-1)">この側を必要な長さだけ残す</text>
+			<text x="362.0" y="91" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(31%,40%,46%); stroke:none;" transform="translate(0,182) scale(1,-1)">この側は使用しない</text>
+			<text x="288.0" y="24" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(77%,32%,28%); stroke:none;" transform="translate(0,48) scale(1,-1)">切断位置</text>
+			<text x="87.7734375" y="3" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,6) scale(1,-1)">残った電源線を4番OUT・5番GNDへ接続</text>
+		</g>
+	</g>
+</svg>
