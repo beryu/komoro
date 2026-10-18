@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="520" height="228" preserveAspectRatio="xMinYMin meet" viewBox="0 0 520 228" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="520" height="228"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-228)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="4" y="143" width="74" height="68" rx="5" ry="5" style="stroke: rgb(65%,73%,78%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,97%); fill-rule: evenodd;"/>
+			<text x="11.0" y="181.5" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,363) scale(1,-1)">電池ホルダー</text>
+			<text x="31.830078125" y="166.5" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,333) scale(1,-1)">BT1</text>
+			<rect x="96" y="171" width="68" height="40" rx="5" ry="5" style="stroke: rgb(65%,73%,78%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,97%); fill-rule: evenodd;"/>
+			<text x="124.74853515625" y="195.5" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,391) scale(1,-1)">F1</text>
+			<text x="111.246337890625" y="180.5" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,361) scale(1,-1)">MF-R050</text>
+			<rect x="178" y="171" width="74" height="40" rx="5" ry="5" style="stroke: rgb(65%,73%,78%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,97%); fill-rule: evenodd;"/>
+			<text x="198.740234375" y="195.5" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,391) scale(1,-1)">D1  1S4</text>
+			<text x="191.29150390625" y="180.5" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,361) scale(1,-1)">帯なし → 帯</text>
+			<rect x="280" y="126" width="115" height="85" rx="5" ry="5" style="stroke: rgb(65%,73%,78%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,97%); fill-rule: evenodd;"/>
+			<text x="331.1083984375" y="173.0" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,346) scale(1,-1)">U1</text>
+			<text x="300.53466796875" y="158.0" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,316) scale(1,-1)">AE-XCL103-5V0</text>
+			<rect x="430" y="143" width="86" height="68" rx="5" ry="5" style="stroke: rgb(65%,73%,78%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,97%); fill-rule: evenodd;"/>
+			<text x="445.4990234375" y="181.5" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,363) scale(1,-1)">USB-Cプラグ</text>
+			<text x="441.5" y="166.5" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,333) scale(1,-1)">右キーボードへ</text>
+			<path d="M 78,191 L 96,191 Z" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="96 191, 90 194, 90 188" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 1; fill: rgb(77%,32%,28%); fill-rule: evenodd;"/>
+			<path d="M 164,191 L 178,191 Z" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="178 191, 172 194, 172 188" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 1; fill: rgb(77%,32%,28%); fill-rule: evenodd;"/>
+			<path d="M 252,191 L 280,191 Z" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="280 191, 274 194, 274 188" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 1; fill: rgb(77%,32%,28%); fill-rule: evenodd;"/>
+			<path d="M 395,191 L 430,191 Z" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="430 191, 424 194, 424 188" style="stroke: rgb(77%,32%,28%); stroke-linecap: butt; stroke-width: 1; fill: rgb(77%,32%,28%); fill-rule: evenodd;"/>
+			<text x="282" y="215" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,430) scale(1,-1)">6番 I：入力</text>
+			<text x="391.24267578125" y="215" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,430) scale(1,-1)">4番 O：5V</text>
+			<path d="M 42,143 L 42,95 Z" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 42,95 L 473,95 Z" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 337,126 L 337,95 Z" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 473,143 L 473,95 Z" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 2;"/>
+			<circle cx="337" cy="95" r="3" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<text x="12" y="117" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,234) scale(1,-1)">電池 −</text>
+			<text x="348" y="111" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">5番 G：共通GND</text>
+			<text x="78" y="215" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(77%,32%,28%); stroke:none;" transform="translate(0,430) scale(1,-1)">＋</text>
+			<rect x="89" y="18" width="332" height="55" rx="5" ry="5" style="stroke: rgb(65%,73%,78%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,97%); fill-rule: evenodd;"/>
+			<text x="152.3046875" y="50.0" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,100) scale(1,-1)">SW1：中央 → U1の2番EN / OFF側 → 1番GND</text>
+			<text x="144.44580078125" y="35.0" style="font-family: Arial Unicode MS; font-size: 10px;fill: rgb(9%,20%,27%); stroke:none;" transform="translate(0,70) scale(1,-1)">ON側は未接続。OFF位置でENとGNDをつなぐ。</text>
+			<text x="143.0" y="2" style="font-family: Arial Unicode MS; font-size: 9px;fill: rgb(31%,40%,46%); stroke:none;" transform="translate(0,4) scale(1,-1)">接続関係の模式図。端子の物理的な位置は次の図で確認。</text>
+		</g>
+	</g>
+</svg>
