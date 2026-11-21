@@ -60,7 +60,7 @@ def draw(ax, name, color, angle=0, alpha=1):
         colors[accent, :3] = shade[accent, None] * np.array([.22, .26, .29])
     if name == 'AAA_cell_reference':
         # Illustrative wrapper, not a specified battery brand.
-        band = f.mean(axis=1)[:, 1] < 20
+        band = f.mean(axis=1)[:, 1] < np.array(MESH[name]['vertices'])[:, 1].min() + 6.75
         colors[band, :3] = shade[band, None] * np.array([.64, .20, .18])
     if not hasattr(ax, '_fold_faces'):
         ax._fold_faces, ax._fold_colors = [], []
@@ -149,7 +149,10 @@ def projected_scene(ax, angle=0, elev=60, azim=-75):
     ax.add_collection(PolyCollection(xy[order], facecolors=colors[order],
                                     edgecolors='none', antialiased=False))
     if angle == 0:
-        position = np.array([-6.5, 36, 16.3]) @ np.stack([right, up], axis=1)
+        cell = np.array(MESH['AAA_cell_reference']['vertices'])
+        label = (cell.min(axis=0) + cell.max(axis=0)) / 2
+        label[2] = cell[:, 2].max() + .05
+        position = label @ np.stack([right, up], axis=1)
         rotation = np.rad2deg(np.arctan2(up[1], right[1]))
         ax.text(*position, 'AAA  1.5 V', fontsize=6, ha='center', va='center',
                 rotation=rotation, rotation_mode='anchor', color='#343b40')
@@ -161,7 +164,7 @@ def projected_scene(ax, angle=0, elev=60, azim=-75):
 fig = plt.figure(figsize=(14, 6), facecolor='#f4f6f7')
 ax = fig.add_axes([.025,.12,.95,.73],facecolor='#f4f6f7')
 projected_scene(ax)
-fig.text(.045,.925,'電池を見せる中央窓 ／ キー配列に沿った輪郭',fontsize=20,color='#183c4b')
+fig.text(.045,.925,'前後の張り出しを抑えた中央ヒンジ',fontsize=20,color='#183c4b')
 fig.text(.045,.06,f"同じPCBを使用 · 配線室を下面へ · 収納厚{CHECK['closed_size_mm'][2]:g} mm · 銀色ボールは仮配置",fontsize=11,color='#526670')
 fig.savefig(OUT/'open-view.png',dpi=160,facecolor=fig.get_facecolor())
 plt.close(fig)

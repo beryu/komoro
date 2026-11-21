@@ -37,15 +37,16 @@ CLOSURE_MAGNET = {
     'actual_closed_retention': 'unverified; steel pull is not the force between installed magnets',
 }
 BATTERY_WINDOW = {'width_mm': 10.5, 'length_mm': 43., 'corner_radius_mm': 1.,
-                  'center_xy_mm': [-6.5, 35.5]}
+                  'center_xy_mm': [-6.5, 40.0]}
 CABLE_ROUTE = {'channel_width_mm': 8., 'channel_top_z_mm': 2.0,
                'cover_bottom_z_mm': -1.2, 'cover_top_z_mm': -.2,
                'cable_width_assumed_mm': 7.6, 'cable_thickness_assumed_mm': 1.,
-               'flex_exit_y_mm': [5., 13.],
+               'flex_exit_y_mm': [8., 16.],
                'dynamic_flex_and_254mm_storage': 'unverified; not a continuous cable motion simulation'}
-THUMB_SLOT_X = 6.8
-THUMB_SLOT_LENGTH = 9.4
-LATCH_MAX_TRAVEL = THUMB_SLOT_X + THUMB_SLOT_LENGTH - 10
+THUMB_SLOT_X = 1.8
+THUMB_SLOT_LENGTH = 7.4
+LATCH_RELEASE = 4.0
+LATCH_MAX_TRAVEL = THUMB_SLOT_X + THUMB_SLOT_LENGTH - 5
 SPRING_SPEC = {
     'manufacturer': 'ACCURATE', 'model': 'C101',
     'source': 'https://www.accurate.jp/products/c101/',
@@ -65,12 +66,14 @@ BOARD_WIDTH = 128.5
 CASE_OFFSET = 2.05
 EXTENT = SPINE_HALF + BOARD_WIDTH + 2 * CASE_OFFSET
 FLOOR = 1.5
-HINGE_RADIUS = 3.5
-PIN_RADIUS = 1.7
+HINGE_RADIUS = 3.0
+PIN_RADIUS = 1.1
+HINGE_Y = (-2., 68.)
+HINGE_SPAN = 8.0
 PCB_TOP = 6.1
 LID_Z = 19.0
 LID_THICKNESS = 1.5
-Y0, Y1 = -14., 88.
+Y0, Y1 = -2., 76.
 
 
 def box(x, y, z, dx, dy, dz):
@@ -110,17 +113,17 @@ def underfloor_wiring(shapes):
     never the assembled socket, passes through the narrow side slots.
     """
     screws = {'left': [(-24, 2), (-24, 52)],
-              'right': [(-11, 2), (-11, 67), (12, 2), (12, 67), (25, 2), (25, 45)]}
+              'right': [(-11, 67), (12, 2), (12, 67), (25, 2), (25, 45)]}
     ribs = {'left': box(-28, 0, 0, 10, 54, 3.5),
             'right': union([box(-16, 0, 0, 34, 69, 3.5), box(18, 0, 0, 11, 47, 3.5)])}
     # Ceiling at 2.0 mm, reinforced to 3.5 mm above. The removable cover
     # leaves a 2.2 mm-high cable chamber and a 1.5 mm solid roof.
     voids = {
         'left': union([box(-27, 5, -.19, 8, 44, 2.19),
-                       box(-27, 5, -.19, 9.1, 8, 2.19),
+                       box(-27, 8, -.19, 9.1, 8, 2.19),
                        box(-20, 40.5, -.19, 2.1, 8, 15.2)]),
         'right': union([box(-14, 5, -.19, 30, 60, 2.19),
-                        box(-16.1, 5, -.19, 43.1, 8, 2.19),
+                        box(-16.1, 8, -.19, 43.1, 8, 2.19),
                         box(19, 5, -.19, 8, 38, 2.19),
                         box(18, 34.5, -.19, 2., 8, 15.2)])}
     covers = {'left': box(-28, 0, -1.2, 10, 54, 1.),
@@ -160,16 +163,19 @@ def closure_magnets(left):
 
 
 def hinge_arm(left, y):
-    # Separate axial bands; the 0.4 mm gap is a print-fit assumption.
-    start, length = (y, 5.6) if left else (y + 6, 6.)
-    x0 = -24 if left else 0
-    pillar_x = -5 if left else 0
-    shape = union([
-        box(x0, y, 0, 24, 12, 5),
-        box(pillar_x, start, 0, 5, length, AXIS_Z),
-        cylinder_y(0, start, AXIS_Z, HINGE_RADIUS, length),
-    ])
-    return shape.cut(cylinder_y(0, start - .1, AXIS_Z, PIN_RADIUS, length + .2))
+    # Two fixed 2 mm cheeks support a central 3.4 mm moving knuckle.
+    # Axial print gaps: 0.3 mm each. No bolt heads or external nuts.
+    bands = [(y + 2.3, 3.4)] if left else [(y, 2.), (y + 6., 2.)]
+    arms = []
+    for start, length in bands:
+        x0, pillar_x = (-24, -5) if left else (0, 0)
+        arm = union([box(x0, start, 0, 24, length, 3.5),
+                     box(pillar_x, start, 0, 5, length, AXIS_Z),
+                     cylinder_y(0, start, AXIS_Z, HINGE_RADIUS, length)])
+        arm = arm.cut(cylinder_y(0, start - .1, AXIS_Z,
+                                PIN_RADIUS if left else 1.05, length + .2))
+        arms.append(arm)
+    return Part.makeCompound(arms) if len(arms) > 1 else arms[0]
 
 
 def closed_stop(left):
@@ -182,44 +188,63 @@ def closed_stop(left):
     height = STOP_FINGER_THICKNESS
     finger_bottom = 2 * AXIS_Z - STOP_HEIGHT - height
     fingers = []
-    for y, length, root_y in ((-14, 18, -14), (70, 11.6, 76)):
+    for y, length, root_y in ((0, 4, .3), (70, 4, 70.3)):
         finger = box(-16, y, finger_bottom, 10, length, height)
         edges = [e for e in finger.Edges if e.BoundBox.ZLength > height - .01
                  and e.BoundBox.XLength < .001 and e.BoundBox.YLength < .001]
         finger = finger.makeFillet(.8, edges)
-        root = box(-7, root_y, finger_bottom, 5, 5.6, height)
+        root = box(-7, root_y, finger_bottom, 5, 3.4, height)
         fingers.append(finger.fuse(root))
     return Part.makeCompound(fingers).cut(closure_magnet_pockets(True))
 
 
 def latch_parts():
-    # Front, spring-loaded rectangular plunger. Pull the exposed thumb tab
-    # right 6 mm to release. A sloped upper nose cams inward on reopening;
-    # the flat lower face holds the moving socket against upward motion.
-    housing = box(0, -14, 1.5, 28, 10, 10.5)
-    channel = box(-.1, -12.3, 3.7, 24.1, 4.6, 4.6)
-    thumb_slot = box(THUMB_SLOT_X, -14.2, 4.5, THUMB_SLOT_LENGTH, 3, 3)
-    housing = housing.cut(channel).cut(thumb_slot)
-    housing = housing.cut(Part.makeCylinder(1.05, 5, V(23.5, -10, 6), V(1, 0, 0)))
-    # Top is open for installing spring and slider, closed by a separate cap.
-    housing = housing.cut(box(1.5, -12.3, 8, 24, 4.6, 5))
-    for x in (3, 25):
-        housing = housing.cut(Part.makeCylinder(.85, 4.5, V(x, -6.2, 7.5)))
-    cap = union([box(0, -14, 12, 28, 10, 1.8),
-                 box(1.6, -12.2, 8.3, 23.8, 4.4, 3.8)])
-    for x in (3, 25):
-        cap = cap.cut(Part.makeCylinder(1.1, 2, V(x, -6.2, 11.9)))
-    # Pin tip: top ramps from z=4 to z=8 across x=-5..-1.
-    profile = [V(-5, -12, 4), V(12, -12, 4), V(12, -12, 8),
-               V(-1, -12, 8), V(-5, -12, 4)]
+    # Shorter pin, same C101 spring: everything sits inside the front bay.
+    housing = box(0, 4, 3.5, 19.5, 9.5, 10.5)
+    channel = box(-.1, 6.3, 5.7, 18.1, 4.6, 4.6)
+    housing = housing.cut(channel).cut(latch_thumb_slot())
+    housing = housing.cut(Part.makeCylinder(1.05, 3, V(17.5, 8.6, 8), V(1, 0, 0)))
+    housing = housing.cut(box(1.5, 6.3, 10, 16.5, 4.6, 5))
+    for x in (2.5, 17):
+        housing = housing.cut(Part.makeCylinder(.85, 4.5, V(x, 12.3, 9.5)))
+    cap = union([box(0, 4, 14, 19.5, 9.5, 1.8),
+                 box(1.6, 6.4, 10.3, 16.3, 4.4, 3.8)])
+    cap = cap.cut(box(-.1, 3.9, 13.9, 5.4, 2.4, 2.1))
+    for x in (2.5, 17):
+        cap = cap.cut(Part.makeCylinder(1.1, 2, V(x, 12.3, 13.9)))
+    profile = [V(-3, 6.6, 6), V(6, 6.6, 6), V(6, 6.6, 10),
+               V(0, 6.6, 10), V(-3, 6.6, 6)]
     slider = Part.Face(Part.makePolygon(profile)).extrude(V(0, 4, 0))
-    slider = union([slider, box(7, -16, 5, 3, 5, 2),
-                    Part.makeCylinder(.8, 9, V(12, -10, 6), V(1, 0, 0))])
-    socket = box(-12, -14, 1.5, 12, 10, 10.5).cut(
-        box(-10, -12.15, 3.85, 10.1, 4.3, 4.3))
-    spring = Part.makeCylinder(1.75, 12, V(12, -10, 6), V(1, 0, 0)).cut(
-        Part.makeCylinder(SPRING_SPEC['inner_diameter_mm'] / 2, 12, V(12, -10, 6), V(1, 0, 0)))
+    slider = union([slider, box(2, .3, 7, 3, 7.3, 2),
+                    Part.makeCylinder(.8, 7.5, V(6, 8.6, 8), V(1, 0, 0))])
+    socket = box(-8, 4, 3.5, 8, 9.5, 10.5)
+    socket = union([socket, box(-20, 4, 3.5, 2, 9.5, 6.5),
+                    box(-20, 4, 7, 14, 9.5, 3)])
+    socket = socket.cut(latch_socket_void())
+    spring = Part.makeCylinder(1.75, 12, V(6, 8.6, 8), V(1, 0, 0)).cut(
+        Part.makeCylinder(SPRING_SPEC['inner_diameter_mm'] / 2, 12, V(6, 8.6, 8), V(1, 0, 0)))
     return housing, cap, slider, socket, spring
+
+
+def latch_thumb_slot():
+    return box(THUMB_SLOT_X, -.2, 6.5, THUMB_SLOT_LENGTH, 6.8, 3)
+
+
+def latch_socket_void():
+    return box(-6, 6.45, 5.85, 6.1, 4.3, 4.3)
+
+
+def compact_joint_clearance(shape, service_bay=True):
+    # Leave the end lands for the closure magnets. The moving stems and
+    # front latch socket need open recesses, not a taller external bracket.
+    shape = shape.cut(box(-16.3, 4, 3.5, 16.6, 9.8, 20))
+    if service_bay:
+        shape = shape.cut(box(0, 4, 10, 19.6, 9.5, 12))
+    for y in HINGE_Y:
+        shape = shape.cut(cylinder_y(0, y - .1, AXIS_Z, 3.25, 8.2))
+        shape = shape.cut(box(-24.1, y + 2., -.1, 24.4, 4., AXIS_Z + .2))
+        shape = shape.cut(box(-5.3, y + 2., STOP_HEIGHT - .2, 10.6, 4., 10))
+    return shape
 
 
 def power_room():
@@ -227,9 +252,9 @@ def power_room():
     body = box(-16, 0, 0, 34, 74, LID_Z).cut(box(-14, 2, 2, 30, 70, LID_Z - 1))
     # Holder supports, end fences, module support and tie slots.
     body = union([body,
-        box(-13, 13, 2, 13, 4, 1.5), box(-13, 55, 2, 13, 4, 1.5),
-        box(-14, 8, 2, 15, 1.5, 3), box(-14, 62, 2, 15, 1.5, 3),
-        box(-14, 9.5, 2, .6, 52.5, 4), box(.4, 9.5, 2, 1.6, 52.5, 4),
+        box(-13, 17.5, 2, 13, 4, 1.5), box(-13, 59.5, 2, 13, 4, 1.5),
+        box(-14, 13.5, 2, 15, 1, 3), box(-14, 66.5, 2, 15, 1.5, 3),
+        box(-14, 14.5, 2, .6, 51, 4), box(.4, 14.5, 2, 1.6, 51, 4),
         box(4, 28, 2, 10, 7.5, 2), box(4, 65, 2, 9.5, 6, 3),
     ])
     for yy in (20, 52):
@@ -253,8 +278,8 @@ def power_room():
     # the adjacent electronics. Holder must expose the cell's upper surface.
     lid = lid.cut(battery_window())
     # Move right-hand lid screws away from the structural landing surfaces.
-    for x, y in ((-12, 6.5), (-12, 66), (13.5, 8), (13.5, 60)):
-        body = body.fuse(Part.makeCylinder(3.2, 6, V(x, y, LID_Z - 6)))
+    for x, y in ((-12, 68.5), (13.5, 17), (13.5, 60)):
+        body = body.fuse(Part.makeCylinder(2.7 if x == -12 and y > 60 else 3.2, 6, V(x, y, LID_Z - 6)))
         body = body.cut(Part.makeCylinder(.85, 5, V(x, y, LID_Z - 4.9)))
         lid = lid.cut(Part.makeCylinder(1.1, LID_THICKNESS + .2, V(x, y, LID_Z - .1)))
     for y in (0, 70):
@@ -268,26 +293,21 @@ def power_room():
     body = body.fuse(closed_stop(False))
     # Retain the rear EN-switch opening below the structural rear land.
     body = body.cut(box(1, 71, 4, 14, 4, 7))
-    body = body.cut(box(5, 69.8, 4, 6, 4.3, 7))
-    # Clearance for hinge bolt tails / locknuts and the rear bolt head.
-    if LID_Z + LID_THICKNESS > AXIS_Z - 3.5:
-        for yy in (-.1, 72):
-            notch = box(-4, yy, AXIS_Z - 4, 8, 6.1 if yy < 0 else 2.1, 8)
-            body = body.cut(notch)
-            lid = lid.cut(notch)
+    body = body.cut(box(7, 69.8, 4, 6, 4.3, 7))
     # The original wall/floor can refill part of a pocket during fusion.
     body = body.cut(closure_magnet_pockets(False))
     refs = {
-        'AAA_holder_assumed': box(-13, 10, 3.5, 13, 51, 15),
-        'AAA_cell_reference': Part.makeCylinder(5.25, 44.5, V(-6.5, 13.25, 11), V(0, 1, 0)),
+        'AAA_holder_assumed': box(-13, 14.5, 3.5, 13, 51, 15),
+        'AAA_cell_reference': Part.makeCylinder(5.25, 44.5, V(-6.5, 17.75, 11), V(0, 1, 0)),
         'Boost_module_assumed': box(4, 28, 4, 10, 7.5, 3),
         'PTC_assumed': box(4.5, 46, 4, 8.5, 3.5, 10),
         'Diode_assumed': Part.makeCylinder(1.3, 3.5, V(9, 55, 5.3), V(0, 1, 0)),
-        'Switch_assumed': box(4, 66, 5, 8.8, 3.9, 3.5),
-        'Switch_knob_assumed': box(6, 69.9, 6, 4, 4, 2),
-        'Power_disconnect_reserved': box(4, 13, 4, 11, 9, 7),
+        'Switch_assumed': box(6, 66, 5, 8.8, 3.9, 3.5),
+        'Switch_knob_assumed': box(8, 69.9, 6, 4, 4, 2),
+        'Power_disconnect_reserved': box(4, 16, 4, 11, 9, 7),
     }
-    return body.removeSplitter(), lid.removeSplitter(), refs
+    lid = compact_joint_clearance(lid, False).cut(box(-16.4, -.1, LID_Z - .1, 16.7, 14., LID_THICKNESS + .2))
+    return compact_joint_clearance(body).removeSplitter(), lid.removeSplitter(), refs
 
 
 def feature(doc, name, shape, color, visible=True):
@@ -327,8 +347,8 @@ def main():
         # inner 8 mm spine rail extends to the front/rear hinge roots; there
         # is no rectangular skirt under the outer key field.
         rail_x = -26 if side == 'left' else 18
-        tray = union([tray, box(rail_x, Y0, 0, 8, Y1 - Y0, 5)])
-        arms = [hinge_arm(side == 'left', yy) for yy in (-14, 76)]
+        tray = union([tray, box(rail_x, Y0, 0, 8, Y1 - Y0, 3.5)])
+        arms = [hinge_arm(side == 'left', yy) for yy in HINGE_Y]
         tray = union([tray] + arms + ([closed_stop(True)] if side == 'left' else []))
         shapes[side + '_tray'] = tray
         shapes[side + '_plate'] = plate
@@ -366,23 +386,29 @@ def main():
     body, lid, power_refs = power_room()
     assert lid.common(battery_window()).Volume < .001, 'Battery display opening obstructed'
     housing, cap, slider, socket, spring = latch_parts()
-    shapes['left_tray'] = union([shapes['left_tray'], socket]).cut(
-        box(-10, -12.15, 3.85, 10.1, 4.3, 4.3))
+    shapes['left_tray'] = union([shapes['left_tray'], socket]).cut(latch_socket_void())
     shapes['left_tray'] = shapes['left_tray'].cut(closure_magnet_pockets(True))
     # Spine is integral with fixed right tray. Low floor bridges do not touch
     # the left moving case (2 mm gap to x=-18).
     bridge = box(14, 3, 0, 8, 68, FLOOR)
     shapes['right_tray'] = union([shapes['right_tray'], body, bridge, housing])
     # Reapply openings after the hinge roots and floor have been fused.
-    shapes['right_tray'] = shapes['right_tray'].cut(box(-.1, -12.3, 3.7, 24.1, 4.6, 4.6))
-    shapes['right_tray'] = shapes['right_tray'].cut(box(THUMB_SLOT_X, -14.2, 4.5, THUMB_SLOT_LENGTH, 3, 3))
-    shapes['right_tray'] = shapes['right_tray'].cut(Part.makeCylinder(1.05, 5, V(23.5, -10, 6), V(1, 0, 0)))
+    shapes['right_tray'] = shapes['right_tray'].cut(box(-.1, 6.3, 5.7, 18.1, 4.6, 4.6))
+    shapes['right_tray'] = shapes['right_tray'].cut(latch_thumb_slot())
+    shapes['right_tray'] = shapes['right_tray'].cut(Part.makeCylinder(1.05, 3, V(17.5, 8.6, 8), V(1, 0, 0)))
     # Inner-spine service route. The former full-width rear rail is removed.
     shapes['right_tray'] = shapes['right_tray'].cut(box(17, 79, 2.5, 10, 3, 3))
     # Open access to the outer 5V/GND solder pads. No PCB copper is edited.
     shapes['right_plate'] = shapes['right_plate'].cut(box(41, 63, 6, 4, 6, 8))
     shapes.update(power_lid=lid, latch_cap=cap, latch_slider=slider)
+    # Leave assembly clearance where the internal latch replaces the
+    # original inner plate rims. Do not cut or drill the PCB itself.
+    shapes['left_plate'] = shapes['left_plate'].cut(box(-20.2, 3.8, 5.9, 2.4, 9.9, 4.3))
+    shapes['right_plate'] = shapes['right_plate'].cut(box(17.8, 3.8, 5.9, 1.9, 9.9, 8.4))
     cable_voids = underfloor_wiring(shapes)
+    for y in HINGE_Y:
+        shapes['right_tray'] = shapes['right_tray'].cut(box(-24.1, y + 2., -.1, 24.4, 4., 3.6))
+        shapes['right_tray'] = shapes['right_tray'].cut(cylinder_y(0, y - .1, AXIS_Z, 1.05, 8.2))
     # Keep old source parts as hidden references, then add the print assembly.
     for obj in doc.Objects:
         if obj.ViewObject:
@@ -404,7 +430,7 @@ def main():
                   'spring': {**SPRING_SPEC, 'maximum_button_travel_mm': LATCH_MAX_TRAVEL,
                       'length_at_button_stop_mm': spring_at_stop,
                       'locked_force_N': SPRING_SPEC['rate_N_per_mm'] * (SPRING_SPEC['free_length_mm'] - SPRING_SPEC['installed_length_mm']),
-                      'released_force_N': SPRING_SPEC['rate_N_per_mm'] * (SPRING_SPEC['free_length_mm'] - SPRING_SPEC['installed_length_mm'] + 6),
+                      'released_force_N': SPRING_SPEC['rate_N_per_mm'] * (SPRING_SPEC['free_length_mm'] - SPRING_SPEC['installed_length_mm'] + LATCH_RELEASE),
                       'force_at_button_stop_N': SPRING_SPEC['rate_N_per_mm'] * (SPRING_SPEC['free_length_mm'] - spring_at_stop)},
                   'power_room': {'top_mm': LID_Z + LID_THICKNESS, 'lid_bottom_mm': LID_Z,
                       'lid_thickness_mm': LID_THICKNESS, 'holder_height_assumption_mm': 15.,
@@ -415,10 +441,18 @@ def main():
                       'battery_visibility': 'requires an open-top holder; actual holder remains unmeasured'},
                   'interconnect': dict(CABLE_ROUTE),
                   'trackball_top_z_assumption_mm': TRACKBALL_TOP,
+                  'compact_joint': {'hinge_y_mm': list(HINGE_Y), 'span_mm': 8., 'pin_diameter_mm': 2., 'pin_length_mm': 7.6, 'retention': 'bond fixed end cheeks only; physical strength and retention unverified'},
                   'key_counts': counts, 'parts': {}, 'sweep': [],
                   'sources_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in [ROOT / 'pcb' / lib['PCB_FILENAMES'][s] for s in ('left', 'right')] +
                               [ROOT / '3d-models/FreeCAD/generate-keyboard-case.py', HERE / 'generate.py']}}
+    validation['print_part_pair_overlap_mm3'] = {}
+    names = list(shapes)
+    for i, first in enumerate(names):
+        for second in names[i + 1:]:
+            overlap = shapes[first].common(shapes[second]).Volume
+            assert overlap < .001, ('Print parts overlap in open assembly', first, second, overlap)
+            validation['print_part_pair_overlap_mm3'][first + '/' + second] = round(overlap, 6)
     for name, shape in shapes.items():
         shape = shape.removeSplitter()
         assert shape.isValid() and len(shape.Solids) == 1, (name, 'invalid/disconnected', len(shape.Solids))
@@ -442,16 +476,8 @@ def main():
     fixed_refs['Split_cable_storage_reserved'] = box(-13.8, 14, -.15, 29.6, 50.8, 2.0)
     moving_refs['Closure_magnets_left'] = closure_magnets(True)
     fixed_refs['Closure_magnets_right'] = closure_magnets(False)
-    # M3x18 screw, two 0.5 mm washers, 4 mm tall locknut. The circular
-    # nut envelope conservatively encloses a 5.5 mm across-flats hexagon.
-    for y, label in ((-14, 'front'), (76, 'rear')):
-        shaft = cylinder_y(0, y - .5, AXIS_Z, 1.5, 18)
-        head = cylinder_y(0, y - 3.5, AXIS_Z, 2.75, 3)
-        nut = cylinder_y(0, y + 12.5, AXIS_Z, 3.2, 4).cut(
-            cylinder_y(0, y + 12.4, AXIS_Z, 1.5, 4.2))
-        washers = [cylinder_y(0, yy, AXIS_Z, 3.5, .5).cut(
-            cylinder_y(0, yy - .1, AXIS_Z, 1.6, .7)) for yy in (y - .5, y + 12)]
-        fixed_refs['Hinge_hardware_' + label] = Part.makeCompound([shaft, head, nut] + washers)
+    for y, label in zip(HINGE_Y, ('front', 'rear')):
+        fixed_refs['Hinge_hardware_' + label] = cylinder_y(0, y + .2, AXIS_Z, 1., 7.6)
     moving = union([shapes['left_tray'], shapes['left_plate'], shapes['left_cable_cover']])
     fixed = union([shapes['right_tray'], shapes['right_plate'], shapes['right_cable_cover'], lid, cap])
     validation['interconnect']['clear_passages_mm3'] = {}
@@ -473,7 +499,7 @@ def main():
     for angle in angles:
         mv = folded(moving, angle)
         vol = mv.common(fixed).Volume
-        released_vol = mv.common(slider.translated(V(6, 0, 0))).Volume
+        released_vol = mv.common(slider.translated(V(LATCH_RELEASE, 0, 0))).Volume
         component_vol = folded(moving_obstacles, angle).common(fixed_obstacles).Volume
         mixed_vol = mv.common(fixed_obstacles).Volume + folded(moving_obstacles, angle).common(fixed).Volume
         pressed = {}
@@ -497,15 +523,15 @@ def main():
         assert max(vol, component_vol, mixed_vol, released_vol) < .01, ('fold collision', validation['sweep'][-1])
     validation['latch'] = {
         'locked_overlap_mm3': round(slider.common(shapes['left_tray']).Volume, 6),
-        'retracted_overlap_mm3': round(slider.translated(V(6, 0, 0)).common(shapes['left_tray']).Volume, 6),
-        'engaged_depth_mm': 5, 'release_travel_mm': 6,
+        'retracted_overlap_mm3': round(slider.translated(V(LATCH_RELEASE, 0, 0)).common(shapes['left_tray']).Volume, 6),
+        'engaged_depth_mm': 3, 'release_travel_mm': LATCH_RELEASE,
         'automatic_cam_and_spring_force': 'not physically verified',
     }
     assert validation['latch']['locked_overlap_mm3'] < .01, validation['latch']
     assert validation['latch']['retracted_overlap_mm3'] < .01
     validation['latch']['fixed_body_overlap_mm3'] = round(slider.common(fixed).Volume, 6)
     assert validation['latch']['fixed_body_overlap_mm3'] < .01
-    for travel in (0, 1, 2, 3, 4, 5, 6):
+    for travel in (0, 1, 2, 3, 4):
         assert slider.translated(V(travel, 0, 0)).common(fixed).Volume < .01, ('Slider channel obstructed', travel)
     assert slider.translated(V(LATCH_MAX_TRAVEL + .1, 0, 0)).common(fixed).Volume > .01, 'Button overtravel stop missing'
     validation['latch']['overtravel_stop_overlap_mm3'] = round(slider.translated(V(LATCH_MAX_TRAVEL + .1, 0, 0)).common(fixed).Volume, 6)
@@ -514,7 +540,7 @@ def main():
     cam = []
     for angle in range(0, 31):
         socket_at_angle = folded(shapes['left_tray'], angle)
-        allowed = [i / 4 for i in range(25) if slider.translated(V(i / 4, 0, 0)).common(socket_at_angle).Volume < .001]
+        allowed = [i / 4 for i in range(int(LATCH_RELEASE * 4) + 1) if slider.translated(V(i / 4, 0, 0)).common(socket_at_angle).Volume < .001]
         assert allowed, ('No automatic latch cam path', angle)
         cam.append({'angle_deg': angle, 'minimum_retraction_mm': min(allowed)})
     validation['latch']['cam_approach'] = cam
@@ -587,18 +613,18 @@ def main():
     for name, shape in {**moving_refs, **fixed_refs}.items():
         color = (.91, .91, .88) if 'AAA_cell' in name or 'Keys_' in name else (.34, .38, .4)
         feature(doc, 'Reference_' + name, shape, color, 'Keys_' in name or name == 'AAA_cell_reference')
-    for name in ('left_tray', 'left_plate'):
+    for name in ('left_tray', 'left_plate', 'left_cable_cover'):
         feature(doc, 'Folded_' + name, folded(shapes[name], 180), colors[name], False)
     feature(doc, 'Folded_Keys_left', folded(closed_keys, 180), (.34, .38, .4), False)
     # Print these small, full-scale front joint sections before a full body.
     validation['fit_coupons'] = {}
     coupons = {}
     for side, x0, width in (('left', -32, 32), ('right', -16, 48)):
-        coupon = shapes[side + '_tray'].common(box(x0, -14, -.1, width,
-                                                24, AXIS_Z + 5.2)).removeSplitter()
+        coupon = shapes[side + '_tray'].common(box(x0, -2, -.1, width,
+                                                22, AXIS_Z + 5.2)).removeSplitter()
         coupons['fit_' + side + '_joint'] = coupon
-    coupons['fit_front_power_lid'] = lid.common(box(-16, 0, 0, 34, 10, 25)).removeSplitter()
-    coupons['fit_power_room'] = body.copy()
+    coupons['fit_front_power_lid'] = lid.common(box(-16, 0, 0, 34, 20, 25)).removeSplitter()
+    coupons['fit_power_room'] = shapes['right_tray'].common(union([body, box(-16, 0, 0, 34, 74, 3.5)])).removeSplitter()
     for name, coupon in coupons.items():
         assert coupon.isValid() and len(coupon.Solids) == 1
         obj = feature(doc, name, coupon, (.31, .58, .62), False)
@@ -628,14 +654,14 @@ def main():
                                    for n in shapes]).BoundBox
     validation['open_size_mm'] = [round(bbox.XLength, 2), round(bbox.YLength, 2), round(bbox.ZLength, 2)]
     validation['closed_size_mm'] = [round(closed_bbox.XLength, 2), round(closed_bbox.YLength, 2), round(closed_bbox.ZLength, 2)]
-    validation['assembled_open_size_including_hinge_hardware_mm'] = [validation['open_size_mm'][0], 111., validation['open_size_mm'][2]]
-    validation['assembled_closed_size_including_hinge_hardware_mm'] = [validation['closed_size_mm'][0], 111., validation['closed_size_mm'][2]]
+    validation['assembled_open_size_including_hinge_hardware_mm'] = [validation['open_size_mm'][0], validation['open_size_mm'][1], validation['open_size_mm'][2]]
+    validation['assembled_closed_size_including_hinge_hardware_mm'] = [validation['closed_size_mm'][0], validation['closed_size_mm'][1], validation['closed_size_mm'][2]]
     validation['key_to_key_closed_gap_mm'] = round(2 * AXIS_Z - 2 * (PCB_TOP + KEY_HEIGHT), 2)
     validation['trackball_to_key_closed_gap_mm'] = round(2 * AXIS_Z - TRACKBALL_TOP - (PCB_TOP + KEY_HEIGHT), 2)
     validation['unverified'] = ['keycap lateral envelope and actual assembled trackball dimensions', 'wiring and FFSD bend fatigue',
         'actual switch travel, contact force and sustained key depression',
         'magnetic retention against key reaction, polarity and adhesive strength',
-        'printed fit / strength / creep', 'spring selection and automatic latch cam',
+        'printed fit / strength / creep', 'short knuckle strength and bonded headless pin retention', 'spring selection and automatic latch cam',
         '5V solder-joint clearance and insulation', 'power thermal performance and battery life']
     (OUT / 'validation.json').write_text(json.dumps(validation, indent=2) + '\n')
     doc.recompute()
