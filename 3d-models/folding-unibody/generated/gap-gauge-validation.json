@@ -1,5 +1,5 @@
 {
-  "nominal_internal_gap_mm": 37.0,
+  "nominal_internal_gap_mm": 39.4,
   "valid_solid": true,
   "closed_STL": true,
   "export_orientation": "broad C face on bed",

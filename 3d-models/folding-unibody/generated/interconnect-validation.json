@@ -1,0 +1,199 @@
+{
+  "scope": "Rigid lead envelopes only. Flexible port-to-port span, 254 mm storage, bend radii and fatigue are not validated.",
+  "source_sha256": "168728b2e974768445149775322a2ecc089e75ad0e823468fa90789669eec94b",
+  "CAD_sha256": "b76aabf9bb8f89b1def982229a90f1d26c9e0a6b3b5a43bcbc3dbc9353916fdd",
+  "own_case_overlap_mm3": {
+    "left": 0.0,
+    "right": 0.0
+  },
+  "own_PCB_overlap_mm3": {
+    "left": 0.0,
+    "right": 0.0
+  },
+  "sweep": [
+    {
+      "angle_deg": 0,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 10,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 15,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 20,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 25,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 30,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 35,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 40,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 45,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 50,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 55,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 60,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 65,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 70,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 75,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 80,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 85,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 90,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 95,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 100,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 105,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 110,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 115,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 120,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 125,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 130,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 135,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 140,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 145,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 150,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 155,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 160,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 165,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 170,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 175,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 175.5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 176.0,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 176.5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 177.0,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 177.5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 178.0,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 178.5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 179.0,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 179.5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 180,
+      "overlap_mm3": 0.0
+    }
+  ]
+}

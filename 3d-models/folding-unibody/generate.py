@@ -36,6 +36,13 @@ CLOSURE_MAGNET = {
     'published_steel_pull_kgf_reference_only': .55,
     'actual_closed_retention': 'unverified; steel pull is not the force between installed magnets',
 }
+BATTERY_WINDOW = {'width_mm': 10.5, 'length_mm': 43., 'corner_radius_mm': 1.,
+                  'center_xy_mm': [-6.5, 35.5]}
+CABLE_ROUTE = {'channel_width_mm': 8., 'channel_top_z_mm': 2.0,
+               'cover_bottom_z_mm': -1.2, 'cover_top_z_mm': -.2,
+               'cable_width_assumed_mm': 7.6, 'cable_thickness_assumed_mm': 1.,
+               'flex_exit_y_mm': [5., 13.],
+               'dynamic_flex_and_254mm_storage': 'unverified; not a continuous cable motion simulation'}
 THUMB_SLOT_X = 6.8
 THUMB_SLOT_LENGTH = 9.4
 LATCH_MAX_TRAVEL = THUMB_SLOT_X + THUMB_SLOT_LENGTH - 10
@@ -83,6 +90,57 @@ def folded(shape, angle):
 
 def cylinder_y(x, y, z, radius, length):
     return Part.makeCylinder(radius, length, V(x, y, z), V(0, 1, 0))
+
+
+def battery_window():
+    w, length = BATTERY_WINDOW['width_mm'], BATTERY_WINDOW['length_mm']
+    cx, cy = BATTERY_WINDOW['center_xy_mm']
+    window = box(cx - w / 2, cy - length / 2, LID_Z - .1,
+                 w, length, LID_THICKNESS + .2)
+    vertical = [e for e in window.Edges if e.BoundBox.ZLength > LID_THICKNESS
+                and e.BoundBox.XLength < .001 and e.BoundBox.YLength < .001]
+    return window.makeFillet(BATTERY_WINDOW['corner_radius_mm'], vertical)
+
+
+def underfloor_wiring(shapes):
+    """Open-bottom channels: install terminated cable sideways, then fit lids.
+
+    The top-mounted headers are retained. The ribbon comes over the plate,
+    down OUTSIDE the PCB edge, and then into the lower channel. Only ribbon,
+    never the assembled socket, passes through the narrow side slots.
+    """
+    screws = {'left': [(-24, 2), (-24, 52)],
+              'right': [(-11, 2), (-11, 67), (12, 2), (12, 67), (25, 2), (25, 45)]}
+    ribs = {'left': box(-28, 0, 0, 10, 54, 3.5),
+            'right': union([box(-16, 0, 0, 34, 69, 3.5), box(18, 0, 0, 11, 47, 3.5)])}
+    # Ceiling at 2.0 mm, reinforced to 3.5 mm above. The removable cover
+    # leaves a 2.2 mm-high cable chamber and a 1.5 mm solid roof.
+    voids = {
+        'left': union([box(-27, 5, -.19, 8, 44, 2.19),
+                       box(-27, 5, -.19, 9.1, 8, 2.19),
+                       box(-20, 40.5, -.19, 2.1, 8, 15.2)]),
+        'right': union([box(-14, 5, -.19, 30, 60, 2.19),
+                        box(-16.1, 5, -.19, 43.1, 8, 2.19),
+                        box(19, 5, -.19, 8, 38, 2.19),
+                        box(18, 34.5, -.19, 2., 8, 15.2)])}
+    covers = {'left': box(-28, 0, -1.2, 10, 54, 1.),
+              'right': union([box(-16, 0, -1.2, 34, 69, 1.),
+                              box(18, 0, -1.2, 11, 47, 1.)])}
+    # Remove the battery holder tie holes only in the cable-room roof: a
+    # tie threaded into this chamber could snag the moving ribbon. Existing
+    # end fences and supports remain; retention still needs a holder fit test.
+    for side in ('left', 'right'):
+        name = side + '_tray'
+        shapes[name] = union([shapes[name], ribs[side]]).cut(voids[side])
+        for x, y in screws[side]:
+            shapes[name] = shapes[name].cut(Part.makeCylinder(.85, 3.2, V(x, y, -.1)))
+            covers[side] = covers[side].cut(Part.makeCylinder(1.1, 1.2, V(x, y, -1.3)))
+        shapes[side + '_cable_cover'] = covers[side].removeSplitter()
+    # These slot volumes are kept clear through the cover/plate as well.
+    for side, x, y in (('left', -20, 40.5), ('right', 18, 34.5)):
+        slot = box(x, y, -.19, 2 if side == 'right' else 2.1, 8, 15.2)
+        shapes[side + '_plate'] = shapes[side + '_plate'].cut(slot)
+    return voids
 
 
 def closure_magnet_pockets(left):
@@ -191,6 +249,9 @@ def power_room():
     duct = box(16, 64, 14, 28, 6, 3).cut(box(15.9, 65.2, 15, 28.2, 3.6, 2.1))
     body = body.fuse(duct)
     lid = box(-16, 0, LID_Z, 34, 74, LID_THICKNESS)
+    # Display the cell through a rounded opening; retain a solid cover over
+    # the adjacent electronics. Holder must expose the cell's upper surface.
+    lid = lid.cut(battery_window())
     # Move right-hand lid screws away from the structural landing surfaces.
     for x, y in ((-12, 6.5), (-12, 66), (13.5, 8), (13.5, 60)):
         body = body.fuse(Part.makeCylinder(3.2, 6, V(x, y, LID_Z - 6)))
@@ -262,10 +323,11 @@ def main():
                 if group.ViewObject:
                     group.ViewObject.Visibility = False
         tray, plate = bottom.Shape.copy(), top.Shape.copy()
-        x0 = -EXTENT if side == 'left' else SPINE_HALF
-        tray = union([tray, box(x0, Y0, 0, EXTENT - SPINE_HALF, Y1 - Y0, FLOOR),
-                      box(x0, Y0, 0, EXTENT - SPINE_HALF, 8, 5),
-                      box(x0, 80, 0, EXTENT - SPINE_HALF, 8, 5)])
+        # Keep the source PCB-following perimeter and column steps. Only the
+        # inner 8 mm spine rail extends to the front/rear hinge roots; there
+        # is no rectangular skirt under the outer key field.
+        rail_x = -26 if side == 'left' else 18
+        tray = union([tray, box(rail_x, Y0, 0, 8, Y1 - Y0, 5)])
         arms = [hinge_arm(side == 'left', yy) for yy in (-14, 76)]
         tray = union([tray] + arms + ([closed_stop(True)] if side == 'left' else []))
         shapes[side + '_tray'] = tray
@@ -302,6 +364,7 @@ def main():
             if obj:
                 refs[side + '_' + name] = obj.Shape.copy()
     body, lid, power_refs = power_room()
+    assert lid.common(battery_window()).Volume < .001, 'Battery display opening obstructed'
     housing, cap, slider, socket, spring = latch_parts()
     shapes['left_tray'] = union([shapes['left_tray'], socket]).cut(
         box(-10, -12.15, 3.85, 10.1, 4.3, 4.3))
@@ -314,19 +377,21 @@ def main():
     shapes['right_tray'] = shapes['right_tray'].cut(box(-.1, -12.3, 3.7, 24.1, 4.6, 4.6))
     shapes['right_tray'] = shapes['right_tray'].cut(box(THUMB_SLOT_X, -14.2, 4.5, THUMB_SLOT_LENGTH, 3, 3))
     shapes['right_tray'] = shapes['right_tray'].cut(Part.makeCylinder(1.05, 5, V(23.5, -10, 6), V(1, 0, 0)))
-    # Service route in rear rail, clear of the elevated USB-C plug corridor.
-    shapes['right_tray'] = shapes['right_tray'].cut(box(17, 79, 2.5, 32, 3, 3))
+    # Inner-spine service route. The former full-width rear rail is removed.
+    shapes['right_tray'] = shapes['right_tray'].cut(box(17, 79, 2.5, 10, 3, 3))
     # Open access to the outer 5V/GND solder pads. No PCB copper is edited.
     shapes['right_plate'] = shapes['right_plate'].cut(box(41, 63, 6, 4, 6, 8))
     shapes.update(power_lid=lid, latch_cap=cap, latch_slider=slider)
+    cable_voids = underfloor_wiring(shapes)
     # Keep old source parts as hidden references, then add the print assembly.
     for obj in doc.Objects:
         if obj.ViewObject:
             obj.ViewObject.Visibility = False
-    colors = {'left_tray': (.18, .35, .44), 'right_tray': (.18, .35, .44),
-              'left_plate': (.72, .83, .84), 'right_plate': (.72, .83, .84),
-              'power_lid': (.31, .58, .62), 'latch_cap': (.35, .55, .61),
-              'latch_slider': (.95, .63, .2)}
+    colors = {'left_tray': (.80, .80, .77), 'right_tray': (.80, .80, .77),
+              'left_plate': (.90, .90, .87), 'right_plate': (.90, .90, .87),
+              'power_lid': (.90, .90, .87), 'latch_cap': (.80, .80, .77),
+              'left_cable_cover': (.80, .80, .77), 'right_cable_cover': (.80, .80, .77),
+              'latch_slider': (.24, .27, .29)}
     objects = {}
     validation = {'revision': 'A / unprinted fit prototype', 'axis_z_mm': AXIS_Z,
                   'PCB_top_z_mm': PCB_TOP, 'key_height_above_PCB_mm': KEY_HEIGHT,
@@ -345,6 +410,10 @@ def main():
                       'lid_thickness_mm': LID_THICKNESS, 'holder_height_assumption_mm': 15.,
                       'holder_bottom_mm': 3.5, 'holder_roof_clearance_mm': LID_Z - 18.5,
                       'height_basis': 'holder remains unmeasured; retain previous 15 mm envelope'},
+                  'styling': {'perimeter': 'original PCB-following contour, inner hinge rails only',
+                      'battery_window': dict(BATTERY_WINDOW),
+                      'battery_visibility': 'requires an open-top holder; actual holder remains unmeasured'},
+                  'interconnect': dict(CABLE_ROUTE),
                   'trackball_top_z_assumption_mm': TRACKBALL_TOP,
                   'key_counts': counts, 'parts': {}, 'sweep': [],
                   'sources_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -368,8 +437,9 @@ def main():
             'valid_solid': True, 'closed_STL': True}
     # Conservative trackball envelope in the right recess, not an exact mount.
     fixed_refs['Trackball_reserved_envelope'] = box(62, -3, 1.5, 30, 21, TRACKBALL_TOP - 1.5)
-    cable_bottom = LID_Z + LID_THICKNESS + .2
-    fixed_refs['Split_cable_loop_reserved'] = box(-10, 30, cable_bottom, 20, 14, 2 * AXIS_Z - 2 - cable_bottom)
+    # Storage below the battery: this does not pretend to be the flexible
+    # cable's changing shape through the folding motion.
+    fixed_refs['Split_cable_storage_reserved'] = box(-13.8, 14, -.15, 29.6, 50.8, 2.0)
     moving_refs['Closure_magnets_left'] = closure_magnets(True)
     fixed_refs['Closure_magnets_right'] = closure_magnets(False)
     # M3x18 screw, two 0.5 mm washers, 4 mm tall locknut. The circular
@@ -382,8 +452,14 @@ def main():
         washers = [cylinder_y(0, yy, AXIS_Z, 3.5, .5).cut(
             cylinder_y(0, yy - .1, AXIS_Z, 1.6, .7)) for yy in (y - .5, y + 12)]
         fixed_refs['Hinge_hardware_' + label] = Part.makeCompound([shaft, head, nut] + washers)
-    moving = union([shapes['left_tray'], shapes['left_plate']])
-    fixed = union([shapes['right_tray'], shapes['right_plate'], lid, cap])
+    moving = union([shapes['left_tray'], shapes['left_plate'], shapes['left_cable_cover']])
+    fixed = union([shapes['right_tray'], shapes['right_plate'], shapes['right_cable_cover'], lid, cap])
+    validation['interconnect']['clear_passages_mm3'] = {}
+    for side in ('left', 'right'):
+        assembly = shapes[side + '_tray'].fuse(shapes[side + '_plate']).fuse(shapes[side + '_cable_cover'])
+        overlap = assembly.common(cable_voids[side]).Volume
+        assert overlap < .001, ('Cable passage obstructed', side, overlap)
+        validation['interconnect']['clear_passages_mm3'][side] = round(overlap, 6)
     for name in ('Hinge_hardware_front', 'Hinge_hardware_rear'):
         assert fixed_refs[name].common(fixed).Volume < .01, ('Hinge hardware hits fixed body', name)
     moving_obstacles = Part.makeCompound([s for n, s in moving_refs.items() if n != 'Keys_left'])
@@ -509,8 +585,8 @@ def main():
                                     for name, key in left_keys.items()])
     fixed_refs['Latch_spring_envelope'] = spring
     for name, shape in {**moving_refs, **fixed_refs}.items():
-        color = (.88, .65, .25) if 'AAA' in name or 'spring' in name else (.34, .38, .4)
-        feature(doc, 'Reference_' + name, shape, color, 'Keys_' in name or 'Trackball' in name)
+        color = (.91, .91, .88) if 'AAA_cell' in name or 'Keys_' in name else (.34, .38, .4)
+        feature(doc, 'Reference_' + name, shape, color, 'Keys_' in name or name == 'AAA_cell_reference')
     for name in ('left_tray', 'left_plate'):
         feature(doc, 'Folded_' + name, folded(shapes[name], 180), colors[name], False)
     feature(doc, 'Folded_Keys_left', folded(closed_keys, 180), (.34, .38, .4), False)
@@ -539,7 +615,11 @@ def main():
     assert folded(coupons['fit_left_joint'], 181).common(front_fixed).Volume > .01
     validation['front_coupon_closed_stop_verified'] = True
     mesh_preview = {}
-    for name, shape in {**shapes, **moving_refs, **fixed_refs, 'Keys_left_closed': closed_keys, **coupons}.items():
+    # A sphere for presentation only. Collision checks continue to use the
+    # larger reserved envelope; actual cradle/sensor location is unverified.
+    visual_refs = {'Trackball_visual_only': Part.makeSphere(9.525, V(77, 7.5, 11.3))}
+    feature(doc, 'Visual_Trackball_not_mount_geometry', visual_refs['Trackball_visual_only'], (.72, .74, .75))
+    for name, shape in {**shapes, **moving_refs, **fixed_refs, 'Keys_left_closed': closed_keys, **coupons, **visual_refs}.items():
         vertices, triangles = shape.tessellate(.35)
         mesh_preview[name] = {'vertices': [[v.x, v.y, v.z] for v in vertices], 'triangles': triangles}
     (OUT / 'preview-mesh.json').write_text(json.dumps(mesh_preview))
