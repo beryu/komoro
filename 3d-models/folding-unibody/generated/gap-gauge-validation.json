@@ -1,0 +1,8 @@
+{
+  "nominal_internal_gap_mm": 37.0,
+  "valid_solid": true,
+  "closed_STL": true,
+  "export_orientation": "broad C face on bed",
+  "use": "reference beside bare case bottoms; do not force or clamp",
+  "rubber_feet_included": false
+}
