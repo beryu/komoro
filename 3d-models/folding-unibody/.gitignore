@@ -1,0 +1,4 @@
+__pycache__/
+generated/*.FCBak
+generated/*.FCStd1
+!generated/*.step

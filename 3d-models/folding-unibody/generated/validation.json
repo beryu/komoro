@@ -1,0 +1,922 @@
+{
+  "revision": "A / unprinted fit prototype",
+  "axis_z_mm": 18.5,
+  "PCB_top_z_mm": 6.1,
+  "key_height_above_PCB_mm": 10.5,
+  "key_height_default_basis": "User measured 10.5 mm above PCB; same switches and keycaps as split version",
+  "configuration": {
+    "trackball": "retained",
+    "lock": "automatic spring latch, manual release",
+    "folding": "keys may depress on contact; power off before folding"
+  },
+  "key_press_limit_assumption_mm": 2.0,
+  "switch": {
+    "model": "Lofree x Kailh Specter",
+    "source": "https://www.lofree.co/products/specter-low-profile-pom-switches",
+    "nominal_travel_mm": 2.8,
+    "travel_tolerance_mm": 0.25,
+    "minimum_published_travel_mm": 2.55,
+    "minimum_travel_minus_required_mm": 1.55
+  },
+  "closure_magnets": {
+    "size_mm": [
+      6.0,
+      2.0,
+      2.3
+    ],
+    "grade": "N52",
+    "quantity": 4,
+    "pairs": 2,
+    "magnetisation": "through 2.3 mm thickness",
+    "pocket_mm": [
+      6.3,
+      2.3,
+      2.5
+    ],
+    "nominal_face_recess_mm": 0.1,
+    "nominal_adhesive_bed_mm": 0.1,
+    "source": "https://www.neomag.jp/shop/magnets/category_list1.php?cat2_id=1&categorysDir=DESC&categorysOrder=Sorter6&shape_id=4",
+    "published_steel_pull_kgf_reference_only": 0.55,
+    "actual_closed_retention": "unverified; steel pull is not the force between installed magnets",
+    "closed_face_gap_mm": 0.2,
+    "minimum_side_wall_mm": 0.85,
+    "remaining_finger_floor_mm": 1.5,
+    "magnet_lever_arm_mm": 12.0,
+    "example_only": {
+      "assumed_force_per_pressed_key_N": 0.5,
+      "key_lever_arms_mm": [
+        70.05,
+        87.05
+      ],
+      "required_pull_per_pair_N": 3.2729,
+      "note": "illustration, not measured key force or validated magnetic holding force"
+    }
+  },
+  "spring": {
+    "manufacturer": "ACCURATE",
+    "model": "C101",
+    "source": "https://www.accurate.jp/products/c101/",
+    "outer_diameter_mm": 3.5,
+    "inner_diameter_mm": 3.1,
+    "free_length_mm": 15.0,
+    "rate_N_per_mm": 0.059,
+    "minimum_allowed_length_mm": 4.5,
+    "maximum_allowed_force_N": 0.62,
+    "solid_length_mm": 1.9,
+    "installed_length_mm": 12.0,
+    "maximum_button_travel_mm": 6.199999999999999,
+    "length_at_button_stop_mm": 5.800000000000001,
+    "locked_force_N": 0.177,
+    "released_force_N": 0.5309999999999999,
+    "force_at_button_stop_N": 0.5428
+  },
+  "power_room": {
+    "top_mm": 20.5,
+    "lid_bottom_mm": 19.0,
+    "lid_thickness_mm": 1.5,
+    "holder_height_assumption_mm": 15.0,
+    "holder_bottom_mm": 3.5,
+    "holder_roof_clearance_mm": 0.5,
+    "height_basis": "holder remains unmeasured; retain previous 15 mm envelope"
+  },
+  "trackball_top_z_assumption_mm": 21.3424,
+  "key_counts": {
+    "left": 26,
+    "right": 22
+  },
+  "parts": {
+    "left_tray": {
+      "volume_mm3": 37325.66,
+      "size_mm": [
+        154.099,
+        102.0,
+        22.0
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "left_plate": {
+      "volume_mm3": 6651.68,
+      "size_mm": [
+        132.6,
+        79.35,
+        1.5
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "right_tray": {
+      "volume_mm3": 50148.465,
+      "size_mm": [
+        166.6,
+        102.0,
+        22.0
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "right_plate": {
+      "volume_mm3": 6831.045,
+      "size_mm": [
+        132.6,
+        79.35,
+        6.41
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "power_lid": {
+      "volume_mm3": 3372.682,
+      "size_mm": [
+        34.0,
+        74.0,
+        1.5
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "latch_cap": {
+      "volume_mm3": 877.779,
+      "size_mm": [
+        28.0,
+        10.0,
+        5.5
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "latch_slider": {
+      "volume_mm3": 282.096,
+      "size_mm": [
+        26.0,
+        8.0,
+        4.0
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    }
+  },
+  "sweep": [
+    {
+      "angle_deg": 0,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 5,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 10,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 15,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 20,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 25,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 30,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 35,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 40,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 45,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 50,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 55,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 60,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 65,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 70,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 75,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 80,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 85,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 90,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 95,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 100,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 105,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 110,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 115,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 120,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 125,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 130,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 135,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 140,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 145,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 150,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 155,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 160,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 165,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 170,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 175,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 175.5,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 176.0,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 176.5,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 177.0,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 177.5,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 178.0,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 178.5,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 179.0,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 179.5,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 180,
+      "body_overlap_mm3": 0.0,
+      "component_overlap_mm3": 0.0,
+      "body_component_overlap_mm3": 0.0,
+      "released_latch_overlap_mm3": 0.0
+    }
+  ],
+  "sources_sha256": {
+    "pcb/torabo-tsuki-lp-S-ortho-mini-left.kicad_pcb": "d2076d6d8c46ee79fcae24832e92fdfa390ae1add11c533ec9dc39e8c9942632",
+    "pcb/torabo-tsuki-lp-S-ortho-mini-right.kicad_pcb": "c3aab4ac7dac0ded8ae54cdb94704d31dfb0ee32ce4029476c048f661134f08c",
+    "3d-models/FreeCAD/generate-keyboard-case.py": "622e4faef8e940a9553e011bc779a1bee3b57dc6f61346aeaef74bfa4f2d0463",
+    "3d-models/folding-unibody/generate.py": "efbd6590f89d8a264e1142799e17badcb2c2b2e14257168604861dbf2b368ba4"
+  },
+  "key_depression_by_angle": [
+    {
+      "angle_deg": 0,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 5,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 10,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 15,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 20,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 25,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 30,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 35,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 40,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 45,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 50,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 55,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 60,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 65,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 70,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 75,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 80,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 85,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 90,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 95,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 100,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 105,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 110,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 115,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 120,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 125,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 130,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 135,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 140,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 145,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 150,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 155,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 160,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 165,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 170,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 175,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 175.5,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 176.0,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 176.5,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 177.0,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 177.5,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 178.0,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 178.5,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 179.0,
+      "required_mm": {}
+    },
+    {
+      "angle_deg": 179.5,
+      "required_mm": {
+        "SW33": 0.4,
+        "SW32": 0.3
+      }
+    },
+    {
+      "angle_deg": 180,
+      "required_mm": {
+        "SW33": 1.0,
+        "SW32": 1.0
+      }
+    }
+  ],
+  "latch": {
+    "locked_overlap_mm3": 0.0,
+    "retracted_overlap_mm3": 0.0,
+    "engaged_depth_mm": 5,
+    "release_travel_mm": 6,
+    "automatic_cam_and_spring_force": "not physically verified",
+    "fixed_body_overlap_mm3": 0.0,
+    "overtravel_stop_overlap_mm3": 0.34,
+    "cam_approach": [
+      {
+        "angle_deg": 0,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 1,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 2,
+        "minimum_retraction_mm": 0.5
+      },
+      {
+        "angle_deg": 3,
+        "minimum_retraction_mm": 1.75
+      },
+      {
+        "angle_deg": 4,
+        "minimum_retraction_mm": 2.5
+      },
+      {
+        "angle_deg": 5,
+        "minimum_retraction_mm": 2.75
+      },
+      {
+        "angle_deg": 6,
+        "minimum_retraction_mm": 2.75
+      },
+      {
+        "angle_deg": 7,
+        "minimum_retraction_mm": 3.0
+      },
+      {
+        "angle_deg": 8,
+        "minimum_retraction_mm": 3.0
+      },
+      {
+        "angle_deg": 9,
+        "minimum_retraction_mm": 2.75
+      },
+      {
+        "angle_deg": 10,
+        "minimum_retraction_mm": 2.5
+      },
+      {
+        "angle_deg": 11,
+        "minimum_retraction_mm": 2.25
+      },
+      {
+        "angle_deg": 12,
+        "minimum_retraction_mm": 2.0
+      },
+      {
+        "angle_deg": 13,
+        "minimum_retraction_mm": 1.75
+      },
+      {
+        "angle_deg": 14,
+        "minimum_retraction_mm": 1.5
+      },
+      {
+        "angle_deg": 15,
+        "minimum_retraction_mm": 1.25
+      },
+      {
+        "angle_deg": 16,
+        "minimum_retraction_mm": 1.0
+      },
+      {
+        "angle_deg": 17,
+        "minimum_retraction_mm": 0.75
+      },
+      {
+        "angle_deg": 18,
+        "minimum_retraction_mm": 0.5
+      },
+      {
+        "angle_deg": 19,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 20,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 21,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 22,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 23,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 24,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 25,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 26,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 27,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 28,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 29,
+        "minimum_retraction_mm": 0.0
+      },
+      {
+        "angle_deg": 30,
+        "minimum_retraction_mm": 0.0
+      }
+    ],
+    "holding_overlap_at_5_deg_mm3": 1.126395,
+    "open_stop_overlap_at_minus_1_deg_mm3": 42.095201
+  },
+  "closed_stop": {
+    "location": "front and rear structural end lands integrated into central power block",
+    "nominal_contact_area_at_180_deg_mm2": 50.470619,
+    "separation_at_180_deg_mm": 0.0,
+    "contact_plane_gap_mm": 0.0,
+    "overtravel_overlap_at_181_deg_mm3": 9.099935,
+    "lid_overlap_under_contact_probe_mm3": 0.0,
+    "old_inner_tower_overlap_below_hinge_axis_mm3": {
+      "left": 0.0,
+      "right": 0.0
+    },
+    "outer_corner_overlap_above_5_mm3": {
+      "left_-14": 0.0,
+      "left_80": 0.0,
+      "right_-14": 0.0,
+      "right_80": 0.0
+    }
+  },
+  "power_envelope_overlap_mm3": {
+    "AAA_holder_assumed": 0.0,
+    "AAA_cell_reference": 0.0,
+    "Boost_module_assumed": 0.0,
+    "PTC_assumed": 0.0,
+    "Diode_assumed": 0.0,
+    "Switch_assumed": 0.0,
+    "Switch_knob_assumed": 0.0,
+    "Power_disconnect_reserved": 0.0
+  },
+  "maximum_required_key_depression_mm": 1.0,
+  "closed_key_depression_mm": {
+    "SW33": 1.0,
+    "SW32": 1.0
+  },
+  "fit_coupons": {
+    "fit_left_joint": {
+      "valid_solid": true,
+      "closed_STL": true,
+      "size_mm": [
+        32.0,
+        24.0,
+        22.0
+      ]
+    },
+    "fit_right_joint": {
+      "valid_solid": true,
+      "closed_STL": true,
+      "size_mm": [
+        48.0,
+        24.0,
+        22.0
+      ]
+    },
+    "fit_front_power_lid": {
+      "valid_solid": true,
+      "closed_STL": true,
+      "size_mm": [
+        34.0,
+        10.0,
+        1.5
+      ]
+    },
+    "fit_power_room": {
+      "valid_solid": true,
+      "closed_STL": true,
+      "size_mm": [
+        60.0,
+        74.0,
+        19.0
+      ]
+    }
+  },
+  "front_coupon_closed_stop_verified": true,
+  "open_size_mm": [
+    301.2,
+    104.0,
+    22.0
+  ],
+  "closed_size_mm": [
+    166.6,
+    104.0,
+    37.0
+  ],
+  "assembled_open_size_including_hinge_hardware_mm": [
+    301.2,
+    111.0,
+    22.0
+  ],
+  "assembled_closed_size_including_hinge_hardware_mm": [
+    166.6,
+    111.0,
+    37.0
+  ],
+  "key_to_key_closed_gap_mm": 3.8,
+  "trackball_to_key_closed_gap_mm": -0.94,
+  "unverified": [
+    "keycap lateral envelope and actual assembled trackball dimensions",
+    "wiring and FFSD bend fatigue",
+    "actual switch travel, contact force and sustained key depression",
+    "magnetic retention against key reaction, polarity and adhesive strength",
+    "printed fit / strength / creep",
+    "spring selection and automatic latch cam",
+    "5V solder-joint clearance and insulation",
+    "power thermal performance and battery life"
+  ]
+}
