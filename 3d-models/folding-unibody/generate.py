@@ -36,8 +36,27 @@ CLOSURE_MAGNET = {
     'published_steel_pull_kgf_reference_only': .55,
     'actual_closed_retention': 'unverified; steel pull is not the force between installed magnets',
 }
-BATTERY_WINDOW = {'width_mm': 10.5, 'length_mm': 43., 'corner_radius_mm': 1.,
-                  'center_xy_mm': [-6.5, 40.0]}
+BATTERY_WINDOW = {'width_mm': 10.5, 'length_mm': 41., 'corner_radius_mm': 1.,
+                  'center_xy_mm': [-6.5, 41.0]}
+BATTERY_CAP = {'outer_min_mm': [-16., 14., 3.8], 'outer_size_mm': [18.5, 53.7, 14.2],
+               'holder_envelope_mm': [13., 51., 9.5], 'unmodified_holder_bounds_assumption_mm': [13., 51., 15.], 'holder_bottom_z_mm': 3.5,
+               'holder_y_mm': [15.5, 66.5], 'inner_top_z_mm': 13.4,
+               'holder_profile_basis': 'Modified open holder: floor 1 mm, sides top Z11.5, end resin trimmed to Z13.0; retain metal contacts and their anchors. Actual part unmeasured',
+               'trimmed_end_top_z_mm': 13., 'end_roof_clearance_mm': .4,
+               'holder_end_height_from_base_mm': 9.5,
+               'terminal_relief_y_mm': [],
+               'clip_intervals_y_mm': [[24., 30.], [52., 58.]],
+               'clip_wall_mm': 1., 'detent_engagement_mm': .35,
+               'release_deflection_allowance_mm': .5,
+               'reference': 'BatteryCase_v4_L.stl is AA-sized; curved hollow roof and open-bottom style only, not scaled or reused',
+               'frame_top_z_mm': 15., 'arch_top_z_mm': 18.,
+               'arch_radius_mm': 7., 'arch_inner_radius_mm': 5.8,
+               'radial_wall_mm': 1.2, 'cell_radial_clearance_mm': .55,
+               'arch_center_z_mm': 11.,
+               'arch_intervals_y_mm': [[17.3, 20.5], [61.5, 64.7]],
+               'long_side_rail_bottom_z_mm': 11.,
+               'raised_above_electronics_lid_mm': 1.7, 'outer_top_edge_radius_mm': .65,
+               'retention_force_and_printed_flex': 'unverified; shortened release tongues need cap and cradle coupon test'}
 CABLE_ROUTE = {'channel_width_mm': 8., 'channel_top_z_mm': 2.0,
                'cover_bottom_z_mm': -1.2, 'cover_top_z_mm': -.2,
                'cable_width_assumed_mm': 7.6, 'cable_thickness_assumed_mm': 1.,
@@ -71,7 +90,7 @@ PIN_RADIUS = 1.1
 HINGE_Y = (-2., 68.)
 HINGE_SPAN = 8.0
 PCB_TOP = 6.1
-LID_Z = 19.0
+LID_Z = 14.8
 LID_THICKNESS = 1.5
 Y0, Y1 = -2., 76.
 
@@ -95,14 +114,66 @@ def cylinder_y(x, y, z, radius, length):
     return Part.makeCylinder(radius, length, V(x, y, z), V(0, 1, 0))
 
 
+def aaa_holder_profile():
+    # A bounding box includes air above the open holder. Do not treat that
+    # air as solid plastic. Keep the old overall bounds, but distinguish
+    # the low side walls and modified end walls explicitly. Only resin
+    # outside the contact/anchor region may be trimmed on the real holder.
+    return union([box(-13, 15.5, 3.5, 13, 51, 1.),
+                  box(-13, 15.5, 4.5, 1, 51, 7), box(-1, 15.5, 4.5, 1, 51, 7),
+                  box(-13, 15.5, 4.5, 13, 1.5, 8.5), box(-13, 65, 4.5, 13, 1.5, 8.5)])
+
+
 def battery_window():
     w, length = BATTERY_WINDOW['width_mm'], BATTERY_WINDOW['length_mm']
     cx, cy = BATTERY_WINDOW['center_xy_mm']
-    window = box(cx - w / 2, cy - length / 2, LID_Z - .1,
-                 w, length, LID_THICKNESS + .2)
-    vertical = [e for e in window.Edges if e.BoundBox.ZLength > LID_THICKNESS
+    window = box(cx-w/2, cy-length/2, 13.3, w, length, 10.)
+    vertical = [e for e in window.Edges if e.BoundBox.ZLength > 9
                 and e.BoundBox.XLength < .001 and e.BoundBox.YLength < .001]
     return window.makeFillet(BATTERY_WINDOW['corner_radius_mm'], vertical)
+
+
+def battery_cap():
+    # Low frame + genuinely hollow concentric cylindrical roof. The roof
+    # follows the cell instead of sitting on top of a tall rectangular box.
+    outer = box(-16, 14, 3.8, 18.5, 53.7, 11.2)
+    edges = [e for e in outer.Edges if e.BoundBox.ZLength > 11
+             and e.BoundBox.XLength < .001 and e.BoundBox.YLength < .001]
+    outer = outer.makeFillet(.8, edges)
+    top_edges = [e for e in outer.Edges if abs(e.BoundBox.ZMin-15.) < .001]
+    outer = outer.makeFillet(.65, top_edges)
+    cover = outer.cut(box(-13.4, 15.2, 3.7, 13.8, 51.6, 9.7))
+    cover = cover.cut(box(-15, 15.2, 3.7, 16.5, 51.6, 2.6))
+    for y in (13.9, 66.2):
+        cover = cover.cut(box(-13.4, y, 3.7, 13.8, 1.7, 2.6))
+    shoulders = []
+    for y0, y1 in BATTERY_CAP['arch_intervals_y_mm']:
+        curved = cylinder_y(-6.5, y0, 11., 7., y1-y0)
+        shoulders.append(curved.common(box(-14, y0, 14.8, 15, y1-y0, 3.3)))
+    cover = union([cover] + shoulders)
+    # The same cylindrical clearance extends through both shoulders.
+    # 5.8 - 5.25 = 0.55 mm radial clearance; 7 - 5.8 = 1.2 mm wall.
+    cover = cover.cut(cylinder_y(-6.5, 17.3, 11., 5.8, 47.4))
+    cover = cover.cut(battery_window())
+    # The modified holder ends fit BELOW the roof; leave these shoulders
+    # closed instead of exposing tall black end walls through roof slots.
+    for y0, y1 in BATTERY_CAP['terminal_relief_y_mm']:
+        cover = cover.cut(box(-13.4, y0, 13.3, 13.8, y1-y0, 6.))
+    cover = cover.cut(box(.3, 21, 3.7, 2.3, 40, 7.3))
+    for y0, y1 in ((21, 23.3), (30.7, 51.3), (58.7, 61)):
+        cover = cover.cut(box(-16.1, y0, 3.7, 2.8, y1-y0, 7.3))
+    hooks = []
+    for y0, y1 in BATTERY_CAP['clip_intervals_y_mm']:
+        for yy in (y0-.7, y1):
+            cover = cover.cut(box(-16.1, yy, 3.7, 2.8, .7, 8.9))
+        cover = cover.cut(box(-15, y0, 6.3, 1.6, y1-y0, 6.3))
+        profile = [V(-15,y0,4.1),V(-14.35,y0,4.55),V(-15,y0,5.),V(-15,y0,4.1)]
+        hooks.append(Part.Face(Part.makePolygon(profile)).extrude(V(0,y1-y0,0)))
+    grip = box(-11, 13.7, 12.7, 9, .7, 2.3)
+    cover = union([cover,grip]+hooks).removeSplitter()
+    assert abs(cover.BoundBox.ZMax-18.) < .001
+    assert cover.common(cylinder_y(-6.5,17.3,11.,5.8,47.4)).Volume < .001
+    return cover, Part.makeCompound(hooks)
 
 
 def underfloor_wiring(shapes):
@@ -252,9 +323,7 @@ def power_room():
     body = box(-16, 0, 0, 34, 74, LID_Z).cut(box(-14, 2, 2, 30, 70, LID_Z - 1))
     # Holder supports, end fences, module support and tie slots.
     body = union([body,
-        box(-13, 17.5, 2, 13, 4, 1.5), box(-13, 59.5, 2, 13, 4, 1.5),
-        box(-14, 13.5, 2, 15, 1, 3), box(-14, 66.5, 2, 15, 1.5, 3),
-        box(-14, 14.5, 2, .6, 51, 4), box(.4, 14.5, 2, 1.6, 51, 4),
+        box(-13, 18.5, 2, 13, 4, 1.5), box(-13, 60.5, 2, 13, 4, 1.5),
         box(4, 28, 2, 10, 7.5, 2), box(4, 65, 2, 9.5, 6, 3),
     ])
     for yy in (20, 52):
@@ -278,9 +347,9 @@ def power_room():
     # the adjacent electronics. Holder must expose the cell's upper surface.
     lid = lid.cut(battery_window())
     # Move right-hand lid screws away from the structural landing surfaces.
-    for x, y in ((-12, 68.5), (13.5, 17), (13.5, 60)):
-        body = body.fuse(Part.makeCylinder(2.7 if x == -12 and y > 60 else 3.2, 6, V(x, y, LID_Z - 6)))
-        body = body.cut(Part.makeCylinder(.85, 5, V(x, y, LID_Z - 4.9)))
+    for x, y in ((13.5, 17), (13.5, 60)):
+        body = body.fuse(Part.makeCylinder(3.2, 3.5, V(x, y, LID_Z - 3.5)))
+        body = body.cut(Part.makeCylinder(.85, 3.4, V(x, y, LID_Z - 3.3)))
         lid = lid.cut(Part.makeCylinder(1.1, LID_THICKNESS + .2, V(x, y, LID_Z - .1)))
     for y in (0, 70):
         # Recessed structural lands receive the fingers when closed. The
@@ -290,6 +359,9 @@ def power_room():
         body = body.cut(box(-16.3, y - .3, open_clear_z, 11.1, 4.6, 20))
         lid = lid.cut(box(5.2, y - .3, LID_Z - .1, 11.1, 4.6, LID_THICKNESS + .2))
         lid = lid.cut(box(-16.3, y - .3, LID_Z - .1, 11.1, 4.6, LID_THICKNESS + .2))
+    # Align the short rear outside wall with the structural landing top.
+    # This avoids a T-junction in the rear switch-port tessellation.
+    body = body.fuse(box(16, 70, LID_Z, 2, 4, STOP_HEIGHT-LID_Z))
     body = body.fuse(closed_stop(False))
     # Retain the rear EN-switch opening below the structural rear land.
     body = body.cut(box(1, 71, 4, 14, 4, 7))
@@ -297,8 +369,10 @@ def power_room():
     # The original wall/floor can refill part of a pocket during fusion.
     body = body.cut(closure_magnet_pockets(False))
     refs = {
-        'AAA_holder_assumed': box(-13, 14.5, 3.5, 13, 51, 15),
-        'AAA_cell_reference': Part.makeCylinder(5.25, 44.5, V(-6.5, 17.75, 11), V(0, 1, 0)),
+        'AAA_holder_assumed': aaa_holder_profile(),
+        'AAA_contact_keepout_assumed': union([cylinder_y(-6.5,17.3,11.,4.5,1.45),
+                                             cylinder_y(-6.5,63.25,11.,4.5,1.45)]),
+        'AAA_cell_reference': Part.makeCylinder(5.25, 44.5, V(-6.5, 18.75, 11), V(0, 1, 0)),
         'Boost_module_assumed': box(4, 28, 4, 10, 7.5, 3),
         'PTC_assumed': box(4.5, 46, 4, 8.5, 3.5, 10),
         'Diode_assumed': Part.makeCylinder(1.3, 3.5, V(9, 55, 5.3), V(0, 1, 0)),
@@ -306,8 +380,27 @@ def power_room():
         'Switch_knob_assumed': box(8, 69.9, 6, 4, 4, 2),
         'Power_disconnect_reserved': box(4, 16, 4, 11, 9, 7),
     }
-    lid = compact_joint_clearance(lid, False).cut(box(-16.4, -.1, LID_Z - .1, 16.7, 14., LID_THICKNESS + .2))
-    return compact_joint_clearance(body).removeSplitter(), lid.removeSplitter(), refs
+    body = compact_joint_clearance(body)
+    # Remove the tall enclosure on the battery side, preserving the floor
+    # and the independent structural hinge/closure-stop lands at the ends.
+    body = body.cut(box(-16.3, 13.8, 3.5, 19.1, 54.2, 20))
+    rails = union([box(-14.7, 15.5, 3.5, 1.5, 51, 2.5),
+                   box(.2, 15.5, 3.5, 1., 51, 2.5),
+                   box(-13, 14.5, 3.5, 13, 1., 2.5),
+                   box(-13, 66.5, 3.5, 13, 1., 2.5)])
+    for y0, y1 in BATTERY_CAP['clip_intervals_y_mm']:
+        rails = rails.cut(box(-14.71, y0-.2, 4.0, .81, y1-y0+.4, 1.2))
+    divider = box(2.8, 14, 3.5, 1., 51.5, LID_Z-3.5)
+    body = union([body, rails, divider])
+    lid = compact_joint_clearance(lid, False).common(box(2.8, 14., LID_Z-.1, 16., 56., LID_THICKNESS+.2))
+    # The lowered electronics lid must clear the elevated XIAO wire duct.
+    lid = lid.cut(box(15.8, 63.8, LID_Z-.1, 2.4, 6.4, LID_THICKNESS+.2))
+    # Clear the fixed hinge pillars and separate latch cap at this lower level.
+    for yy in HINGE_Y:
+        for start in (yy, yy+6):
+            lid = lid.cut(box(-.1, start-.1, LID_Z-.1, 5.3, 2.2, LID_THICKNESS+.2))
+    lid = lid.cut(box(0, 3.8, LID_Z-.1, 19.6, 9.9, LID_THICKNESS+.2))
+    return body.removeSplitter(), lid.removeSplitter(), refs
 
 
 def feature(doc, name, shape, color, visible=True):
@@ -384,7 +477,8 @@ def main():
             if obj:
                 refs[side + '_' + name] = obj.Shape.copy()
     body, lid, power_refs = power_room()
-    assert lid.common(battery_window()).Volume < .001, 'Battery display opening obstructed'
+    cell_cover, cover_hooks = battery_cap()
+    assert cell_cover.common(battery_window()).Volume < .001, 'Battery display opening obstructed'
     housing, cap, slider, socket, spring = latch_parts()
     shapes['left_tray'] = union([shapes['left_tray'], socket]).cut(latch_socket_void())
     shapes['left_tray'] = shapes['left_tray'].cut(closure_magnet_pockets(True))
@@ -400,7 +494,7 @@ def main():
     shapes['right_tray'] = shapes['right_tray'].cut(box(17, 79, 2.5, 10, 3, 3))
     # Open access to the outer 5V/GND solder pads. No PCB copper is edited.
     shapes['right_plate'] = shapes['right_plate'].cut(box(41, 63, 6, 4, 6, 8))
-    shapes.update(power_lid=lid, latch_cap=cap, latch_slider=slider)
+    shapes.update(power_lid=lid, battery_cap=cell_cover, latch_cap=cap, latch_slider=slider)
     # Leave assembly clearance where the internal latch replaces the
     # original inner plate rims. Do not cut or drill the PCB itself.
     shapes['left_plate'] = shapes['left_plate'].cut(box(-20.2, 3.8, 5.9, 2.4, 9.9, 4.3))
@@ -416,6 +510,7 @@ def main():
     colors = {'left_tray': (.80, .80, .77), 'right_tray': (.80, .80, .77),
               'left_plate': (.90, .90, .87), 'right_plate': (.90, .90, .87),
               'power_lid': (.90, .90, .87), 'latch_cap': (.80, .80, .77),
+              'battery_cap': (.90, .90, .87),
               'left_cable_cover': (.80, .80, .77), 'right_cable_cover': (.80, .80, .77),
               'latch_slider': (.24, .27, .29)}
     objects = {}
@@ -426,16 +521,17 @@ def main():
                       'folding': 'keys may depress on contact; power off before folding'},
                   'key_press_limit_assumption_mm': KEY_PRESS_LIMIT,
                   'switch': dict(SWITCH_SPEC),
+                  'battery_service': dict(BATTERY_CAP),
                   'closure_magnets': dict(CLOSURE_MAGNET),
                   'spring': {**SPRING_SPEC, 'maximum_button_travel_mm': LATCH_MAX_TRAVEL,
                       'length_at_button_stop_mm': spring_at_stop,
                       'locked_force_N': SPRING_SPEC['rate_N_per_mm'] * (SPRING_SPEC['free_length_mm'] - SPRING_SPEC['installed_length_mm']),
                       'released_force_N': SPRING_SPEC['rate_N_per_mm'] * (SPRING_SPEC['free_length_mm'] - SPRING_SPEC['installed_length_mm'] + LATCH_RELEASE),
                       'force_at_button_stop_N': SPRING_SPEC['rate_N_per_mm'] * (SPRING_SPEC['free_length_mm'] - spring_at_stop)},
-                  'power_room': {'top_mm': LID_Z + LID_THICKNESS, 'lid_bottom_mm': LID_Z,
-                      'lid_thickness_mm': LID_THICKNESS, 'holder_height_assumption_mm': 15.,
-                      'holder_bottom_mm': 3.5, 'holder_roof_clearance_mm': LID_Z - 18.5,
-                      'height_basis': 'holder remains unmeasured; retain previous 15 mm envelope'},
+                  'power_room': {'battery_cover_top_mm': BATTERY_CAP['arch_top_z_mm'], 'battery_frame_top_mm': BATTERY_CAP['frame_top_z_mm'], 'PTC_roof_clearance_mm': LID_Z - 14., 'top_mm': LID_Z + LID_THICKNESS, 'lid_bottom_mm': LID_Z,
+                      'lid_thickness_mm': LID_THICKNESS, 'holder_height_assumption_mm': 9.5,
+                      'holder_bottom_mm': 3.5, 'holder_side_roof_clearance_mm': BATTERY_CAP['inner_top_z_mm'] - 11.5,
+                      'height_basis': BATTERY_CAP['holder_profile_basis']},
                   'styling': {'perimeter': 'original PCB-following contour, inner hinge rails only',
                       'battery_window': dict(BATTERY_WINDOW),
                       'battery_visibility': 'requires an open-top holder; actual holder remains unmeasured'},
@@ -479,7 +575,7 @@ def main():
     for y, label in zip(HINGE_Y, ('front', 'rear')):
         fixed_refs['Hinge_hardware_' + label] = cylinder_y(0, y + .2, AXIS_Z, 1., 7.6)
     moving = union([shapes['left_tray'], shapes['left_plate'], shapes['left_cable_cover']])
-    fixed = union([shapes['right_tray'], shapes['right_plate'], shapes['right_cable_cover'], lid, cap])
+    fixed = union([shapes['right_tray'], shapes['right_plate'], shapes['right_cable_cover'], lid, cap, cell_cover])
     validation['interconnect']['clear_passages_mm3'] = {}
     for side in ('left', 'right'):
         assembly = shapes[side + '_tray'].fuse(shapes[side + '_plate']).fuse(shapes[side + '_cable_cover'])
@@ -597,9 +693,42 @@ def main():
             assert vol < .001, ('Outer corner tower remains', side, yy)
     validation['power_envelope_overlap_mm3'] = {}
     for name, ref in power_refs.items():
-        vol = ref.common(shapes['right_tray']).Volume + ref.common(lid).Volume
+        vol = ref.common(shapes['right_tray']).Volume + ref.common(lid).Volume + ref.common(cell_cover).Volume
         validation['power_envelope_overlap_mm3'][name] = round(vol, 6)
         assert vol < .01, ('Power-room collision', name, vol)
+    # Verify that reducing the holder model is paired with actual opaque
+    # roof material, rather than merely hiding the black reference object.
+    validation['battery_service']['holder_end_roof_missing_mm3'] = {}
+    for yy in (15.5,65.):
+        roof_probe = box(-13,yy,14.,13,1.5,.5)
+        missing = roof_probe.Volume-roof_probe.common(cell_cover).Volume
+        assert abs(missing)<.001, ('Holder end roof remains open',yy,missing)
+        validation['battery_service']['holder_end_roof_missing_mm3'][str(yy)] = round(missing,6)
+    radial_gap = cell_cover.distToShape(power_refs['AAA_cell_reference'])[0]
+    assert radial_gap >= .549, ('Cell-to-cap clearance', radial_gap)
+    validation['battery_service']['minimum_cell_to_cap_clearance_mm'] = round(radial_gap, 6)
+    validation['battery_service']['hinge_axis_minus_cap_peak_mm'] = round(AXIS_Z-cell_cover.BoundBox.ZMax, 6)
+    section_plane = Part.Face(Part.makePolygon([V(-20,19,0),V(5,19,0),V(5,19,22),V(-20,19,22),V(-20,19,0)]))
+    validation['battery_service']['cross_section'] = {'y_mm':19., 'cover_edges_xz_mm':
+        [[[round(v.x,5),round(v.z,5)] for v in e.discretize(64)]
+         for e in cell_cover.section(section_plane).Edges]}
+    # Service access with the keyboard open. Snap-hook retraction is a
+    # clearance allowance only, not a material/force simulation.
+    fixed_without_cover = union([shapes['right_tray'], shapes['right_plate'],
+                                 shapes['right_cable_cover'], lid, cap, moving])
+    released_cover = cell_cover.cut(cover_hooks)
+    validation['battery_service']['released_lift_overlap_mm3'] = {}
+    for height in (0, .5, 2, 5, 15, 25):
+        overlap = released_cover.translated(V(0, 0, height)).common(fixed_without_cover).Volume
+        assert overlap < .001, ('Battery cover cannot lift after hook release', height, overlap)
+        validation['battery_service']['released_lift_overlap_mm3'][str(height)] = round(overlap, 6)
+    cell_exit = box(-11.95, 18.55, 5.55, 10.9, 44.9, 44.45)
+    exit_overlap = cell_exit.common(fixed_without_cover).Volume
+    assert exit_overlap < .001, ('Body blocks battery removal', exit_overlap)
+    validation['battery_service']['cell_exit_overlap_mm3'] = round(exit_overlap, 6)
+    for y0, y1 in BATTERY_CAP['clip_intervals_y_mm']:
+        allowance = box(-16.5, y0, 3.8, 1.5, y1-y0, 13.7)
+        assert allowance.common(fixed_without_cover).Volume < .001, 'No room for clip release'
     # Spring envelope and pin/hardware are references, never printable parts.
     fixed_refs.update(power_refs)
     validation['maximum_required_key_depression_mm'] = max(
@@ -609,6 +738,8 @@ def main():
     validation['closed_key_depression_mm'] = closed_key_pressures
     closed_keys = Part.makeCompound([key.translated(V(0, 0, -closed_key_pressures.get(name, 0)))
                                     for name, key in left_keys.items()])
+    validation['battery_service']['closed_cap_to_left_case_clearance_mm'] = round(cell_cover.distToShape(folded(moving,180))[0], 6)
+    validation['battery_service']['closed_cap_to_left_keys_clearance_mm'] = round(cell_cover.distToShape(folded(closed_keys,180))[0], 6)
     fixed_refs['Latch_spring_envelope'] = spring
     for name, shape in {**moving_refs, **fixed_refs}.items():
         color = (.91, .91, .88) if 'AAA_cell' in name or 'Keys_' in name else (.34, .38, .4)
@@ -625,6 +756,8 @@ def main():
         coupons['fit_' + side + '_joint'] = coupon
     coupons['fit_front_power_lid'] = lid.common(box(-16, 0, 0, 34, 20, 25)).removeSplitter()
     coupons['fit_power_room'] = shapes['right_tray'].common(union([body, box(-16, 0, 0, 34, 74, 3.5)])).removeSplitter()
+    coupons['fit_battery_cradle'] = shapes['right_tray'].common(box(-16.1, 13.8, -.1, 20.1, 54., 6.6)).fuse(
+        box(-16.1, 13.8, 0, 20.1, 54., 2.)).removeSplitter()
     for name, coupon in coupons.items():
         assert coupon.isValid() and len(coupon.Solids) == 1
         obj = feature(doc, name, coupon, (.31, .58, .62), False)
@@ -643,8 +776,13 @@ def main():
     mesh_preview = {}
     # A sphere for presentation only. Collision checks continue to use the
     # larger reserved envelope; actual cradle/sensor location is unverified.
-    visual_refs = {'Trackball_visual_only': Part.makeSphere(9.525, V(77, 7.5, 11.3))}
+    holder_visual = aaa_holder_profile()
+    feature(doc, 'Reference_AAA_holder_bounding_box_unmeasured',
+            box(-13,15.5,3.5,13,51,15), (.34,.38,.4), False)
+    visual_refs = {'Trackball_visual_only': Part.makeSphere(9.525, V(77, 7.5, 11.3)),
+                   'AAA_holder_visual_only': holder_visual}
     feature(doc, 'Visual_Trackball_not_mount_geometry', visual_refs['Trackball_visual_only'], (.72, .74, .75))
+    feature(doc, 'Visual_AAA_holder_not_manufacturer_geometry', holder_visual, (.12, .13, .14))
     for name, shape in {**shapes, **moving_refs, **fixed_refs, 'Keys_left_closed': closed_keys, **coupons, **visual_refs}.items():
         vertices, triangles = shape.tessellate(.35)
         mesh_preview[name] = {'vertices': [[v.x, v.y, v.z] for v in vertices], 'triangles': triangles}

@@ -76,8 +76,8 @@ def assembly(ax, angle):
         draw(ax, side + '_plate', '#e4e4dd', a)
         keys = 'Keys_left_closed' if side == 'left' and angle == 180 else 'Keys_' + side
         draw(ax, keys, '#efeee8', a)
-    for name, color in [('power_lid', '#e4e4dd'), ('latch_cap', '#cacbc5'), ('latch_slider', '#41484c')]:
-        draw(ax, name, color)
+    for name, color in [('power_lid', '#e4e4dd'), ('battery_cap', '#e4e4dd'), ('latch_cap', '#cacbc5'), ('latch_slider', '#41484c')]:
+        if name in MESH: draw(ax, name, color)
     for name in ('Hinge_hardware_front', 'Hinge_hardware_rear'):
         draw(ax, name, '#c5cbd0')
     draw(ax, 'Closure_magnets_right', '#c9cdd0')
@@ -85,6 +85,8 @@ def assembly(ax, angle):
     # Display references: the ball position is illustrative, while the CAD
     # validation uses the larger conservative reserved envelope.
     draw(ax, 'Trackball_visual_only', '#b9bec1')
+    if 'AAA_holder_visual_only' in MESH:
+        draw(ax, 'AAA_holder_visual_only', '#343a3e')
     draw(ax, 'AAA_cell_reference', '#e8e8e1')
 
 
@@ -124,7 +126,7 @@ for name,color,label in parts:
     else:
         ax.text(20,(lo[1]+hi[1])/2,label,va='center',fontsize=10,color='#34515d')
         ax.plot([hi[0],19],[(lo[1]+hi[1])/2]*2,color='#7b959f',lw=.8)
-ax.text(-16,-6,f"電源室 34 × 74 mm ／ 高さ {CHECK['power_room']['top_mm']:g} mm",fontsize=10,color='#526670')
+ax.text(-16,-6,f"電源室 34 × 74 mm ／ 電池側 {CHECK['power_room']['battery_cover_top_mm']:g} mm",fontsize=10,color='#526670')
 ax.set(xlim=(-28,48),ylim=(-10,82)); ax.set_aspect('equal');ax.axis('off')
 fig.text(.06,.04,'中央の前後に磁石を2組内蔵。キー押下の反力に対する保持力・接着・組付けは実物確認前。銀色ボールは配置イメージ。検証は従来の予約空間で実施。',fontsize=11,color='#7d6440')
 fig.subplots_adjust(left=.05,right=.95,bottom=.09,top=.87,wspace=.13,hspace=.12)
@@ -164,7 +166,7 @@ def projected_scene(ax, angle=0, elev=60, azim=-75):
 fig = plt.figure(figsize=(14, 6), facecolor='#f4f6f7')
 ax = fig.add_axes([.025,.12,.95,.73],facecolor='#f4f6f7')
 projected_scene(ax)
-fig.text(.045,.925,'前後の張り出しを抑えた中央ヒンジ',fontsize=20,color='#183c4b')
+fig.text(.045,.925,'電池だけが盛り上がる、段差付き中央モジュール',fontsize=20,color='#183c4b')
 fig.text(.045,.06,f"同じPCBを使用 · 配線室を下面へ · 収納厚{CHECK['closed_size_mm'][2]:g} mm · 銀色ボールは仮配置",fontsize=11,color='#526670')
 fig.savefig(OUT/'open-view.png',dpi=160,facecolor=fig.get_facecolor())
 plt.close(fig)

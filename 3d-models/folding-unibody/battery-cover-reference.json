@@ -1,0 +1,17 @@
+{
+  "file_name": "BatteryCase_v4_L.stl",
+  "sha256": "464153f779d525bd9470aba44d39e499a9dd85ecf9d0c1918c41d35d29290189",
+  "provided_by": "user",
+  "intended_cell": "AA, user clarified; geometry inspiration only",
+  "outer_bounds_mm": [
+    20.12001,
+    60.12,
+    11.910206
+  ],
+  "application": "Open-bottom cover and display window only. New dimensions use the existing AAA holder envelope; no uniform scaling or mesh reuse.",
+  "applied_features": [
+    "arched shoulders at both window ends",
+    "open lower long sides with end feet",
+    "independent open-bottom windowed cap"
+  ]
+}

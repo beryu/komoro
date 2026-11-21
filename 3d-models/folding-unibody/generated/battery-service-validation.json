@@ -1,0 +1,18 @@
+{
+  "scope": "Released snap hooks; assumed resin-trimmed holder, metal-contact keepout and cell, not measured hardware.",
+  "CAD_sha256": "2eefd5f412edb93be40d5ffdcf9bdf435f856ff44cda5a655e6c7d6625c9941b",
+  "checker_sha256": "3ad64d61e8ca16c12b3a103f443cc8dda6641df47c4a7af6273db3a8973a9e85",
+  "references": [
+    "AAA_holder_assumed",
+    "AAA_contact_keepout_assumed",
+    "AAA_cell_reference"
+  ],
+  "lift_overlap_mm3": {
+    "0": 0.0,
+    "0.5": 0.0,
+    "2": 0.0,
+    "5": 0.0,
+    "15": 0.0,
+    "25": 0.0
+  }
+}
