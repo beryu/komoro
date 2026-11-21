@@ -47,7 +47,7 @@ for i, angle in enumerate((0, 180), 1):
         front = triangles[vertices[triangles][:, :, 1].mean(axis=1) < 10]
         ns['MESH'][name + '_front'] = {'vertices': item['vertices'], 'triangles': front.tolist()}
         draw(ax, name + '_front', '#c9cdd0', angle if side == 'left' else 0)
-    finish(ax, ((-35 if angle == 0 else -20, 36), (-20, 14), (0, 42)), (71 if angle == 0 else 56, 34, 42))
+    finish(ax, ((-35 if angle == 0 else -20, 36), (-5, 22), (0, 42)), (71 if angle == 0 else 56, 27, 42))
     ax.set_title('01  前側ヒンジ・ロック' if angle == 0 else '02  中央ブロックで閉じ止め',
                  loc='left', fontsize=13, color='#183c4b')
 ax = fig.add_subplot(2, 2, 3, projection='3d', facecolor='#f4f6f7')
@@ -71,7 +71,7 @@ ax.text(17.5, gap/2+2, f'{gap:g} mm', color='#183c4b', fontsize=16, va='center')
 ax.text(5, -5, '締め付けず、ケースの脇へ添える', color='#526670', fontsize=10)
 ax.set(xlim=(-3, 43), ylim=(-8, gap+10)); ax.set_aspect('equal'); ax.axis('off')
 ax.set_title('04  収納厚の確認ゲージ（側面）', loc='left', fontsize=13, color='#183c4b')
-fig.text(.06, .035, 'ばね候補：C101 ／ 自動復帰・部品収納・キー接触・印刷強度は実物で確認する段階です。', fontsize=11, color='#7d6440')
+fig.text(.06, .035, '軸：2 × 7.6 mm金属ピン ／ ばね：C101 ／ 抜け止め・軸受け強度・自動復帰は実物で確認する段階です。', fontsize=11, color='#7d6440')
 fig.subplots_adjust(left=.06, right=.95, bottom=.1, top=.86, hspace=.15, wspace=.1)
 fig.savefig(OUT / 'fit-pack.png', dpi=150, facecolor=fig.get_facecolor())
 plt.close(fig)

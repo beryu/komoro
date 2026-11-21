@@ -19,16 +19,16 @@ leads = {
                 box(-19.5,40.7,1.1,1,7.6,11.9),
                 box(-26.8,40.7,.1,8.3,7.6,1),
                 box(-26.8,5.2,.1,7.6,43.6,1),
-                box(-26.8,5.2,.1,8.8,7.6,1)]),
+                box(-26.8,8.2,.1,8.8,7.6,1)]),
  'right': union([box(18.5,34.7,12,15.75,7.6,1),
                  box(18.5,34.7,1.1,1,7.6,11.9),
                  box(18.5,34.7,.1,8.3,7.6,1),
                  box(19.2,5.2,.1,7.6,37.6,1),
-                 box(-16,5.2,.1,42.8,7.6,1)])}
+                 box(-16,8.2,.1,42.8,7.6,1)])}
 report = {'scope':'Rigid lead envelopes only. Flexible port-to-port span, 254 mm storage, bend radii and fatigue are not validated.',
           'source_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
           'CAD_sha256':hashlib.sha256((OUT / 'folding-unibody-rev-a.FCStd').read_bytes()).hexdigest(),
-          'own_case_overlap_mm3':{},'own_PCB_overlap_mm3':{},'sweep':[]}
+          'own_case_overlap_mm3':{},'own_PCB_overlap_mm3':{},'case_to_PCB_overlap_mm3':{},'sweep':[]}
 assemblies = {}
 for side in ('left','right'):
  assemblies[side] = union([shape('Print_'+side+'_'+n) for n in ('tray','plate','cable_cover')])
@@ -36,6 +36,9 @@ for side in ('left','right'):
  own=leads[side].common(assemblies[side]).Volume
  pcb=leads[side].common(shape('Reference_'+side+'_PCB_reference')).Volume
  assert max(own,pcb)<.001,(side,'lead obstructed',own,pcb)
+ case_pcb = assemblies[side].common(shape('Reference_'+side+'_PCB_reference')).Volume
+ assert case_pcb < .001, (side, 'case obstructs PCB', case_pcb)
+ report['case_to_PCB_overlap_mm3'][side] = round(case_pcb,6)
  report['own_case_overlap_mm3'][side]=round(own,6)
  report['own_PCB_overlap_mm3'][side]=round(pcb,6)
 for angle in sorted(set(range(0,181,5)) | {175+i*.5 for i in range(11)}):
