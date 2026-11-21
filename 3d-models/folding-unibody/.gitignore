@@ -2,3 +2,5 @@ __pycache__/
 generated/*.FCBak
 generated/*.FCStd1
 !generated/*.step
+generated/*.blend1
+generated/*.blend2

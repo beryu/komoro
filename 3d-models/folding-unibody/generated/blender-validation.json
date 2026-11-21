@@ -1,0 +1,94 @@
+{
+  "blender_version": "5.0.0",
+  "units": "metres, displayed as millimetres",
+  "source_sha256": {
+    "export-blender.py": "49ced151e5bcb25b4ed6497b5ba80f361b1b4a451695f9da116311452cc48fb4",
+    "generated/preview-mesh.json": "17720b8932dcac08911a0141444776dd417d7e769a5a53f0ad32c8580759b52b",
+    "generated/validation.json": "29b7de0d18aa8ba8429a47b8b67485f4f7fdf9c365d74a2c788525bdcc108651",
+    "generated/left_tray.stl": "5072862e783c0536424db08695051406313a21c36e23f450e3dbd93031da8dd8",
+    "generated/left_plate.stl": "b36b17429872f2e90422d296d7762737a276bbf643a1612831b8eda59186499d",
+    "generated/right_tray.stl": "a857ad4e577c69e334639c4e19aa1c60dc7a58aafaa547d434963041523a6d74",
+    "generated/right_plate.stl": "d52b0c3bd31d28bb8071f29ddda00c562b7900a83abfbc72fb18cc6ea907005a",
+    "generated/power_lid.stl": "c761358949dd162725bcd0411cbd0baf3a21ca93f323b3eeb52d45885e523063",
+    "generated/battery_cap.stl": "d006258680c2975be89721b57d0fe35c5609898b3543b5c09b839f8d2da9c0db",
+    "generated/latch_cap.stl": "750bf1a6e3524a79fce5c5c66d014ef3a9a3217201041816bbc6b4af3ef2e19c",
+    "generated/latch_slider.stl": "9ca878150235f13f9c8102f248fe7579965060a8dba0be30245fe9a06539d3a4",
+    "generated/left_cable_cover.stl": "0bdc7a32c3d81503febc7a6ab598cbc08c67d3557d292ce4431a7d375f096c03",
+    "generated/right_cable_cover.stl": "a2d7c9fc2918db0b87ea9d18a1eeb6d668045c4a1399f963024b0c4fe5ccb00c"
+  },
+  "scenes": {
+    "01_Open": {
+      "mesh_objects": 70,
+      "mesh_dimensions_mm": [
+        301.2000024318695,
+        80.75000578537583,
+        22.70000078715384
+      ],
+      "CAD_BRep_bounds_mm": [
+        301.2,
+        80.75,
+        22.7
+      ],
+      "within_CAD_BRep_bounds": true
+    },
+    "02_Folded": {
+      "mesh_objects": 70,
+      "mesh_dimensions_mm": [
+        166.60000197589397,
+        80.75000578537583,
+        39.39999849535525
+      ],
+      "CAD_BRep_bounds_mm": [
+        166.8,
+        80.75,
+        39.4
+      ],
+      "within_CAD_BRep_bounds": true
+    }
+  },
+  "preview_directory": "blender-views",
+  "native_file": "komoro-folding-review.blend",
+  "portable_file": "komoro-folding-open.glb",
+  "validation_script_sha256": "b57e38979c423ceb14a5e214b7b05c51838164154d7607cb97b9f515ca5f7d10",
+  "native_reopen": {
+    "file_sha256": "396b35140902b44c0818e9b15e2afbb1dae3dba1012bb671f3ab5f6f4fcb3e66",
+    "passed": true,
+    "scenes": [
+      "01_Open",
+      "02_Folded",
+      "03_Underside_covers_hidden",
+      "04_Battery_cover_removed"
+    ],
+    "printed_parts_per_scene": 10,
+    "keys_per_scene": 48,
+    "external_images": false
+  },
+  "GLB_reimport": {
+    "file_sha256": "0af29501c37118ba08d408d094b15f5d9f8eca63fd8fb478813ec972d48a3697",
+    "passed": true,
+    "mesh_objects": 70,
+    "dimensions_mm": [
+      301.2000024318695,
+      80.75000578537583,
+      22.70000078715384
+    ]
+  },
+  "battery_access_reopen": {
+    "passed": true,
+    "initial_scene": "04_Battery_cover_removed",
+    "file_sha256": "c9be8fbe7af4d1d04facca7b721df1395fa5356dd56bc784785dc48ea4171a50"
+  },
+  "trimmed_holder_reopen": {
+    "passed": true,
+    "holder_top_z_mm": 13.000000268220901,
+    "holder_visible": true
+  },
+  "conformal_battery_reopen": {
+    "passed": true,
+    "top_z_mm": {
+      "battery_cap": 17.999999225139618,
+      "power_lid": 16.29999838769436
+    },
+    "step_mm": 1.700000837445259
+  }
+}

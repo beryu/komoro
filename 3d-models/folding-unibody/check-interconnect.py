@@ -32,7 +32,7 @@ report = {'scope':'Rigid lead envelopes only. Flexible port-to-port span, 254 mm
 assemblies = {}
 for side in ('left','right'):
  assemblies[side] = union([shape('Print_'+side+'_'+n) for n in ('tray','plate','cable_cover')])
- if side == 'right': assemblies[side] = union([assemblies[side],shape('Print_power_lid'),shape('Print_latch_cap')])
+ if side == 'right': assemblies[side] = union([assemblies[side],shape('Print_power_lid'),shape('Print_latch_cap'),shape('Print_battery_cap')])
  own=leads[side].common(assemblies[side]).Volume
  pcb=leads[side].common(shape('Reference_'+side+'_PCB_reference')).Volume
  assert max(own,pcb)<.001,(side,'lead obstructed',own,pcb)
