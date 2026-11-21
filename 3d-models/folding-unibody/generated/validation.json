@@ -79,6 +79,36 @@
     "holder_roof_clearance_mm": 0.5,
     "height_basis": "holder remains unmeasured; retain previous 15 mm envelope"
   },
+  "styling": {
+    "perimeter": "original PCB-following contour, inner hinge rails only",
+    "battery_window": {
+      "width_mm": 10.5,
+      "length_mm": 43.0,
+      "corner_radius_mm": 1.0,
+      "center_xy_mm": [
+        -6.5,
+        35.5
+      ]
+    },
+    "battery_visibility": "requires an open-top holder; actual holder remains unmeasured"
+  },
+  "interconnect": {
+    "channel_width_mm": 8.0,
+    "channel_top_z_mm": 2.0,
+    "cover_bottom_z_mm": -1.2,
+    "cover_top_z_mm": -0.2,
+    "cable_width_assumed_mm": 7.6,
+    "cable_thickness_assumed_mm": 1.0,
+    "flex_exit_y_mm": [
+      5.0,
+      13.0
+    ],
+    "dynamic_flex_and_254mm_storage": "unverified; not a continuous cable motion simulation",
+    "clear_passages_mm3": {
+      "left": 0.0,
+      "right": 0.0
+    }
+  },
   "trackball_top_z_assumption_mm": 21.3424,
   "key_counts": {
     "left": 26,
@@ -86,7 +116,7 @@
   },
   "parts": {
     "left_tray": {
-      "volume_mm3": 37325.66,
+      "volume_mm3": 24634.987,
       "size_mm": [
         154.099,
         102.0,
@@ -96,7 +126,7 @@
       "closed_STL": true
     },
     "left_plate": {
-      "volume_mm3": 6651.68,
+      "volume_mm3": 6627.68,
       "size_mm": [
         132.6,
         79.35,
@@ -106,7 +136,7 @@
       "closed_STL": true
     },
     "right_tray": {
-      "volume_mm3": 50148.465,
+      "volume_mm3": 37042.613,
       "size_mm": [
         166.6,
         102.0,
@@ -116,7 +146,7 @@
       "closed_STL": true
     },
     "right_plate": {
-      "volume_mm3": 6831.045,
+      "volume_mm3": 6807.045,
       "size_mm": [
         132.6,
         79.35,
@@ -126,7 +156,7 @@
       "closed_STL": true
     },
     "power_lid": {
-      "volume_mm3": 3372.682,
+      "volume_mm3": 2696.72,
       "size_mm": [
         34.0,
         74.0,
@@ -151,6 +181,26 @@
         26.0,
         8.0,
         4.0
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "left_cable_cover": {
+      "volume_mm3": 532.397,
+      "size_mm": [
+        10.0,
+        54.0,
+        1.0
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "right_cable_cover": {
+      "volume_mm3": 2840.192,
+      "size_mm": [
+        45.0,
+        69.0,
+        1.0
       ],
       "valid_solid": true,
       "closed_STL": true
@@ -484,7 +534,7 @@
     "pcb/torabo-tsuki-lp-S-ortho-mini-left.kicad_pcb": "d2076d6d8c46ee79fcae24832e92fdfa390ae1add11c533ec9dc39e8c9942632",
     "pcb/torabo-tsuki-lp-S-ortho-mini-right.kicad_pcb": "c3aab4ac7dac0ded8ae54cdb94704d31dfb0ee32ce4029476c048f661134f08c",
     "3d-models/FreeCAD/generate-keyboard-case.py": "622e4faef8e940a9553e011bc779a1bee3b57dc6f61346aeaef74bfa4f2d0463",
-    "3d-models/folding-unibody/generate.py": "efbd6590f89d8a264e1142799e17badcb2c2b2e14257168604861dbf2b368ba4"
+    "3d-models/folding-unibody/generate.py": "fd817aa6f3eca52660e641c82b01ba3cc3c25ff21bc9c69223f650a9195c1070"
   },
   "key_depression_by_angle": [
     {
@@ -890,22 +940,22 @@
   "open_size_mm": [
     301.2,
     104.0,
-    22.0
+    23.2
   ],
   "closed_size_mm": [
-    166.6,
+    166.8,
     104.0,
-    37.0
+    39.4
   ],
   "assembled_open_size_including_hinge_hardware_mm": [
     301.2,
     111.0,
-    22.0
+    23.2
   ],
   "assembled_closed_size_including_hinge_hardware_mm": [
-    166.6,
+    166.8,
     111.0,
-    37.0
+    39.4
   ],
   "key_to_key_closed_gap_mm": 3.8,
   "trackball_to_key_closed_gap_mm": -0.94,

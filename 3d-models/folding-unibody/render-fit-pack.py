@@ -21,7 +21,7 @@ gap = json.loads((OUT / 'gap-gauge-validation.json').read_text())['nominal_inter
 
 def finish(ax, limits, aspect, elev=30, azim=-65):
     ax.add_collection3d(Poly3DCollection(np.concatenate(ax._fold_faces),
-        facecolors=np.concatenate(ax._fold_colors), edgecolors='none', zsort='average'))
+        facecolors=np.concatenate(ax._fold_colors), edgecolors='none', antialiased=False, zsort='average'))
     ax.set_axis_off()
     ax.set_proj_type('ortho')
     ax.set(xlim=limits[0], ylim=limits[1], zlim=limits[2])
