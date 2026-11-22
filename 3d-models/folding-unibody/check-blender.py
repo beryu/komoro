@@ -52,7 +52,7 @@ cover=next(c for c in bpy.context.scene.collection.children if '04 Battery cover
 assert cover.hide_viewport and cover.hide_render
 assert any(o.get('CAD_part')=='battery_cap' for o in cover.objects)
 report['battery_access_reopen']={'passed':True,'initial_scene':bpy.context.scene.name,'file_sha256':hashlib.sha256((out/'komoro-folding-battery-access.blend').read_bytes()).hexdigest()}
-bpy.ops.wm.open_mainfile(filepath=str(out/'komoro-folding-trimmed-holder.blend'))
+bpy.ops.wm.open_mainfile(filepath=str(out/'komoro-folding-end-rims.blend'))
 assert bpy.context.scene.name=='01_Open'
 parts={o['CAD_part']:o for o in bpy.context.scene.objects if 'CAD_part' in o}
 heights={n:max(v.co.z for v in parts[n].data.vertices)*1000 for n in ('battery_cap','power_lid')}
@@ -60,6 +60,12 @@ assert abs(heights['battery_cap']-18.)<.001 and abs(heights['power_lid']-16.3)<.
 curve_vertices=[v.co for v in parts['battery_cap'].data.vertices if .01731<v.co.y<.06469]
 radial=[math.hypot(v.x*1000+6.5,v.z*1000-11.) for v in curve_vertices]
 assert min(radial)>5.798 and sum(abs(r-5.8)<.003 for r in radial)>8, (min(radial),len(radial))
+rim_heights={}
+for side,x0,x1,expected in (('left',-16.01,-8.,19.),('right',6.,16.,18.)):
+ region=[v.co.z*1000 for v in parts[side+'_tray'].data.vertices if x0<v.co.x*1000<x1 and .5<v.co.y*1000<3.5]
+ assert region and abs(max(region)-expected)<.001,(side,max(region) if region else None)
+ rim_heights[side]=max(region)
+report['end_rims_reopen']={'passed':True,'crest_z_mm':rim_heights}
 holder=next(o for o in bpy.context.scene.objects if o.name.endswith('/ AAA_holder_visual_only'))
 holder_top=max(v.co.z for v in holder.data.vertices)*1000
 assert abs(holder_top-13.)<.001 and holder.visible_get(),(holder_top,holder.visible_get())

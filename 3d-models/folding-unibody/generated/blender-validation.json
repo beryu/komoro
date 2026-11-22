@@ -2,12 +2,12 @@
   "blender_version": "5.0.0",
   "units": "metres, displayed as millimetres",
   "source_sha256": {
-    "export-blender.py": "49ced151e5bcb25b4ed6497b5ba80f361b1b4a451695f9da116311452cc48fb4",
-    "generated/preview-mesh.json": "17720b8932dcac08911a0141444776dd417d7e769a5a53f0ad32c8580759b52b",
-    "generated/validation.json": "29b7de0d18aa8ba8429a47b8b67485f4f7fdf9c365d74a2c788525bdcc108651",
-    "generated/left_tray.stl": "5072862e783c0536424db08695051406313a21c36e23f450e3dbd93031da8dd8",
-    "generated/left_plate.stl": "b36b17429872f2e90422d296d7762737a276bbf643a1612831b8eda59186499d",
-    "generated/right_tray.stl": "a857ad4e577c69e334639c4e19aa1c60dc7a58aafaa547d434963041523a6d74",
+    "export-blender.py": "e48c49a7147fe35aedd290066bbd610d5bb95395bec9f4dd0dda40170d691f5c",
+    "generated/preview-mesh.json": "b89f31f78402a8fff27c990d5db002acf9430ffe33b2286a2cae06174c3db968",
+    "generated/validation.json": "66d3fc46e68d8704e744b0a23aceee21bb00b1116718b8b1aab4a1bc2b38e719",
+    "generated/left_tray.stl": "13caf868330e51c80d03d2fbf9ba23ebb539253cc318ef6a09ea69e8627a26d8",
+    "generated/left_plate.stl": "d93cd9012fa9a9ef3245a1f18e126b72151edea18026cb6a6339eb8efd9d0c02",
+    "generated/right_tray.stl": "a58b08bbfbb6a73d756d42b3f80b8a71072d58ca9b6c5fac75a23df7f6152bd5",
     "generated/right_plate.stl": "d52b0c3bd31d28bb8071f29ddda00c562b7900a83abfbc72fb18cc6ea907005a",
     "generated/power_lid.stl": "c761358949dd162725bcd0411cbd0baf3a21ca93f323b3eeb52d45885e523063",
     "generated/battery_cap.stl": "d006258680c2975be89721b57d0fe35c5609898b3543b5c09b839f8d2da9c0db",
@@ -49,9 +49,9 @@
   "preview_directory": "blender-views",
   "native_file": "komoro-folding-review.blend",
   "portable_file": "komoro-folding-open.glb",
-  "validation_script_sha256": "b57e38979c423ceb14a5e214b7b05c51838164154d7607cb97b9f515ca5f7d10",
+  "validation_script_sha256": "0c85d7bf551f5e81d7ad756a7b5b2c2e3bde571b74548a40497b93ace752d70f",
   "native_reopen": {
-    "file_sha256": "396b35140902b44c0818e9b15e2afbb1dae3dba1012bb671f3ab5f6f4fcb3e66",
+    "file_sha256": "39103f4ffbdc29a2355180808bfb0982469a6a5d1e3247d6c0abdb2f0e942532",
     "passed": true,
     "scenes": [
       "01_Open",
@@ -64,7 +64,7 @@
     "external_images": false
   },
   "GLB_reimport": {
-    "file_sha256": "0af29501c37118ba08d408d094b15f5d9f8eca63fd8fb478813ec972d48a3697",
+    "file_sha256": "b385c632f26d5ca08548642326872335c9444f5834f5c1f5e39c3d6a3e9b1a37",
     "passed": true,
     "mesh_objects": 70,
     "dimensions_mm": [
@@ -76,7 +76,14 @@
   "battery_access_reopen": {
     "passed": true,
     "initial_scene": "04_Battery_cover_removed",
-    "file_sha256": "c9be8fbe7af4d1d04facca7b721df1395fa5356dd56bc784785dc48ea4171a50"
+    "file_sha256": "03d013ff8bacb58b59ea0430a9f04dca79d360121186d4485d36ec5b57423f91"
+  },
+  "end_rims_reopen": {
+    "passed": true,
+    "crest_z_mm": {
+      "left": 18.99999938905239,
+      "right": 17.999999225139618
+    }
   },
   "trimmed_holder_reopen": {
     "passed": true,
