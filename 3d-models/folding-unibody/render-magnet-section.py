@@ -8,14 +8,14 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Rectangle, Polygon
 
 OUT = Path(__file__).resolve().parent / 'generated'
 v = json.loads((OUT / 'validation.json').read_text())
 m = v['closure_magnets']
 w, d, h = m['size_mm']
 pw, pd, ph = m['pocket_mm']
-face = 16.
+face = v['closed_stop']['fixed_crest_z_mm']
 recess = m['nominal_face_recess_mm']
 font = Path('/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc')
 if font.exists():
@@ -27,19 +27,20 @@ fig, (ax, zoom) = plt.subplots(1, 2, figsize=(12, 5), gridspec_kw={'width_ratios
 for a in (ax, zoom):
     a.set_facecolor('#f4f6f7')
     a.axis('off')
-ax.add_patch(Rectangle((6, 0), 10, face, facecolor='#315e70'))
-ax.add_patch(Rectangle((6, face), 10, 4, facecolor='#79aeb4'))
+ax.add_patch(Rectangle((3.4, 0), 14.6, face, facecolor='#315e70'))
+ceiling=2*v['axis_z_mm']-3.3
+ax.add_patch(Polygon([(2,face),(16,face),(19.8,2*v['axis_z_mm']-4.3),(26,2*v['axis_z_mm']-4.3),(26,ceiling),(2,ceiling)],closed=True,facecolor='#79aeb4'))
 for z in (face-ph, face):
     ax.add_patch(Rectangle((12-pw/2, z), pw, ph, facecolor='#f4f6f7'))
 for z in (face-recess-h, face+recess):
     ax.add_patch(Rectangle((12-w/2, z), w, h, facecolor='#c5cbd0', edgecolor='#627784', linewidth=.8))
 ax.text(12, face-recess-h/2, '磁石 N', ha='center', va='center', fontsize=12, color='#314856')
 ax.text(12, face+recess+h/2, '磁石 S', ha='center', va='center', fontsize=12, color='#314856')
-ax.annotate('周囲の樹脂で閉じ止め', (7.4, face), (5.5, 21.1),
+ax.annotate('周囲の樹脂で閉じ止め', (7.4, face), (5.5, face+5.1),
     arrowprops={'arrowstyle': '->', 'color': '#315e70'}, fontsize=11, color='#183c4b')
-ax.text(6, 12.2, '中央ブロック側', fontsize=11, color='white')
-ax.text(6, 19.4, '可動ツメ側', fontsize=11, color='#183c4b')
-ax.set(xlim=(5.3, 16.7), ylim=(11.8, 22))
+ax.text(6, face-3.8, '中央ブロック側', fontsize=11, color='white')
+ax.text(6, face+3.4, '可動リブ側', fontsize=11, color='#183c4b')
+ax.set(xlim=(1, 22.8), ylim=(face-4.2, face+6))
 ax.set_aspect('equal')
 zoom.add_patch(Rectangle((0, -.5), 4, .5-recess, facecolor='#c5cbd0', edgecolor='#627784'))
 zoom.add_patch(Rectangle((0, recess), 4, .5-recess, facecolor='#c5cbd0', edgecolor='#627784'))

@@ -25,7 +25,7 @@ AXIS_Z = float(os.environ.get('FOLD_AXIS_Z_MM', '18.5'))
 KEY_HEIGHT = float(os.environ.get('FOLD_KEY_HEIGHT_MM', '10.5'))  # user-measured above PCB top
 TRACKBALL_TOP = float(os.environ.get('FOLD_TRACKBALL_TOP_MM', '21.3424'))
 KEY_PRESS_LIMIT = float(os.environ.get('FOLD_KEY_PRESS_LIMIT_MM', '2.0'))
-STOP_HEIGHT = 16.0
+STOP_HEIGHT = 18.0
 STOP_FINGER_THICKNESS = 4.0
 CLOSURE_MAGNET = {
     'size_mm': [6., 2., 2.3], 'grade': 'N52', 'quantity': 4, 'pairs': 2,
@@ -250,23 +250,26 @@ def hinge_arm(left, y):
 
 
 def closed_stop(left):
-    # The fixed stops are structural end lands of the central power block.
-    # Short fingers integrated into the moving hinge leaves land on them;
-    # there are no separate upright stop towers beside the hinges.
-    if not left:
-        return Part.makeCompound([box(6, y, 0, 10, 4, STOP_HEIGHT)
-                                  for y in (0, 70)]).cut(closure_magnet_pockets(False))
-    height = STOP_FINGER_THICKNESS
-    finger_bottom = 2 * AXIS_Z - STOP_HEIGHT - height
-    fingers = []
-    for y, length, root_y in ((0, 4, .3), (70, 4, 70.3)):
-        finger = box(-16, y, finger_bottom, 10, length, height)
-        edges = [e for e in finger.Edges if e.BoundBox.ZLength > height - .01
-                 and e.BoundBox.XLength < .001 and e.BoundBox.YLength < .001]
-        finger = finger.makeFillet(.8, edges)
-        root = box(-7, root_y, finger_bottom, 5, 3.4, height)
-        fingers.append(finger.fuse(root))
-    return Part.makeCompound(fingers).cut(closure_magnet_pockets(True))
+    # Continuous front/rear end rims. Their raised edges carry closure
+    # loads instead of a short pad/finger that reads as a separate pillar.
+    rims = []
+    crest=2*AXIS_Z-STOP_HEIGHT
+    for y in (0.,70.):
+        if left:
+            # Stay outside the PCB edge, then rise as one ramped end wall.
+            # The top line joins the hinge leaf through a full-height web.
+            profile=[V(-26,y,3.3),V(-26,y,4.3),V(-19.8,y,4.3),V(-16,y,crest),V(-6,y,crest),V(-6,y,3.3),V(-26,y,3.3)]
+            rim=Part.Face(Part.makePolygon(profile)).extrude(V(0,4,0))
+            rim=rim.fuse(box(-7,y+.3,3.3,5,3.4,crest-3.3)).removeSplitter()
+            top=crest
+        else:
+            rim=box(3.4,y,0,14.6,4,STOP_HEIGHT)
+            top=STOP_HEIGHT
+        edges=[e for e in rim.Edges if abs(e.BoundBox.ZMin-top)<.001
+               and abs(e.BoundBox.ZMax-top)<.001 and e.BoundBox.XLength>1]
+        rim=rim.makeChamfer(.25,edges)
+        rims.append(rim)
+    return Part.makeCompound(rims).cut(closure_magnet_pockets(left))
 
 
 def latch_parts():
@@ -499,10 +502,18 @@ def main():
     # original inner plate rims. Do not cut or drill the PCB itself.
     shapes['left_plate'] = shapes['left_plate'].cut(box(-20.2, 3.8, 5.9, 2.4, 9.9, 4.3))
     shapes['right_plate'] = shapes['right_plate'].cut(box(17.8, 3.8, 5.9, 1.9, 9.9, 8.4))
+    # End rims replace the inner overhang of the removable left plate;
+    # their relief stays outside the unchanged PCB edge.
+    for yy in (0.,70.):
+        shapes['left_plate'] = shapes['left_plate'].cut(box(-19.95,yy-.2,5.9,2.2,4.4,2.))
     cable_voids = underfloor_wiring(shapes)
     for y in HINGE_Y:
         shapes['right_tray'] = shapes['right_tray'].cut(box(-24.1, y + 2., -.1, 24.4, 4., 3.6))
         shapes['right_tray'] = shapes['right_tray'].cut(cylinder_y(0, y - .1, AXIS_Z, 1.05, 8.2))
+    for side,refs in (('left',moving_refs),('right',fixed_refs)):
+        pcb=refs[side+'_PCB_reference']
+        overlap=sum(shapes[side+'_'+part].common(pcb).Volume for part in ('tray','plate'))
+        assert overlap<.001, ('End rim or plate obstructs PCB',side,overlap)
     # Keep old source parts as hidden references, then add the print assembly.
     for obj in doc.Objects:
         if obj.ViewObject:
@@ -652,7 +663,10 @@ def main():
     contact_probe = closed_left_stop.translated(V(0, 0, -.001))
     stop_area = contact_probe.common(right_stop).Volume / .001
     validation['closed_stop'] = {
-        'location': 'front and rear structural end lands integrated into central power block',
+        'location': 'continuous raised front/rear end rims, joined to hinge leaves by ramped walls',
+        'end_rim_width_mm': 4., 'crest_edge_chamfer_mm': .25,
+        'moving_ramp_x_mm': [-19.8,-16.], 'PCB_return_lip_top_mm': 4.3, 'moving_crest_z_mm': 2*AXIS_Z-STOP_HEIGHT,
+        'fixed_rim_x_mm': [3.4,18.], 'fixed_crest_z_mm': STOP_HEIGHT,
         'nominal_contact_area_at_180_deg_mm2': round(stop_area, 6),
         'separation_at_180_deg_mm': round(closed_left_stop.distToShape(right_stop)[0], 9),
         'contact_plane_gap_mm': round(left_bb.ZMin - right_bb.ZMax, 9),
@@ -673,7 +687,7 @@ def main():
     validation['closure_magnets'].update({
         'closed_face_gap_mm': round(magnet_gap, 6),
         'minimum_side_wall_mm': .85,
-        'remaining_finger_floor_mm': STOP_FINGER_THICKNESS - CLOSURE_MAGNET['pocket_mm'][2],
+        'remaining_finger_floor_mm': 2*AXIS_Z-STOP_HEIGHT-3.3-CLOSURE_MAGNET['pocket_mm'][2],
         'magnet_lever_arm_mm': 12.,
         'example_only': {'assumed_force_per_pressed_key_N': .5,
             'key_lever_arms_mm': [70.05, 87.05],

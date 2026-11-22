@@ -8,7 +8,7 @@
 
 電池交換の変更点をすぐ見るには [komoro-folding-battery-access.blend](generated/komoro-folding-battery-access.blend) を開く。電池カバーを外したシーンから表示する別名の確認用ファイルで、同じ4シーンを収録する。既に開いているファイルの表示は、ディスク上の更新だけでは切り替わらないため、ファイルを開き直す。
 
-電池に沿って内側をくり抜いた最新版は [komoro-folding-trimmed-holder.blend](generated/komoro-folding-trimmed-holder.blend)。外枠15 mm、曲面頂点18 mm。黒いホルダー端部は樹脂加工後Z=13 mmの仮定形状とし、閉じた白い屋根の下へ収める。曲面は内側R5.8／外側R7 mmの中空形状で、装着状態から開く。
+電池に沿って内側をくり抜いた最新版は [komoro-folding-end-rims.blend](generated/komoro-folding-end-rims.blend)。外枠15 mm、曲面頂点18 mm。黒いホルダー端部は樹脂加工後Z=13 mmの仮定形状とし、閉じた白い屋根の下へ収める。曲面は内側R5.8／外側R7 mmの中空形状で、装着状態から開く。前後端の閉じ止めは連続したリブへ変更し、可動側の頂点19 mm・固定側の接触線18 mmとした。
 
 ## シーンを切り替える
 

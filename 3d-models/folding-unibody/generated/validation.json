@@ -4774,7 +4774,7 @@
     "actual_closed_retention": "unverified; steel pull is not the force between installed magnets",
     "closed_face_gap_mm": 0.2,
     "minimum_side_wall_mm": 0.85,
-    "remaining_finger_floor_mm": 1.5,
+    "remaining_finger_floor_mm": 13.2,
     "magnet_lever_arm_mm": 12.0,
     "example_only": {
       "assumed_force_per_pressed_key_N": 0.5,
@@ -4863,7 +4863,7 @@
   },
   "parts": {
     "left_tray": {
-      "volume_mm3": 20609.095,
+      "volume_mm3": 21824.287,
       "size_mm": [
         153.599,
         79.35,
@@ -4873,7 +4873,7 @@
       "closed_STL": true
     },
     "left_plate": {
-      "volume_mm3": 6595.01,
+      "volume_mm3": 6573.905,
       "size_mm": [
         132.6,
         79.35,
@@ -4883,7 +4883,7 @@
       "closed_STL": true
     },
     "right_tray": {
-      "volume_mm3": 29370.269,
+      "volume_mm3": 29719.347,
       "size_mm": [
         166.6,
         80.75,
@@ -5291,7 +5291,7 @@
     "pcb/torabo-tsuki-lp-S-ortho-mini-left.kicad_pcb": "d2076d6d8c46ee79fcae24832e92fdfa390ae1add11c533ec9dc39e8c9942632",
     "pcb/torabo-tsuki-lp-S-ortho-mini-right.kicad_pcb": "c3aab4ac7dac0ded8ae54cdb94704d31dfb0ee32ce4029476c048f661134f08c",
     "3d-models/FreeCAD/generate-keyboard-case.py": "622e4faef8e940a9553e011bc779a1bee3b57dc6f61346aeaef74bfa4f2d0463",
-    "3d-models/folding-unibody/generate.py": "a3bc08e89db1d41a20dc7a96e2568941deec0bb461cba70a2c17df86b8aae6bc"
+    "3d-models/folding-unibody/generate.py": "abcabc88fa6cc2411637a4b6a78375d45bfb10e56cdb90ea9e6540bea23fbee1"
   },
   "print_part_pair_overlap_mm3": {
     "left_tray/left_plate": 0.0,
@@ -5670,11 +5670,24 @@
     "open_stop_overlap_at_minus_1_deg_mm3": 18.989018
   },
   "closed_stop": {
-    "location": "front and rear structural end lands integrated into central power block",
-    "nominal_contact_area_at_180_deg_mm2": 50.03257,
+    "location": "continuous raised front/rear end rims, joined to hinge leaves by ramped walls",
+    "end_rim_width_mm": 4.0,
+    "crest_edge_chamfer_mm": 0.25,
+    "moving_ramp_x_mm": [
+      -19.8,
+      -16.0
+    ],
+    "PCB_return_lip_top_mm": 4.3,
+    "moving_crest_z_mm": 19.0,
+    "fixed_rim_x_mm": [
+      3.4,
+      18.0
+    ],
+    "fixed_crest_z_mm": 18.0,
+    "nominal_contact_area_at_180_deg_mm2": 56.116105,
     "separation_at_180_deg_mm": 0.0,
-    "contact_plane_gap_mm": 0.0,
-    "overtravel_overlap_at_181_deg_mm3": 8.987868,
+    "contact_plane_gap_mm": -0.0,
+    "overtravel_overlap_at_181_deg_mm3": 8.234802,
     "lid_overlap_under_contact_probe_mm3": 0.0,
     "old_inner_tower_overlap_below_hinge_axis_mm3": {
       "left": 0.0,
@@ -5737,7 +5750,7 @@
       "size_mm": [
         60.0,
         74.0,
-        17.0
+        18.0
       ]
     },
     "fit_battery_cradle": {

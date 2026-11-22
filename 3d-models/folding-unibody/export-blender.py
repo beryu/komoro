@@ -335,6 +335,7 @@ bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-raised-battery.bl
 bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-arched-battery.blend'), compress=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-conformal-battery.blend'), compress=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-trimmed-holder.blend'), compress=True)
+bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-end-rims.blend'), compress=True)
 
 # Orthographic preview renders also verify the saved meshes look as expected.
 preview_dir = OUT / 'blender-views'
