@@ -4883,7 +4883,7 @@
       "closed_STL": true
     },
     "right_tray": {
-      "volume_mm3": 29719.347,
+      "volume_mm3": 29321.415,
       "size_mm": [
         166.6,
         80.75,
@@ -4893,7 +4893,7 @@
       "closed_STL": true
     },
     "right_plate": {
-      "volume_mm3": 6781.8,
+      "volume_mm3": 6776.554,
       "size_mm": [
         132.6,
         79.35,
@@ -4903,10 +4903,10 @@
       "closed_STL": true
     },
     "power_lid": {
-      "volume_mm3": 1232.606,
+      "volume_mm3": 1252.841,
       "size_mm": [
         15.2,
-        55.7,
+        56.0,
         1.5
       ],
       "valid_solid": true,
@@ -5291,7 +5291,7 @@
     "pcb/torabo-tsuki-lp-S-ortho-mini-left.kicad_pcb": "d2076d6d8c46ee79fcae24832e92fdfa390ae1add11c533ec9dc39e8c9942632",
     "pcb/torabo-tsuki-lp-S-ortho-mini-right.kicad_pcb": "c3aab4ac7dac0ded8ae54cdb94704d31dfb0ee32ce4029476c048f661134f08c",
     "3d-models/FreeCAD/generate-keyboard-case.py": "622e4faef8e940a9553e011bc779a1bee3b57dc6f61346aeaef74bfa4f2d0463",
-    "3d-models/folding-unibody/generate.py": "abcabc88fa6cc2411637a4b6a78375d45bfb10e56cdb90ea9e6540bea23fbee1"
+    "3d-models/folding-unibody/generate.py": "64c52c6b141d380b725b44b8238471102d62109e54562b8d605cebfe89993df1"
   },
   "print_part_pair_overlap_mm3": {
     "left_tray/left_plate": 0.0,
@@ -5339,6 +5339,14 @@
     "latch_slider/left_cable_cover": 0.0,
     "latch_slider/right_cable_cover": 0.0,
     "left_cable_cover/right_cable_cover": 0.0
+  },
+  "internal_power_route": {
+    "wire_OD_assumed_mm": 1.0,
+    "path": "floor, rear PCB edge, XIAO outer-pad side",
+    "case_overlap_mm3": 0.0,
+    "PCB_overlap_mm3": 0.0,
+    "module_overlap_mm3": 0.0,
+    "real_wire_bend_and_solder_fit": "unverified"
   },
   "key_depression_by_angle": [
     {
@@ -5748,7 +5756,7 @@
       "valid_solid": true,
       "closed_STL": true,
       "size_mm": [
-        60.0,
+        34.0,
         74.0,
         18.0
       ]

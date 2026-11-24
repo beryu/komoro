@@ -1,0 +1,239 @@
+{
+  "CAD_sha256": "b70b86f0ff0deb4412bcf7afa13a0b37ce174b3c69ca1d9e6333db14fd58a2a6",
+  "sweep": [
+    {
+      "angle_deg": 0,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 5,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 10,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 15,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 20,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 25,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 30,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 35,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 40,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 45,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 50,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 55,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 60,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 65,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 70,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 75,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 80,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 85,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 90,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 95,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 100,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 105,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 110,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 115,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 120,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 125,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 130,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 135,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 140,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 145,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 150,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 155,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 160,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 165,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 170,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 175,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 0
+    },
+    {
+      "angle_deg": 180,
+      "ribbon_overlap_mm3": 0.0,
+      "moving_case_overlap_mm3": 0.0,
+      "key_press_max_mm": 1.0
+    }
+  ],
+  "part_overlaps": {},
+  "component_overlaps": {
+    "Boost_module_assumed": 0.0,
+    "PTC_assumed": 0.0,
+    "Diode_assumed": 0.0,
+    "Switch_assumed": 0.0,
+    "Switch_knob_assumed": 0.0,
+    "Power_disconnect_reserved": 0.0
+  },
+  "power_route_overlap_mm3": 0.0,
+  "bottom_screw_wire_overlap_mm3": 0.0,
+  "maximum_key_press_mm": 1.0
+}

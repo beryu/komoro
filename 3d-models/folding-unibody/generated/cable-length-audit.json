@@ -1,0 +1,36 @@
+{
+  "scope": "Current front-port topology only; not a proof for other routes or PCB/connector positions.",
+  "CAD_sha256": "aafc1c8733e1fb50cbba515ee475b5e0916d2300ada18875dec26329a8a60367",
+  "source_sha256": "485496de13700085153e32b804953e0c197ee197e5847596fee6e5da354f0fc8",
+  "nominal_centerline_chord_sum_mm": {
+    "0": 98.10923609012792,
+    "90": 132.05947948290623,
+    "180": 145.48169805021251
+  },
+  "optimistic_closed_lower_bound_mm": 124.76967170705497,
+  "lower_bound_terms_mm": [
+    26.542421234695222,
+    50.774010330089155,
+    47.45324014227059
+  ],
+  "available_assembly_lengths_mm": [
+    76.2,
+    101.6,
+    254.0
+  ],
+  "length_only_results": {
+    "76.2": "insufficient for current front-port route",
+    "101.6": "insufficient for current front-port route",
+    "254.0": "not rejected by length bound; fit NOT validated"
+  },
+  "ignored_to_make_bound_optimistic": [
+    "bends",
+    "obstacles",
+    "strain relief",
+    "connector portion included in assembly length",
+    "slack",
+    "one common port point for adjacent segments"
+  ],
+  "continuous_cable_geometry": "not implemented",
+  "dynamic_flex_validation": "not performed"
+}

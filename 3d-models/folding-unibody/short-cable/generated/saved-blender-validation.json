@@ -1,0 +1,26 @@
+{
+  "native_sha256": "35f40f87f8e02cda6d9bdf692db0e82096bb23defbfdd85f4a7f7e8c026612d7",
+  "source_hashes_match": true,
+  "scenes": {
+    "01_Open": {
+      "print_parts": 10,
+      "key_envelopes": 48,
+      "closed_ribbon_mesh": true
+    },
+    "02_Folded": {
+      "print_parts": 10,
+      "key_envelopes": 48,
+      "closed_ribbon_mesh": true
+    },
+    "03_Underside_covers_hidden": {
+      "print_parts": 10,
+      "key_envelopes": 48,
+      "closed_ribbon_mesh": true
+    },
+    "04_Battery_cover_removed": {
+      "print_parts": 10,
+      "key_envelopes": 48,
+      "closed_ribbon_mesh": true
+    }
+  }
+}

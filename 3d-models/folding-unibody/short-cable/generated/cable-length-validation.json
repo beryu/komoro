@@ -1,0 +1,232 @@
+{
+  "scope": "37 geometric poses, nominal assembly length; sampled self-clearance",
+  "sources_sha256": {
+    "cable.py": "c43205d9be124cfdc7a7352bd22c6b352090ff5464ea561c3f05b996ea9a8c0e",
+    "solve-cable.py": "99dbc38bd309890f67bd8a243b1e38dfdb8cf7f302aad488fc29c19a68d189e4",
+    "generated/cable-paths.json": "c76a7b31560770b48fa174a86efd795f2215086cbd50e3e20237aa2fff9e99e0"
+  },
+  "poses": [
+    {
+      "angle_deg": 0,
+      "assembly_length_mm": 101.59809948499165,
+      "sampled_self_clearance_mm": 3.037703508558152,
+      "minimum_free_radius_mm": 3.0000000000018914
+    },
+    {
+      "angle_deg": 5,
+      "assembly_length_mm": 101.59809948553664,
+      "sampled_self_clearance_mm": 3.0544065505337192,
+      "minimum_free_radius_mm": 3.036991900243264
+    },
+    {
+      "angle_deg": 10,
+      "assembly_length_mm": 101.59809948540911,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.0573871556591325
+    },
+    {
+      "angle_deg": 15,
+      "assembly_length_mm": 101.59809949400756,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.079664739001071
+    },
+    {
+      "angle_deg": 20,
+      "assembly_length_mm": 101.59809948700752,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.1096308428209505
+    },
+    {
+      "angle_deg": 25,
+      "assembly_length_mm": 101.59809948604712,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.1527629704617657
+    },
+    {
+      "angle_deg": 30,
+      "assembly_length_mm": 101.59809948506685,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.208323223984427
+    },
+    {
+      "angle_deg": 35,
+      "assembly_length_mm": 101.59809948556264,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.2929434245822393
+    },
+    {
+      "angle_deg": 40,
+      "assembly_length_mm": 101.59809948990295,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.418535777513384
+    },
+    {
+      "angle_deg": 45,
+      "assembly_length_mm": 101.59809949051257,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 6.018128454014016
+    },
+    {
+      "angle_deg": 50,
+      "assembly_length_mm": 101.59809949018654,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 6.456536102153916
+    },
+    {
+      "angle_deg": 55,
+      "assembly_length_mm": 101.59809986376371,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 7.311564230538058
+    },
+    {
+      "angle_deg": 60,
+      "assembly_length_mm": 101.59810808231745,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 6.0646921262848
+    },
+    {
+      "angle_deg": 65,
+      "assembly_length_mm": 101.59809948500506,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 6.5946936779658945
+    },
+    {
+      "angle_deg": 70,
+      "assembly_length_mm": 101.59809948788049,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 9.619322319318297
+    },
+    {
+      "angle_deg": 75,
+      "assembly_length_mm": 101.59809948501686,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 9.056490537261642
+    },
+    {
+      "angle_deg": 80,
+      "assembly_length_mm": 101.5980994834926,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 8.243597537981815
+    },
+    {
+      "angle_deg": 85,
+      "assembly_length_mm": 101.59809948706302,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 7.301108070112098
+    },
+    {
+      "angle_deg": 90,
+      "assembly_length_mm": 101.5980994776088,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 6.395734170351329
+    },
+    {
+      "angle_deg": 95,
+      "assembly_length_mm": 101.59809948516138,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 5.607863795804465
+    },
+    {
+      "angle_deg": 100,
+      "assembly_length_mm": 101.59809949176616,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 4.9618198826217155
+    },
+    {
+      "angle_deg": 105,
+      "assembly_length_mm": 101.59809948700027,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 4.459416771407355
+    },
+    {
+      "angle_deg": 110,
+      "assembly_length_mm": 101.59809948980487,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 4.078907969568726
+    },
+    {
+      "angle_deg": 115,
+      "assembly_length_mm": 101.5980994821866,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.779837442342959
+    },
+    {
+      "angle_deg": 120,
+      "assembly_length_mm": 101.59809949298992,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.561776700393054
+    },
+    {
+      "angle_deg": 125,
+      "assembly_length_mm": 101.59809948497184,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.3862214703557134
+    },
+    {
+      "angle_deg": 130,
+      "assembly_length_mm": 101.59809948927366,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.245570157170556
+    },
+    {
+      "angle_deg": 135,
+      "assembly_length_mm": 101.59809948594611,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.1272213312817994
+    },
+    {
+      "angle_deg": 140,
+      "assembly_length_mm": 101.59809948500231,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.019903123252485
+    },
+    {
+      "angle_deg": 145,
+      "assembly_length_mm": 101.59809948755273,
+      "sampled_self_clearance_mm": 3.0433304914584247,
+      "minimum_free_radius_mm": 3.000000000666073
+    },
+    {
+      "angle_deg": 150,
+      "assembly_length_mm": 101.59809948645466,
+      "sampled_self_clearance_mm": 3.0418984979224524,
+      "minimum_free_radius_mm": 3.0041312482311517
+    },
+    {
+      "angle_deg": 155,
+      "assembly_length_mm": 101.59809948521809,
+      "sampled_self_clearance_mm": 3.049231284924833,
+      "minimum_free_radius_mm": 3.0638235511382432
+    },
+    {
+      "angle_deg": 160,
+      "assembly_length_mm": 101.59809948612642,
+      "sampled_self_clearance_mm": 3.0480009738971967,
+      "minimum_free_radius_mm": 3.022516347730366
+    },
+    {
+      "angle_deg": 165,
+      "assembly_length_mm": 101.59809948791585,
+      "sampled_self_clearance_mm": 3.0576941244406646,
+      "minimum_free_radius_mm": 3.0000000014132207
+    },
+    {
+      "angle_deg": 170,
+      "assembly_length_mm": 101.59809948814862,
+      "sampled_self_clearance_mm": 3.041152919052781,
+      "minimum_free_radius_mm": 3.0000000012396186
+    },
+    {
+      "angle_deg": 175,
+      "assembly_length_mm": 101.59809948499031,
+      "sampled_self_clearance_mm": 3.048042826128927,
+      "minimum_free_radius_mm": 2.9999999999999494
+    },
+    {
+      "angle_deg": 180,
+      "assembly_length_mm": 101.59809948544415,
+      "sampled_self_clearance_mm": 3.0337559461082564,
+      "minimum_free_radius_mm": 2.999999999810155
+    }
+  ]
+}

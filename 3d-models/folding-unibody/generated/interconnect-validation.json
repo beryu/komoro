@@ -1,7 +1,7 @@
 {
   "scope": "Rigid lead envelopes only. Flexible port-to-port span, 254 mm storage, bend radii and fatigue are not validated.",
   "source_sha256": "04ccb25c9dbad2f1d54c9520200611e45de53519a04bac927bee2e39c830fd7f",
-  "CAD_sha256": "9474b431b2f8b8a90278a0e1407092fc98496070f993ab16f48db9d2c2326eec",
+  "CAD_sha256": "aafc1c8733e1fb50cbba515ee475b5e0916d2300ada18875dec26329a8a60367",
   "own_case_overlap_mm3": {
     "left": 0.0,
     "right": 0.0

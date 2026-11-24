@@ -8,7 +8,7 @@
 
 電池交換の変更点をすぐ見るには [komoro-folding-battery-access.blend](generated/komoro-folding-battery-access.blend) を開く。電池カバーを外したシーンから表示する別名の確認用ファイルで、同じ4シーンを収録する。既に開いているファイルの表示は、ディスク上の更新だけでは切り替わらないため、ファイルを開き直す。
 
-電池に沿って内側をくり抜いた最新版は [komoro-folding-end-rims.blend](generated/komoro-folding-end-rims.blend)。外枠15 mm、曲面頂点18 mm。黒いホルダー端部は樹脂加工後Z=13 mmの仮定形状とし、閉じた白い屋根の下へ収める。曲面は内側R5.8／外側R7 mmの中空形状で、装着状態から開く。前後端の閉じ止めは連続したリブへ変更し、可動側の頂点19 mm・固定側の接触線18 mmとした。
+電池に沿って内側をくり抜いた最新版は [komoro-folding-hidden-power.blend](generated/komoro-folding-hidden-power.blend)。外枠15 mm、曲面頂点18 mm。黒いホルダー端部は樹脂加工後Z=13 mmの仮定形状とし、閉じた白い屋根の下へ収める。曲面は内側R5.8／外側R7 mmの中空形状で、装着状態から開く。前後端の閉じ止めは連続したリブへ変更し、可動側の頂点19 mm・固定側の接触線18 mmとした。
 
 ## シーンを切り替える
 
@@ -56,3 +56,14 @@ python3 3d-models/folding-unibody/render-blender-views.py
 ```
 
 確認画像は `generated/blender-views/`、入力ハッシュと寸法の記録は [blender-validation.json](generated/blender-validation.json)。`.blend` 内の `START_HERE / はじめに` にも簡単な操作説明を入れた。
+
+## 開状態・収納状態のレンダリング
+
+同じスタジオ照明と視点方向で作成したCycles画像は [開状態](generated/open-render.png) と [収納状態](generated/folded-render.png)。各1800×1140 px。元のモデル形状と `.blend` は変更せず、レンダリング時だけ床・照明を追加する。
+
+```sh
+/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python-exit-code 1 \
+  --python 3d-models/folding-unibody/render-open-folded.py
+```
+
+上面の長い給電線ガイドを省き、[給電線の経路](POWER-ROUTING.md)をケース内へ移した。`Assumed envelopes` 内の `Power_wire_internal_reserved` はその予約空間で、初期状態は非表示。
