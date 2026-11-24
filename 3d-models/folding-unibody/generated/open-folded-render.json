@@ -1,0 +1,20 @@
+{
+  "source": "komoro-folding-hidden-power.blend",
+  "source_sha256": "ca9914434ef99f9e88855c6d07617482dd62dd9c532b2a3e7522b50694cf0cf2",
+  "engine": "Cycles CPU",
+  "samples": 48,
+  "images": {
+    "open-render": {
+      "scene": "01_Open",
+      "width": 1800,
+      "height": 1140,
+      "sha256": "cc5018e1f6bd1cb301eb5483a4a6f7a3a502f6d4f8cbecf517a18e3378854291"
+    },
+    "folded-render": {
+      "scene": "02_Folded",
+      "width": 1800,
+      "height": 1140,
+      "sha256": "5bcf43c88148279ada06041dade71aa702fd209a1b5e75c02d0a07a9758a41cf"
+    }
+  }
+}

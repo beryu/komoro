@@ -1,0 +1,9 @@
+{
+  "source": "komoro-folding-101mm.blend",
+  "source_sha256": "35f40f87f8e02cda6d9bdf692db0e82096bb23defbfdd85f4a7f7e8c026612d7",
+  "note": "Cases/cell transparent and keycaps hidden for inspection only; cable is the same geometric envelope as the native model.",
+  "images": {
+    "cable-open-render": "913f72fab7315fcc5a6adcaf22d242ac0e3fd165a0924863d8c71e348776ca22",
+    "cable-folded-render": "9bbe766f9c31749fbd5e60a2516d1899039a4c28a988db8fe2d2f1fe4e7b7619"
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "revision": "101.6 mm cable layout study / unprinted",
+  "axis_z_mm": 18.5,
+  "key_counts": {
+    "left": 26,
+    "right": 22
+  },
+  "parts": {
+    "left_tray": {
+      "volume_mm3": 23246.36021134915,
+      "size_mm": [
+        153.59906754600246,
+        79.34999432798747,
+        22.7
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "left_plate": {
+      "volume_mm3": 6650.705084438271,
+      "size_mm": [
+        132.60000000000002,
+        79.34999432798747,
+        4.799999999999999
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "right_tray": {
+      "volume_mm3": 28146.613101209416,
+      "size_mm": [
+        166.60000000000002,
+        84.05,
+        21.500000000000004
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "right_plate": {
+      "volume_mm3": 6635.094825844353,
+      "size_mm": [
+        132.60000000000002,
+        79.3499723605324,
+        6.410000000000001
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "power_lid": {
+      "volume_mm3": 485.846018667469,
+      "size_mm": [
+        17.0,
+        19.5,
+        1.5
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "battery_cap": {
+      "volume_mm3": 2104.457440586378,
+      "size_mm": [
+        18.5,
+        54.0,
+        14.2
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "latch_cap": {
+      "volume_mm3": 563.1872224009629,
+      "size_mm": [
+        19.5,
+        9.5,
+        5.5
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "latch_slider": {
+      "volume_mm3": 172.87964473723096,
+      "size_mm": [
+        16.5,
+        10.299999999999999,
+        4.0
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "right_cable_cover": {
+      "volume_mm3": 2446.3946915566253,
+      "size_mm": [
+        62.0,
+        68.0,
+        1.0
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    },
+    "power_rear_lid": {
+      "volume_mm3": 511.346018667469,
+      "size_mm": [
+        17.0,
+        20.5,
+        1.5
+      ],
+      "valid_solid": true,
+      "closed_STL": true
+    }
+  },
+  "sources_sha256": {
+    "3d-models/folding-unibody/short-cable/generate.py": "ab3796b88eb277dda7d0a175410b14f36e2b238100f81c9ccadb8bf05ce7dc4f",
+    "/Users/beryu/ghq/github.com/beryu/torabo-tsuki-om/3d-models/folding-unibody/generated/folding-unibody-rev-a.FCStd": "aafc1c8733e1fb50cbba515ee475b5e0916d2300ada18875dec26329a8a60367"
+  },
+  "battery_service": {
+    "cell_center_x_mm": 10.0,
+    "cell_center_z_mm": 12.0,
+    "cover_top_z_mm": 19.0
+  },
+  "right_PCB_translation_y_mm": 6.0,
+  "unverified": [
+    "mated connector height",
+    "power wiring after rearrangement",
+    "ribbon strain and fatigue",
+    "printed fit"
+  ],
+  "sweep": [
+    {
+      "angle_deg": 0,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 5,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 10,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 15,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 20,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 25,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 30,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 35,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 40,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 45,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 50,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 55,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 60,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 65,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 70,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 75,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 80,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 85,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 90,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 95,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 100,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 105,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 110,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 115,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 120,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 125,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 130,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 135,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 140,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 145,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 150,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 155,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 160,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 165,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 170,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 175,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 175.5,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 176.0,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 176.5,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 177.0,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 177.5,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 178.0,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 178.5,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 179.0,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 179.5,
+      "case_overlap_mm3": 0.0
+    },
+    {
+      "angle_deg": 180,
+      "case_overlap_mm3": 0.0
+    }
+  ],
+  "interconnect": {
+    "assembly_length_nominal_mm": 101.6,
+    "connector_body_length_total_mm": 6.1,
+    "ribbon_width_max_mm": 7.7978,
+    "ribbon_thickness_max_mm": 0.7366,
+    "minimum_bend_radius_design_assumption_mm": 3.0,
+    "mated_exit_z_assumption_mm": 12.5,
+    "length_tolerance_mm": 3.175,
+    "manufacturer_cycle_rating": "not established",
+    "length_tolerance_fit": "nominal cable only; shorter/longer samples not yet simulated",
+    "sweep": [
+      {
+        "angle_deg": 0,
+        "case_PCB_cell_holder_overlap_mm3": 0.0
+      },
+      {
+        "angle_deg": 45,
+        "case_PCB_cell_holder_overlap_mm3": 0.0
+      },
+      {
+        "angle_deg": 90,
+        "case_PCB_cell_holder_overlap_mm3": 0.0
+      },
+      {
+        "angle_deg": 135,
+        "case_PCB_cell_holder_overlap_mm3": 0.0
+      },
+      {
+        "angle_deg": 180,
+        "case_PCB_cell_holder_overlap_mm3": 0.0
+      }
+    ]
+  },
+  "open_size_mm": [
+    301.20000000000005,
+    85.34999432798747,
+    22.7
+  ],
+  "closed_size_mm": [
+    166.8,
+    85.35,
+    39.400000000000006
+  ]
+}

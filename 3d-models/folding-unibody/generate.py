@@ -217,6 +217,27 @@ def underfloor_wiring(shapes):
     return voids
 
 
+def hidden_power_route(shapes):
+    # Two assumed 1 mm OD insulated wires, vertically stacked in the trunk.
+    # Wrap around the rear PCB edge; do not cut copper or pass through PCB.
+    channel=union([box(14.9,65.9,1.8,2.,3.6,11.5),
+                   box(15.,66.5,1.8,30.4,3.,2.4),
+                   box(43.4,66.5,1.8,2.,8.85,2.4),
+                   box(43.65,74.15,1.8,1.5,1.2,7.),
+                   box(43.65,64.,6.3,1.5,11.35,2.5)])
+    # A small internal return in the existing cover side, below its top.
+    # It stays inside the original perimeter and avoids the USB mouth.
+    return_roof=box(43.35,71.9,6.1,2.4,3.7,4.4)
+    shapes['right_plate']=shapes['right_plate'].fuse(return_roof).cut(channel).removeSplitter()
+    shapes['right_tray']=shapes['right_tray'].cut(channel).removeSplitter()
+    wire=union([box(15.2,67.5,2.,1.,1.,10.),
+                box(15.2,67.5,2.,29.7,1.,2.),
+                box(43.9,67.5,2.,1.,7.65,2.),
+                box(43.9,74.35,2.,1.,.8,6.55),
+                box(43.9,64.8,6.55,1.,10.35,2.)])
+    return wire
+
+
 def closure_magnet_pockets(left):
     face = 2 * AXIS_Z - STOP_HEIGHT if left else STOP_HEIGHT
     cx = -12 if left else 12
@@ -337,14 +358,8 @@ def power_room():
     for xx in (3, 14):
         body = body.cut(box(xx, 47, -.1, 1.1, 3.2, 2.3))
         body = body.cut(box(xx, 66, -.1, 1.1, 3.2, 2.3))
-    # Switch knob access, rightward 5V/GND exit. Wiring is confined to fixed
-    # right body; only the split interconnect must cross the folding joint.
+    # Power wires exit internally through the floor, not above the XIAO.
     body = body.cut(box(1, 71, 4, 14, 4, 7))
-    body = body.cut(box(15, 64.5, 15, 4, 4.5, 4))
-    # An elevated open duct carries the two power wires over the XIAO cover,
-    # away from its USB mouth (north of y=71). Its end drops to pads 13/14.
-    duct = box(16, 64, 14, 28, 6, 3).cut(box(15.9, 65.2, 15, 28.2, 3.6, 2.1))
-    body = body.fuse(duct)
     lid = box(-16, 0, LID_Z, 34, 74, LID_THICKNESS)
     # Display the cell through a rounded opening; retain a solid cover over
     # the adjacent electronics. Holder must expose the cell's upper surface.
@@ -396,8 +411,6 @@ def power_room():
     divider = box(2.8, 14, 3.5, 1., 51.5, LID_Z-3.5)
     body = union([body, rails, divider])
     lid = compact_joint_clearance(lid, False).common(box(2.8, 14., LID_Z-.1, 16., 56., LID_THICKNESS+.2))
-    # The lowered electronics lid must clear the elevated XIAO wire duct.
-    lid = lid.cut(box(15.8, 63.8, LID_Z-.1, 2.4, 6.4, LID_THICKNESS+.2))
     # Clear the fixed hinge pillars and separate latch cap at this lower level.
     for yy in HINGE_Y:
         for start in (yy, yy+6):
@@ -514,6 +527,8 @@ def main():
         pcb=refs[side+'_PCB_reference']
         overlap=sum(shapes[side+'_'+part].common(pcb).Volume for part in ('tray','plate'))
         assert overlap<.001, ('End rim or plate obstructs PCB',side,overlap)
+    power_wire=hidden_power_route(shapes)
+    fixed_refs['Power_wire_internal_reserved']=power_wire
     # Keep old source parts as hidden references, then add the print assembly.
     for obj in doc.Objects:
         if obj.ViewObject:
@@ -576,6 +591,14 @@ def main():
         validation['parts'][name] = {'volume_mm3': round(shape.Volume, 3),
             'size_mm': [round(bb.XLength, 3), round(bb.YLength, 3), round(bb.ZLength, 3)],
             'valid_solid': True, 'closed_STL': True}
+    power_case=union([shapes['right_tray'],shapes['right_plate'],lid])
+    pw_case=power_wire.common(power_case).Volume
+    pw_pcb=power_wire.common(fixed_refs['right_PCB_reference']).Volume
+    pw_module=power_wire.common(fixed_refs['right_XIAO_reference']).Volume
+    assert max(pw_case,pw_pcb,pw_module)<.001, ('Internal power route blocked',pw_case,pw_pcb,pw_module)
+    validation['internal_power_route']={'wire_OD_assumed_mm':1.,'path':'floor, rear PCB edge, XIAO outer-pad side',
+        'case_overlap_mm3':round(pw_case,6),'PCB_overlap_mm3':round(pw_pcb,6),'module_overlap_mm3':round(pw_module,6),
+        'real_wire_bend_and_solder_fit':'unverified'}
     # Conservative trackball envelope in the right recess, not an exact mount.
     fixed_refs['Trackball_reserved_envelope'] = box(62, -3, 1.5, 30, 21, TRACKBALL_TOP - 1.5)
     # Storage below the battery: this does not pretend to be the flexible

@@ -52,7 +52,7 @@ cover=next(c for c in bpy.context.scene.collection.children if '04 Battery cover
 assert cover.hide_viewport and cover.hide_render
 assert any(o.get('CAD_part')=='battery_cap' for o in cover.objects)
 report['battery_access_reopen']={'passed':True,'initial_scene':bpy.context.scene.name,'file_sha256':hashlib.sha256((out/'komoro-folding-battery-access.blend').read_bytes()).hexdigest()}
-bpy.ops.wm.open_mainfile(filepath=str(out/'komoro-folding-end-rims.blend'))
+bpy.ops.wm.open_mainfile(filepath=str(out/'komoro-folding-hidden-power.blend'))
 assert bpy.context.scene.name=='01_Open'
 parts={o['CAD_part']:o for o in bpy.context.scene.objects if 'CAD_part' in o}
 heights={n:max(v.co.z for v in parts[n].data.vertices)*1000 for n in ('battery_cap','power_lid')}
