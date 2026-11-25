@@ -4,6 +4,8 @@
 
 [Blenderモデル](generated/komoro-folding-101mm.blend) ／ [FreeCAD](generated/folding-unibody-rev-a.FCStd) ／ [開状態](generated/open-render.png) ／ [閉状態](generated/folded-render.png)
 
+購入部品・製造先・1台分の数量は[購入リンク付き部品表](PARTS.md)を参照。現行分割版からの流用とC専用品、未選定品・実機確認事項を分けて記載している。
+
 ## 配置の変更
 
 - 右PCB・右キー領域を奥へ6 mm移し、左右コネクタの前後位置をそろえた。基板の銅箔・穴・部品位置は変更していない。
