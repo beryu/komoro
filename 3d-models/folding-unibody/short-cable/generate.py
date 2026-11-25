@@ -102,20 +102,9 @@ parts['right_tray']=parts['right_tray'].cut(box(-16.1,61.4,9.5,2.2,5,3))
 # Rear power wiring is a new routing reservation, not the obsolete right bay.
 refs.pop('Power_wire_internal_reserved',None)
 refs.pop('Split_cable_storage_reserved',None)
-# Two power leads stay beneath the rear floor and return around the new
-# PCB rear edge. This remains a wire envelope, not a solder-joint model.
-parts['right_plate']=parts['right_plate'].fuse(box(43.05,77.9,6.1,3.55,3.7,4.4))
-power_void=union([box(-11.6,66.8,.1,3.,2.4,10.),box(-11.6,66.8,-.19,57.1,2.4,1.99),
- box(43.,66.8,-.19,2.8,14.7,1.99),box(43.,80.1,.1,2.8,1.4,8.5),box(43.,70.,6.8,2.8,11.5,2.2)])
-for p in ('right_tray','right_plate'):
-    parts[p]=parts[p].cut(power_void)
-parts['right_cable_cover']=union([parts['right_cable_cover'],box(15,66.2,-1.2,31,15.6,1)])
-for y in (72.,79.):
-    boss=Part.makeCylinder(2.5,3.5,V(40,y,0)).cut(Part.makeCylinder(.85,2.5,V(40,y,-.1)))
-    parts['right_tray']=parts['right_tray'].fuse(boss)
-    parts['right_cable_cover']=parts['right_cable_cover'].cut(Part.makeCylinder(1.1,1.2,V(40,y,-1.3)))
-refs['Power_wire_internal_reserved']=union([box(-11.1,67.0,.3,2.,2.,9.2),box(-11.1,67.0,.3,56.,2.,1.),
- box(43.4,67.0,.3,2.,14.,1.),box(43.4,80.2,.3,2.,.8,7.8),box(43.4,70.8,7.1,2.,10.2,1.)])
+# C exterior and internal XIAO wiring are built from versioned geometry only.
+c_design=runpy.run_path(str(HERE/'c-design.py'))
+c_receipt=c_design['apply'](parts,refs,ns)
 
 # Actual female body envelope, separate from the existing header references.
 for side,cx,cy in (('left',-33.85,44.5),('right',34.25,44.5)):
@@ -127,10 +116,11 @@ for n,o in [('Trackball_visual_only','Reference_Trackball_visual_only')]:
 
 doc=App.newDocument('Folding101Layout')
 check={'revision':'101.6 mm cable layout study / unprinted','axis_z_mm':18.5,'key_counts':oldcheck['key_counts'],'parts':{},
- 'sources_sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (Path(__file__),BASE/'generated/folding-unibody-rev-a.FCStd')},
+ 'sources_sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (Path(__file__),HERE/'c-design.py',BASE/'generated/folding-unibody-rev-a.FCStd',BASE.parent/'FreeCAD/generate-keyboard-case.py')},
  'battery_service':{'cell_center_x_mm':10.,'cell_center_z_mm':12.,'cover_top_z_mm':19.},
  'right_PCB_translation_y_mm':6.,
- 'unverified':['mated connector height','power wiring after rearrangement','ribbon strain and fatigue','printed fit']}
+ 'c_design':c_receipt,
+ 'unverified':['mated connector height','real solder joints and USB plug','wire insulation and bend durability','ribbon strain and fatigue','printed fit']}
 preview={}
 def feature(n,s,color=(.8,.8,.77)):
     o=doc.addObject('Part::Feature',n);o.Shape=s

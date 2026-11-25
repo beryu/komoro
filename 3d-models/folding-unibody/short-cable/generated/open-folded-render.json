@@ -1,6 +1,6 @@
 {
   "source": "komoro-folding-101mm.blend",
-  "source_sha256": "35f40f87f8e02cda6d9bdf692db0e82096bb23defbfdd85f4a7f7e8c026612d7",
+  "source_sha256": "41056e86ebcf96de3da40fb1fbb28b4c22a865c3e4ba0de426df17b90dc85b56",
   "engine": "Cycles CPU",
   "samples": 48,
   "images": {
@@ -8,13 +8,13 @@
       "scene": "01_Open",
       "width": 1800,
       "height": 1140,
-      "sha256": "f0e0b63c51e9b6ae775ab1160f27010a201213588f1ada36df65c583d14bf399"
+      "sha256": "2099eb788c711b6bd2c6d373a8193a74d2018040ef5cccbfb890d09fcfe68b7f"
     },
     "folded-render": {
       "scene": "02_Folded",
       "width": 1800,
       "height": 1140,
-      "sha256": "98ccfc4adcfb5f5b32cedacff1e21ff67835ce7927807ec7f07e6f95ff0869a7"
+      "sha256": "2dc53a5cf694414cf9184a4d9cba9d4fc041b2d8b987df52adfe4498500cee28"
     }
   }
 }

@@ -242,6 +242,9 @@ def build_scene(name, closed=False, service=False, battery_service=False):
         obj = object_for(assumed, name + ' / ' + source, MESH[source], MAT['reference'])
         obj.display_type = 'WIRE'
         obj['purpose'] = 'Assumed envelope, not manufacturing geometry'
+    for source in ('Power_wire_GND_nominal', 'Power_wire_VBUS_nominal'):
+        if source in MESH:
+            model.append(object_for(visible, name+' / '+source, MESH[source], MAT['black'] if 'GND' in source else MAT['red']))
     for source in ('left_socket_assumed','right_socket_assumed'):
         if source in MESH:
             model.append(object_for(refs,name+' / '+source,MESH[source],MAT['black'],closed and source.startswith('left_')))
@@ -343,14 +346,12 @@ bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-review.blend'), c
 bpy.context.window.scene = battery_scene
 bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-battery-access.blend'), compress=True)
 bpy.context.window.scene = open_scene
-bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-raised-battery.blend'), compress=True)
-bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-arched-battery.blend'), compress=True)
-bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-conformal-battery.blend'), compress=True)
-bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-trimmed-holder.blend'), compress=True)
-bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-end-rims.blend'), compress=True)
-bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-hidden-power.blend'), compress=True)
 if 'Cable_ribbon_open' in MESH:
     bpy.ops.wm.save_as_mainfile(filepath=str(OUT / 'komoro-folding-101mm.blend'),compress=True)
+else:
+    for alias in ('raised-battery', 'arched-battery', 'conformal-battery',
+                  'trimmed-holder', 'end-rims', 'hidden-power'):
+        bpy.ops.wm.save_as_mainfile(filepath=str(OUT / ('komoro-folding-'+alias+'.blend')),compress=True)
 
 # Orthographic preview renders also verify the saved meshes look as expected.
 preview_dir = OUT / 'blender-views'

@@ -2,46 +2,46 @@
   "blender_version": "5.0.0",
   "units": "metres, displayed as millimetres",
   "source_sha256": {
-    "../export-blender.py": "ff73743365fabe45a8d4440e1504fea52992fc00eb6e30c3e5cc1e0baad1247a",
-    "generated/preview-mesh.json": "e18c3ddcc9ca3e8d48f23ee46acff7a0e4be0700e1b03c920969efea9a9cf301",
-    "generated/validation.json": "16cb3a50f16ebf51a2df64a8cd23a1d4e9036261930ba34ddfca55d9df95b82b",
-    "generated/left_tray.stl": "02971e0a6e1abac740d1685f18be7de000835341bf82fa26426925703cf0cce5",
+    "../export-blender.py": "b35e9d1244997fdfc2208023eaf796eb03fee6f3acba5c9b2da5b40885553d06",
+    "generated/preview-mesh.json": "62f37857513da6e3c811d136159488562e101a2c4a897e7691b648032fb5962b",
+    "generated/validation.json": "4e6a85197fbd263a5818e4524db227779b53e82ed2621a3b09071e13d2ba0e8e",
+    "generated/left_tray.stl": "2903d736428bbec19ea3cff63382e12b8df7df4cc563884f77b89ce1001c7231",
     "generated/left_plate.stl": "6813c5682bac1e134fe168aa2d6dd5a490940530e98a38bc8498d56bfae0fb62",
-    "generated/right_tray.stl": "cc0a55377d5b5215b7b97f8c3fb880ef07ad6f387eecc67702da65832f9c21f2",
-    "generated/right_plate.stl": "a6ed6047d2b4512dacd0d0e4cf0bf77e19b66011c2f6108b91945f36721b0346",
-    "generated/power_lid.stl": "a01d41c130a994ee5c9b3358ae84459891c93430108efb246a2d5812cff83adc",
+    "generated/right_tray.stl": "ed79854edb56c3186ea975fe7696b7860459af0a099a077452b0f778ddc20a53",
+    "generated/right_plate.stl": "447718d556156b000abad7cfb1b9748745c9ea7febf46a9ec53c8ed1b417ce90",
+    "generated/power_lid.stl": "285251f0efb277da5d87fbd669c4314d9277e8efba2f73daaf7c1266a2463db3",
     "generated/battery_cap.stl": "de85148d421f1200af4d4772d4080f64fedd33c902c03f35764123dcb0caa1cd",
-    "generated/latch_cap.stl": "98588c83eea450b0f3df9a9d76b789bc644446e46cf43d9f019ad011fb0b3c11",
+    "generated/latch_cap.stl": "7871a78d57d8771e1550316e43e09e54092057af3ed720c3dea2a34ba8f7edd6",
     "generated/latch_slider.stl": "9ca878150235f13f9c8102f248fe7579965060a8dba0be30245fe9a06539d3a4",
-    "generated/right_cable_cover.stl": "340ca5ed6a44e7635b20beb32bfa9f198cc3881728e430e4e6125e84885ea52c",
-    "generated/power_rear_lid.stl": "836b4f2be1ad10d333dba6c3338bc585a250b080fe77c485b86d6a69142ce613"
+    "generated/right_cable_cover.stl": "5d5f91dcf1efbed709187b81f23f67eabf82e6cc04927d257cceefd80af48811",
+    "generated/power_rear_lid.stl": "05956a96f705c2b0087e2c08480d47400ca39bfbcead0a0f19557389aa2f3bd0"
   },
   "scenes": {
     "01_Open": {
-      "mesh_objects": 73,
+      "mesh_objects": 75,
       "mesh_dimensions_mm": [
         301.2000024318695,
         85.35000309348106,
-        22.70000078715384
+        22.699499735608697
       ],
       "CAD_BRep_bounds_mm": [
         301.20000000000005,
         85.34999432798747,
-        22.7
+        22.699520804972217
       ],
       "within_CAD_BRep_bounds": true
     },
     "02_Folded": {
-      "mesh_objects": 73,
+      "mesh_objects": 75,
       "mesh_dimensions_mm": [
         166.60000197589397,
         85.35000309348106,
-        39.40000222064555
+        38.2000005338341
       ],
       "CAD_BRep_bounds_mm": [
-        166.8,
+        166.60000000000002,
         85.35,
-        39.400000000000006
+        38.200000000000024
       ],
       "within_CAD_BRep_bounds": true
     }

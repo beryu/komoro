@@ -7,11 +7,11 @@
   },
   "parts": {
     "left_tray": {
-      "volume_mm3": 23246.36021134915,
+      "volume_mm3": 22744.57532093131,
       "size_mm": [
-        153.59906754600246,
+        153.59966006249448,
         79.34999432798747,
-        22.7
+        21.499520804972214
       ],
       "valid_solid": true,
       "closed_STL": true
@@ -27,17 +27,17 @@
       "closed_STL": true
     },
     "right_tray": {
-      "volume_mm3": 28146.613101209416,
+      "volume_mm3": 28415.82922700067,
       "size_mm": [
         166.60000000000002,
         84.05,
-        21.500000000000004
+        21.499520804972217
       ],
       "valid_solid": true,
       "closed_STL": true
     },
     "right_plate": {
-      "volume_mm3": 6635.094825844353,
+      "volume_mm3": 6662.175399790177,
       "size_mm": [
         132.60000000000002,
         79.3499723605324,
@@ -47,11 +47,11 @@
       "closed_STL": true
     },
     "power_lid": {
-      "volume_mm3": 485.846018667469,
+      "volume_mm3": 470.7909353341357,
       "size_mm": [
         17.0,
-        19.5,
-        1.5
+        19.500000000000004,
+        1.5000000000000036
       ],
       "valid_solid": true,
       "closed_STL": true
@@ -67,11 +67,11 @@
       "closed_STL": true
     },
     "latch_cap": {
-      "volume_mm3": 563.1872224009629,
+      "volume_mm3": 561.4727224009629,
       "size_mm": [
         19.5,
         9.5,
-        5.5
+        5.500000000000002
       ],
       "valid_solid": true,
       "closed_STL": true
@@ -87,29 +87,31 @@
       "closed_STL": true
     },
     "right_cable_cover": {
-      "volume_mm3": 2446.3946915566253,
+      "volume_mm3": 1987.4973457783126,
       "size_mm": [
-        62.0,
-        68.0,
+        35.5,
+        56.2,
         1.0
       ],
       "valid_solid": true,
       "closed_STL": true
     },
     "power_rear_lid": {
-      "volume_mm3": 511.346018667469,
+      "volume_mm3": 495.8684353341356,
       "size_mm": [
         17.0,
         20.5,
-        1.5
+        1.5000000000000036
       ],
       "valid_solid": true,
       "closed_STL": true
     }
   },
   "sources_sha256": {
-    "3d-models/folding-unibody/short-cable/generate.py": "ab3796b88eb277dda7d0a175410b14f36e2b238100f81c9ccadb8bf05ce7dc4f",
-    "/Users/beryu/ghq/github.com/beryu/torabo-tsuki-om/3d-models/folding-unibody/generated/folding-unibody-rev-a.FCStd": "aafc1c8733e1fb50cbba515ee475b5e0916d2300ada18875dec26329a8a60367"
+    "3d-models/folding-unibody/short-cable/generate.py": "254658b4a134a2060be0d253adcf57651fe23f90504859936f85f97ae656764f",
+    "/Users/beryu/orca/workspaces/kb-1/folding-c-hidden-power/3d-models/folding-unibody/short-cable/c-design.py": "a08c76581c82263e71dac7154766853a9b1267f0da1e1c5946058e7f634cb8ee",
+    "/Users/beryu/orca/workspaces/kb-1/folding-c-hidden-power/3d-models/folding-unibody/generated/folding-unibody-rev-a.FCStd": "aafc1c8733e1fb50cbba515ee475b5e0916d2300ada18875dec26329a8a60367",
+    "/Users/beryu/orca/workspaces/kb-1/folding-c-hidden-power/3d-models/FreeCAD/generate-keyboard-case.py": "4836d1cf32829db7389f2666239d5ee2830e1a06b2f085d9c57f2fa7993e55ba"
   },
   "battery_service": {
     "cell_center_x_mm": 10.0,
@@ -117,9 +119,138 @@
     "cover_top_z_mm": 19.0
   },
   "right_PCB_translation_y_mm": 6.0,
+  "c_design": {
+    "style": "C / solid perimeter chamfers preserve bores and closure lands",
+    "wire_OD_mm": 1.0,
+    "channel_radius_mm": 0.66,
+    "route_points_mm": [
+      [
+        [
+          -9.55,
+          67.55,
+          11.7
+        ],
+        [
+          -9.55,
+          67.55,
+          3.55
+        ],
+        [
+          37,
+          67.55,
+          3.55
+        ],
+        [
+          41.7,
+          67.55,
+          2.35
+        ],
+        [
+          43.4,
+          70.0,
+          2.35
+        ],
+        [
+          43.4,
+          78.5,
+          2.35
+        ],
+        [
+          43.45,
+          79.35,
+          4.5
+        ],
+        [
+          43.45,
+          79.35,
+          6.7
+        ],
+        [
+          44.0,
+          78.55,
+          7.35
+        ],
+        [
+          44.0,
+          70.48,
+          7.35
+        ]
+      ],
+      [
+        [
+          -8.2,
+          69.02,
+          12.9
+        ],
+        [
+          -8.2,
+          69.02,
+          3.55
+        ],
+        [
+          43.0,
+          69.02,
+          3.55
+        ],
+        [
+          45.18,
+          71.83,
+          3.55
+        ],
+        [
+          45.18,
+          78.65,
+          3.55
+        ],
+        [
+          45.42,
+          79.65,
+          4.55
+        ],
+        [
+          45.42,
+          79.65,
+          7.4
+        ],
+        [
+          44.18,
+          78.65,
+          8.45
+        ],
+        [
+          44.0,
+          73.02,
+          8.45
+        ]
+      ]
+    ],
+    "bottom_changes": {
+      "left": {
+        "added_mm3": 1311.360459425027,
+        "removed_mm3": 1808.9999999999984
+      },
+      "right": {
+        "added_mm3": 1308.3322466474663,
+        "removed_mm3": 1199.119892864849
+      }
+    },
+    "tapers": {
+      "left_tray": 0.35,
+      "right_tray": 0.35,
+      "latch_cap": 0.3,
+      "power_lid": 0.65,
+      "power_rear_lid": 0.65
+    },
+    "minimum_wire_surface_gap_mm": 0.08215896236967137,
+    "minimum_centerline_bend_radius_mm": [
+      0.9628342685824628,
+      1.3499999999999999
+    ]
+  },
   "unverified": [
     "mated connector height",
-    "power wiring after rearrangement",
+    "real solder joints and USB plug",
+    "wire insulation and bend durability",
     "ribbon strain and fatigue",
     "printed fit"
   ],
@@ -345,11 +476,11 @@
   "open_size_mm": [
     301.20000000000005,
     85.34999432798747,
-    22.7
+    22.699520804972217
   ],
   "closed_size_mm": [
-    166.8,
+    166.60000000000002,
     85.35,
-    39.400000000000006
+    38.200000000000024
   ]
 }

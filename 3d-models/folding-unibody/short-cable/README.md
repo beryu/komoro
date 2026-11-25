@@ -1,4 +1,4 @@
-# 101.6 mm FFSDケーブル用の配置案
+# 折りたたみC案 — 101.6 mm FFSDと内部給電
 
 手持ちの101.6 mm品を基準に、既存PCBを加工せず、電池下を通る連続したリボンケーブルをモデル化した。元の前端迂回案は親ディレクトリへ残し、この案のCAD・Blender・画像・検証をここへ分離している。印刷・実ケーブルでの嵌合・耐久確認前の試作案。
 
@@ -54,11 +54,33 @@ Blenderの `01_Open` と `02_Folded` が通常の開閉状態。`03_Underside_co
 再生成の順番：
 
 1. 親ディレクトリの `generate.py` で元のCADを生成する。
-2. 通常のPython（NumPy/SciPy）で `solve-cable.py` を実行する。37姿勢の経路を保存する。
-3. FreeCADのPythonで、このディレクトリの `generate.py`、`check-layout.py`、`check-battery.py` を順に実行する。
+2. 通常のPython（NumPy/SciPy）で `solve-cable.py`、`check-cable.py` を順に実行する。37姿勢の経路と公称長・自己接触の検証を保存する。
+3. FreeCADのPythonで、このディレクトリの `generate.py`、`check-layout.py`、`check-battery.py`、`check-c-design.py`、`check-exports.py` を順に実行する。
 4. 環境変数 `FOLD_MODEL_DIR` にこのディレクトリの絶対パスを指定し、Blenderで親の `export-blender.py` を実行する。
-5. Blenderで `check-blender.py` を実行する。親の `render-open-folded.py` は同じ環境変数と `FOLD_REVIEW_FILE=komoro-folding-101mm.blend` を指定する。配線確認画像は `render-cable.py` で生成する。
+5. Blenderで `check-blender.py` を実行する。親の `render-open-folded.py` は同じ環境変数と `FOLD_REVIEW_FILE=komoro-folding-101mm.blend` を指定する。配線確認画像は `render-cable.py` で生成し、通常のPython（Pillow）で `compose-routing.py` を実行して比較画像を更新する。
 
-底ぶたはM2×3、電源ふたはM2×4を想定する。底ぶたの中央2本は給電線から離したY=64 mmに置き、専用のねじボスを設けた。ねじ軸の包絡と線の重なりも確認する。上記の全体寸法は印刷形状の包絡で、ねじ頭や追加する足は含まない。
+底ぶたはM2×3、電源ふたはM2×4を想定する。底ぶたの2本は給電線から離したY=64 mmに置き、専用のねじボスを設けた。奥へ張り出していた給電線用の底ぶた・2個のボスは廃止した。ねじ軸の包絡と線の重なりも確認する。上記の全体寸法は印刷形状の包絡で、ねじ頭や追加する足は含まない。
 
 STLは `generated/` 内の10個の印刷部品。ケーブル・基板・電池・スイッチ類は参照形状で印刷しない。親ディレクトリの旧部品と混ぜて組み立てない。
+
+## 承認済みC外観とXIAO内部給電
+
+`c-design.py` がPCB由来の版管理された寸法だけからC案を生成する。承認時の一時CADや一時スクリプトは再生成に使わない。左右トレーの旧split用縦溝・内側補強リブと4個ずつの丸い床面磁石穴、左トレーの床下1.2 mmの旧配線室の帯を除いた。ヒンジ側の閉止用磁石・軸穴・閉止面、元のPCBとキー配置、トラックボール、AAAの開口と電池カバー形状は維持する。split版と親の折りたたみ出力は変更しない。
+
+ヒンジ肩の頂部はZ=19.7 mmより上だけを小さくテーパーにする。ピン穴上端Z=19.55 mm以下には触れない。ラッチふたの前・側縁は0.3 mm（ねじ穴に近い後縁を保持）、前後の電源ふたは0.65 mmの実体面取りとし、丸いねじ穴と取付面を保持した。承認画像のメッシュ全体を縮める処理とはこの点が異なる。最高部や機構寸法を変える大きな変形は採用していない。
+
+GND/VBUSはそれぞれ被覆外径1 mmの公称実体。溝半径は0.66 mmで、承認参照の0.65 mmから0.01 mm拡げ、既存カバー面に接する微小なSTL開口を回避した。電源室の後ろから内壁沿いに進み、右PCB後端を回って、既存の上カバーの側方空間と小さな内側リップの内側でXIAOへ戻す。終端は元の座標系でGND側Y=70.48、VBUS側Y=73.02 mmへの接近位置。実際のパッドやはんだフィレットの形状は表していない。長い上面導管や給電線用の下面延長はなく、中央のFFSD着脱底ぶたを残す。
+
+[`c-design-validation.json`](generated/c-design-validation.json) は保存CADを再読込し、全10部品の閉じた単一ソリッドとSTL、旧底面形状の消失、8個の床面磁石穴の充填、ねじ穴の開口、公称給電線と固定部品、および0〜180°の5°刻みと閉じ際の0.5°刻みを確認する。FFSD・キー押下・電池アクセスは既存の検証を併用する。
+
+組立では右PCB・上板を取り付ける前に未接続の線を配置し、必要な短い通路には未はんだの端を通す。XIAO側のはんだ付けと絶縁の後に上板を取り付ける想定であり、端末付き線を細い穴へ通せるとは確認していない。実物の組立アクセス、USBプラグ外形、端子・はんだ高さ、線の固定とストレインリリーフは仮組みで確認する。
+
+**製作前の限界：** 線間余裕は0.0822 mm、可動部との最小余裕は0.480 mm。仮定したスイッチ外形との余裕は0.050 mm、右PCBとXIAO外形には各0.450 mm。中心線の最小曲げ半径はGNDが0.963 mm、VBUSが1.350 mmで、1 mm線には非常に小さい。正確な生成値はJSONに記録する。印刷誤差・線径公差・被覆の変形・はんだや接着剤の厚みを吸収できる保証はない。曲線の最小半径は幾何学的な値で、使用する線材の許容曲げ半径や反復寿命ではない。線材の選定、絶縁、実USBアクセス、印刷強度とヒンジ・ラッチの摩耗、電池着脱力を実機で確認する。本案は製作実証済みではない。
+
+再生成後は `update-manifest.py` を最後に実行する。STEPは全10部品を本案の `generated/` に保存し、STL・FreeCAD・Blender・検証JSONと一緒に配布する。
+
+### upstream機構の比較記録
+
+`check-preservation.py --baseline-cad <比較元.FCStd> --baseline-commit <SHA>` は比較元を明示して再実行できる。今回の比較元はmaster `10c3bea19c68a638a8abf6724226711448d78b1f` の本ディレクトリのCAD。`git show <SHA>:3d-models/folding-unibody/short-cable/generated/folding-unibody-rev-a.FCStd` で取り出せる。記録は [`mechanical-preservation-validation.json`](generated/mechanical-preservation-validation.json)。元のPCB・キー・部品参照27個、電池カバー・左上板・ラッチスライダ、軸付近の機構面とふた取付面の体積差を確認した。
+
+このMacではFreeCAD Pythonに `PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib` を指定する。Blenderの実行ファイルは `/Applications/Blender.app/Contents/MacOS/Blender`。再生成は作業用チェックアウトで行い、親の既存成果物の更新は本案の変更に混ぜない。

@@ -642,7 +642,7 @@ def _close_stl_roundoff(path: Path):
         raise ValueError(f"STL mesh is not closed: {path}")
 
 
-def _make_side(doc, repo_root: Path, side: str):
+def _make_side(doc, repo_root: Path, side: str, *, legacy_bottom_features=True):
     pcb_path = repo_root / "pcb" / PCB_FILENAMES[side]
     data = _board_data(pcb_path)
     pcb_wire = _wire_from_records(data["records"])
@@ -915,7 +915,9 @@ def _make_side(doc, repo_root: Path, side: str):
             ),
         )
 
-    bottom_shape = bottom_shape.fuse(wall_ring).fuse(cable_rib).cut(cable_groove)
+    bottom_shape = bottom_shape.fuse(wall_ring)
+    if legacy_bottom_features:
+        bottom_shape = bottom_shape.fuse(cable_rib).cut(cable_groove)
     if trackball_mount_floor is not None:
         bottom_shape = bottom_shape.fuse(trackball_mount_floor)
         bottom_shape = bottom_shape.cut(trackball_mount_slot)
@@ -954,7 +956,7 @@ def _make_side(doc, repo_root: Path, side: str):
         LEFT_MAGNET_POCKET_CENTERS if side == "left" else
         tuple((MAGNET_MIRROR_X - x, y) for x, y in LEFT_MAGNET_POCKET_CENTERS)
     )
-    for x, y in magnet_centers:
+    for x, y in (magnet_centers if legacy_bottom_features else ()):
         pocket = Part.makeCylinder(
             MAGNET_POCKET_DIAMETER / 2,
             MAGNET_POCKET_DEPTH + 0.1,
@@ -962,7 +964,8 @@ def _make_side(doc, repo_root: Path, side: str):
         )
         bottom_shape = bottom_shape.cut(pocket)
 
-    bottom_shape = _chamfer_cable_groove_edges(bottom_shape, groove_track)
+    if legacy_bottom_features:
+        bottom_shape = _chamfer_cable_groove_edges(bottom_shape, groove_track)
 
     bottom_obj = _add_feature(
         doc,
