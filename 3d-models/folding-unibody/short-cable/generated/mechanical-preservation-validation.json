@@ -1,7 +1,7 @@
 {
   "baseline_commit": "10c3bea19c68a638a8abf6724226711448d78b1f",
   "baseline_CAD_sha256": "b70b86f0ff0deb4412bcf7afa13a0b37ce174b3c69ca1d9e6333db14fd58a2a6",
-  "checker_sha256": "d8af25c7278abd3aceef799cdebd70d2a41dbbf478e6beadd6729ad82afeffd2",
+  "checker_sha256": "db66296da7a1e2ce5365ba908e8d86665ca00fedf1e85e4cae9167589ae142ab",
   "CAD_sha256": "c3189e0af45a36d82bab775edabedd82a59582a9561ce837b4125c75ba03a0ff",
   "unchanged_reference_difference_mm3": {
     "Reference_Keys_left": 0.0,
@@ -45,5 +45,29 @@
     "latch_cap": 0.0,
     "power_lid": 0.0,
     "power_rear_lid": 0.0
+  },
+  "USB_reservations": {
+    "opening": {
+      "right_tray": {
+        "baseline_overlap_mm3": 14.909521270639473,
+        "current_overlap_mm3": 14.040000000000038
+      },
+      "right_plate": {
+        "baseline_overlap_mm3": 0.0,
+        "current_overlap_mm3": 0.0
+      },
+      "wire_gap_mm": 2.772371030638495
+    },
+    "full_height_plug_notch": {
+      "right_tray": {
+        "baseline_overlap_mm3": 0.0,
+        "current_overlap_mm3": 0.0
+      },
+      "right_plate": {
+        "baseline_overlap_mm3": 0.0,
+        "current_overlap_mm3": 0.0
+      },
+      "wire_gap_mm": 2.799999999999997
+    }
   }
 }

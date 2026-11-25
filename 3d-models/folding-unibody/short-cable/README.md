@@ -81,6 +81,6 @@ GND/VBUSはそれぞれ被覆外径1 mmの公称実体。溝半径は0.66 mmで�
 
 ### upstream機構の比較記録
 
-`check-preservation.py --baseline-cad <比較元.FCStd> --baseline-commit <SHA>` は比較元を明示して再実行できる。今回の比較元はmaster `10c3bea19c68a638a8abf6724226711448d78b1f` の本ディレクトリのCAD。`git show <SHA>:3d-models/folding-unibody/short-cable/generated/folding-unibody-rev-a.FCStd` で取り出せる。記録は [`mechanical-preservation-validation.json`](generated/mechanical-preservation-validation.json)。元のPCB・キー・部品参照27個、電池カバー・左上板・ラッチスライダ、軸付近の機構面とふた取付面の体積差を確認した。
+`check-preservation.py --baseline-cad <比較元.FCStd> --baseline-commit <SHA>` は比較元を明示して再実行できる。今回の比較元はmaster `10c3bea19c68a638a8abf6724226711448d78b1f` の本ディレクトリのCAD。`git show <SHA>:3d-models/folding-unibody/short-cable/generated/folding-unibody-rev-a.FCStd` で取り出せる。記録は [`mechanical-preservation-validation.json`](generated/mechanical-preservation-validation.json)。元のPCB・キー・部品参照27個、電池カバー・左上板・ラッチスライダ、軸付近の機構面とふた取付面の体積差を確認した。既存USB開口と全高プラグ切欠きの予約空間も狭めておらず、給電線との余裕は開口まで2.772 mm、全高切欠きまでの正確値は同JSONに記録する（実USBプラグの保証ではない）。
 
 このMacではFreeCAD Pythonに `PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib` を指定する。Blenderの実行ファイルは `/Applications/Blender.app/Contents/MacOS/Blender`。再生成は作業用チェックアウトで行い、親の既存成果物の更新は本案の変更に混ぜない。
