@@ -1,23 +1,31 @@
 {
-  "native_sha256": "35f40f87f8e02cda6d9bdf692db0e82096bb23defbfdd85f4a7f7e8c026612d7",
+  "native_sha256": "41056e86ebcf96de3da40fb1fbb28b4c22a865c3e4ba0de426df17b90dc85b56",
   "source_hashes_match": true,
   "scenes": {
     "01_Open": {
+      "closed_print_meshes": true,
+      "nominal_power_wires": 2,
       "print_parts": 10,
       "key_envelopes": 48,
       "closed_ribbon_mesh": true
     },
     "02_Folded": {
+      "closed_print_meshes": true,
+      "nominal_power_wires": 2,
       "print_parts": 10,
       "key_envelopes": 48,
       "closed_ribbon_mesh": true
     },
     "03_Underside_covers_hidden": {
+      "closed_print_meshes": true,
+      "nominal_power_wires": 2,
       "print_parts": 10,
       "key_envelopes": 48,
       "closed_ribbon_mesh": true
     },
     "04_Battery_cover_removed": {
+      "closed_print_meshes": true,
+      "nominal_power_wires": 2,
       "print_parts": 10,
       "key_envelopes": 48,
       "closed_ribbon_mesh": true

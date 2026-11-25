@@ -7,7 +7,7 @@ doc=App.openDocument(str(OUT/'folding-unibody-rev-a.FCStd'))
 shape=lambda n:doc.getObject(n).Shape.copy()
 hooks=ns['battery_cap']()[1].mirror(App.Vector(1.75,0,0),App.Vector(1,0,0)).translated(App.Vector(0,0,1))
 cap=shape('Print_battery_cap').cut(hooks)
-blockers=Part.makeCompound([o.Shape for o in doc.Objects if (o.Name.startswith('Print_') and o.Name!='Print_battery_cap') or o.Name in ('Reference_AAA_holder_assumed','Reference_AAA_cell_reference','Reference_AAA_contact_keepout_assumed','Cable_ribbon_open')])
+blockers=Part.makeCompound([o.Shape for o in doc.Objects if (o.Name.startswith('Print_') and o.Name!='Print_battery_cap') or o.Name in ('Reference_AAA_holder_assumed','Reference_AAA_cell_reference','Reference_AAA_contact_keepout_assumed','Reference_Power_wire_internal_reserved','Cable_ribbon_open')])
 report={}
 for lift in (0,.5,2,5,15,25):
  v=cap.translated(App.Vector(0,0,lift)).common(blockers).Volume

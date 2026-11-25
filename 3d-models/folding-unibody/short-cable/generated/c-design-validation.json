@@ -1,0 +1,323 @@
+{
+  "CAD_sha256": "c3189e0af45a36d82bab775edabedd82a59582a9561ce837b4125c75ba03a0ff",
+  "checker_sha256": "1d1bfa982ad53699fe42fb07debc48c32b0b9452d32b513eb4b563ed0781513d",
+  "solids": {
+    "left_tray": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "left_plate": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "right_tray": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "right_plate": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "power_lid": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "battery_cap": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "latch_cap": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "latch_slider": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "right_cable_cover": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    },
+    "power_rear_lid": {
+      "valid_closed_single_solid": true,
+      "closed_STL": true
+    }
+  },
+  "floor_pockets": {
+    "left0": 0.0,
+    "left1": 0.0,
+    "left2": 0.0,
+    "left3": 0.0,
+    "right0": 0.0,
+    "right1": 0.0,
+    "right2": 0.0,
+    "right3": 0.0
+  },
+  "sweep": [
+    {
+      "angle_deg": 0,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.47999999999998977
+    },
+    {
+      "angle_deg": 5,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.47999999999998977
+    },
+    {
+      "angle_deg": 10,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.47999999999998977
+    },
+    {
+      "angle_deg": 15,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.47999999999998977
+    },
+    {
+      "angle_deg": 20,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.5035721312136954
+    },
+    {
+      "angle_deg": 25,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.7800000000000011
+    },
+    {
+      "angle_deg": 30,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.7800000000000011
+    },
+    {
+      "angle_deg": 35,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.7800000000000011
+    },
+    {
+      "angle_deg": 40,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.7800000000000011
+    },
+    {
+      "angle_deg": 45,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.7800000000000011
+    },
+    {
+      "angle_deg": 50,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.7800000000000011
+    },
+    {
+      "angle_deg": 55,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 0.7800000000000011
+    },
+    {
+      "angle_deg": 60,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 1.047366081626834
+    },
+    {
+      "angle_deg": 65,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 1.7244195580953845
+    },
+    {
+      "angle_deg": 70,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 2.513200346727619
+    },
+    {
+      "angle_deg": 75,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 3.3267087122228984
+    },
+    {
+      "angle_deg": 80,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 4.1336196248534245
+    },
+    {
+      "angle_deg": 85,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 4.9155812162848065
+    },
+    {
+      "angle_deg": 90,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 5.654060487826422
+    },
+    {
+      "angle_deg": 95,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.328427699934663
+    },
+    {
+      "angle_deg": 100,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866365
+    },
+    {
+      "angle_deg": 105,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.6349097788663665
+    },
+    {
+      "angle_deg": 110,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866363
+    },
+    {
+      "angle_deg": 115,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866365
+    },
+    {
+      "angle_deg": 120,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866363
+    },
+    {
+      "angle_deg": 125,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866365
+    },
+    {
+      "angle_deg": 130,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866363
+    },
+    {
+      "angle_deg": 135,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866365
+    },
+    {
+      "angle_deg": 140,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866363
+    },
+    {
+      "angle_deg": 145,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866365
+    },
+    {
+      "angle_deg": 150,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866365
+    },
+    {
+      "angle_deg": 155,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866363
+    },
+    {
+      "angle_deg": 160,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866363
+    },
+    {
+      "angle_deg": 165,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.634909778866366
+    },
+    {
+      "angle_deg": 170,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.637851425576816
+    },
+    {
+      "angle_deg": 175,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.646090429152969
+    },
+    {
+      "angle_deg": 175.5,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.6469080656447925
+    },
+    {
+      "angle_deg": 176.0,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.647724151420481
+    },
+    {
+      "angle_deg": 176.5,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.648538582247589
+    },
+    {
+      "angle_deg": 177.0,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.6493512535556665
+    },
+    {
+      "angle_deg": 177.5,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.650162060456171
+    },
+    {
+      "angle_deg": 178.0,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.650970897762544
+    },
+    {
+      "angle_deg": 178.5,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.651777660010542
+    },
+    {
+      "angle_deg": 179.0,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.652582241478703
+    },
+    {
+      "angle_deg": 179.5,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.653384536209081
+    },
+    {
+      "angle_deg": 180,
+      "overlap_mm3": 0.0,
+      "wire_gap_mm": 6.654184438028093
+    }
+  ],
+  "left_legacy_bottom": {
+    "missing_flat_fill_mm3": 0.0,
+    "remaining_rib_mm3": 0.0
+  },
+  "right_legacy_bottom": {
+    "missing_flat_fill_mm3": 0.0,
+    "remaining_rib_mm3": 0.0
+  },
+  "fixed_clearances_mm": {
+    "right_PCB_reference": 0.4500000000000002,
+    "right_XIAO_reference": 0.44999999999999574,
+    "Keys_right": 2.30069408567303,
+    "AAA_cell_reference": 4.860037313302957,
+    "AAA_holder_assumed": 0.915980225850624,
+    "AAA_contact_keepout_assumed": 4.370831551183018,
+    "Hinge_hardware_front": 62.17670682778531,
+    "Hinge_hardware_rear": 8.52102935611481,
+    "Closure_magnets_right": 11.711588758224703,
+    "Boost_module_assumed": 33.55,
+    "PTC_assumed": 9.549999999999997,
+    "Diode_assumed": 2.0894014752448076,
+    "Switch_assumed": 0.049999999999998934,
+    "Switch_knob_assumed": 4.24605099003371,
+    "Power_disconnect_reserved": 42.05,
+    "Trackball_reserved_envelope": 47.86389817901159
+  },
+  "wire_surface_gap_mm": 0.08215896236967078,
+  "minimum_moving_gap_mm": 0.47999999999998977,
+  "assembly": "Lay loose wires with plate/PCB removed; solder/insulate at XIAO before closing cover; physical assembly and USB plug unverified",
+  "limitations": [
+    "nominal 1 mm OD only",
+    "no insulation compression or manufacturing tolerance",
+    "minimum bend is geometric, not wire supplier rating",
+    "no solder fillets, real USB plug, print strength or fatigue validation"
+  ]
+}

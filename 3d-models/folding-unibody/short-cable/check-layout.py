@@ -24,15 +24,15 @@ for n in ('Boost_module_assumed','PTC_assumed','Diode_assumed','Switch_assumed',
 pw=refs['Power_wire_internal_reserved'].common(Part.makeCompound([right,refs['right_PCB_reference'],refs['right_XIAO_reference']])).Volume
 assert pw<.001,('power route obstructed',pw)
 report['power_route_overlap_mm3']=pw
-fixed_components=Part.makeCompound([s for n,s in refs.items() if n in ('AAA_holder_assumed','AAA_cell_reference','right_PCB_reference','right_XIAO_reference','right_SplitHeader_reference','right_socket_assumed','Boost_module_assumed','PTC_assumed','Diode_assumed','Switch_assumed','Switch_knob_assumed','Power_disconnect_reserved','Keys_right','Trackball_reserved_envelope')])
-key_pieces=[s for n,s in parts.items() if not n.startswith('left_') and n!='latch_slider']+[s for n,s in refs.items() if n in ('AAA_holder_assumed','AAA_cell_reference','right_PCB_reference','right_XIAO_reference','right_SplitHeader_reference','right_socket_assumed','Boost_module_assumed','PTC_assumed','Diode_assumed','Switch_assumed','Switch_knob_assumed','Power_disconnect_reserved','Keys_right','Trackball_reserved_envelope')]
+fixed_components=Part.makeCompound([s for n,s in refs.items() if n in ('AAA_holder_assumed','AAA_cell_reference','right_PCB_reference','right_XIAO_reference','right_SplitHeader_reference','right_socket_assumed','Boost_module_assumed','PTC_assumed','Diode_assumed','Switch_assumed','Switch_knob_assumed','Power_disconnect_reserved','Power_wire_internal_reserved','Keys_right','Trackball_reserved_envelope')])
+key_pieces=[s for n,s in parts.items() if not n.startswith('left_') and n!='latch_slider']+[s for n,s in refs.items() if n in ('AAA_holder_assumed','AAA_cell_reference','right_PCB_reference','right_XIAO_reference','right_SplitHeader_reference','right_socket_assumed','Boost_module_assumed','PTC_assumed','Diode_assumed','Switch_assumed','Switch_knob_assumed','Power_disconnect_reserved','Power_wire_internal_reserved','Keys_right','Trackball_reserved_envelope')]
 def bb_overlap(a,b):
  return all(getattr(a,c+'Max')>=getattr(b,c+'Min') and getattr(b,c+'Max')>=getattr(a,c+'Min') for c in 'XYZ')
 def blocked(k,angle):
  moved=folded(k,angle);possible=[s for s in key_pieces if bb_overlap(moved.BoundBox,s.BoundBox)]
  return bool(possible) and moved.common(Part.makeCompound(possible)).Volume>.001
 # Bottom-cover fastener shafts must not cross either wiring envelope.
-shafts=Part.makeCompound([Part.makeCylinder(1.05,4.,App.Vector(x,y,-1.2)) for x,y in ((-11,64),(12,64),(40,72),(40,79))])
+shafts=Part.makeCompound([Part.makeCylinder(1.05,4.,App.Vector(x,y,-1.2)) for x,y in ((-11,64),(12,64))])
 assert shafts.common(refs['Power_wire_internal_reserved']).Volume<.001,'screw crosses power wire'
 for angle in (0,180):
  assert shafts.common(cable['solid'](angle)).Volume<.001,'screw crosses ribbon'

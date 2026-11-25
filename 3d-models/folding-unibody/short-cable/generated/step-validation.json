@@ -1,0 +1,52 @@
+{
+  "left_tray": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "fe8817bfa6956eb215acb90abc1d2f57aed55d7cbe540a88accde90141132464"
+  },
+  "left_plate": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "4437346b49b7f506f38db31b6a38659c9d96d75415611c42df304a7353051b07"
+  },
+  "right_tray": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "3819732666f4d7b50a7a3277933ad5dbb8e738672d3379760219ddbb696f45e9"
+  },
+  "right_plate": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "259c9d9045331eaf7eee1fac24d39792427f18b7ce5995b120244120048ce52d"
+  },
+  "power_lid": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "729a4efcf23d075e82a1f9fa2165d47990a0c65f15b0bd84ec217c7b61c4047e"
+  },
+  "battery_cap": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "131f9f3df068d6533720bbec5dda380d680a815dd6505e9de86d466d0e2bda05"
+  },
+  "latch_cap": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "5622e078b7febbcd268400996c91019aaffb6f4a6a2355af50384cfdc108ac27"
+  },
+  "latch_slider": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "bd2e3afe8fff935dc7f75669916987c37887e39b70a8bf18cfe2eb8b2764f496"
+  },
+  "right_cable_cover": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "71fa3cb422082eac10d871ee615a212cab3f506ae0549d21999664ad41543722"
+  },
+  "power_rear_lid": {
+    "valid_closed_single_solid": true,
+    "symmetric_difference_mm3": 0.0,
+    "sha256": "2773499c3f3f939c8ada596a1e07e0727e53ad67516079f7ac9fbad203a938d9"
+  }
+}

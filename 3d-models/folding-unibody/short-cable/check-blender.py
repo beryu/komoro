@@ -23,7 +23,13 @@ for name in ('01_Open','02_Folded','03_Underside_covers_hidden','04_Battery_cove
   for key in p.edge_keys:edges[key]=edges.get(key,0)+1
  assert all(n==2 for n in edges.values()),('open ribbon mesh',name)
  assert sum(abs(v) for v in cable.rotation_euler)<1e-8,('double fold transform',name)
- rows[name]={'print_parts':len(check['parts']),'key_envelopes':48,'closed_ribbon_mesh':True}
+ assert len([o for o in s.objects if 'Power_wire_' in o.name and '_nominal' in o.name])==2
+ for obj in [o for o in s.objects if 'CAD_part' in o]:
+  counts={}
+  for poly in obj.data.polygons:
+   for edge in poly.edge_keys:counts[edge]=counts.get(edge,0)+1
+  assert all(n==2 for n in counts.values()),('open print mesh',name,obj.name)
+ rows[name]={'closed_print_meshes':True,'nominal_power_wires':2,'print_parts':len(check['parts']),'key_envelopes':48,'closed_ribbon_mesh':True}
 result={'native_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'source_hashes_match':True,'scenes':rows}
 (OUT/'saved-blender-validation.json').write_text(json.dumps(result,indent=2)+'\n')
 print('SAVED_BLENDER_VALID',rows)

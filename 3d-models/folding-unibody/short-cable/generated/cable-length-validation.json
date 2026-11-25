@@ -1,6 +1,7 @@
 {
-  "scope": "37 geometric poses, nominal assembly length; sampled self-clearance",
+  "scope": "37 geometric poses, nominal assembly length; sampled self-clearance for centreline arclength separations >=4 mm; not continuous elastic analysis",
   "sources_sha256": {
+    "check-cable.py": "58af4ed39781a2f810a2033fb9fb115ab8f40dff802f2930591a010c8b31bf89",
     "cable.py": "c43205d9be124cfdc7a7352bd22c6b352090ff5464ea561c3f05b996ea9a8c0e",
     "solve-cable.py": "99dbc38bd309890f67bd8a243b1e38dfdb8cf7f302aad488fc29c19a68d189e4",
     "generated/cable-paths.json": "c76a7b31560770b48fa174a86efd795f2215086cbd50e3e20237aa2fff9e99e0"
